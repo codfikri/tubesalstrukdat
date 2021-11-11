@@ -2,6 +2,10 @@
 #include <stdlib.h>
 #include <time.h>
 #include "skill.h"
+#include "boolean.h"
+
+
+
 
 int check(int x){
     if ((x >= 1) && (x <= 10)){
@@ -25,12 +29,18 @@ int check(int x){
     else if((x >= 67) && (x <= 70)){
         return 6;
     }
+    else{
+        return -999;
+    }
 }
 
 
 
-void printSkill(TabStr skillPemain)
+void printSkill(List skillPemain)
 {
+    // Kamus Lokal
+    address p;
+    int count = 1;
     char daftarSkill[][22] =
     {
         "Pintu Ga Ke Mana Mana",
@@ -41,31 +51,36 @@ void printSkill(TabStr skillPemain)
         "Senter Pengecil Hoki",
         "Mesin Penukar Posisi"
     };
-    for(int i = 0; i < 6; i++){
-        printf("%d. %s\n", i+1, daftarSkill[skillPemain.TI[i].skillId]);
+    p = First(skillPemain);
+    printf("Kamu memiliki skill:\n");
+    while(p != Nil){
+        printf("%d. %s\n", count, daftarSkill[Info(p)]);
+        count += 1;
+        p = Next(p);
     }
 }
 
-void getSkill(TabStr *skillPemain, int i){
+void getSkill(List *skillPemain){
     int x;
+    address p;
 
     x = rand();
     srand(x);
     x = check((x)%100 +1);
 
-    (*skillPemain).TI[i].skillId = x;
-    (*skillPemain).Neff += 1;
+    if(x != -999){
+        InsVLast(skillPemain, x);
+    }
 }
 
-
+// Masukin ke inisialisasi permainan -------------------------------------------
 int main(){
-    TabStr skillPemain;
+    List skillPemain;
     srand(time(NULL));
-
+    CreateEmpty(&skillPemain);
     for(int i = 0; i < 6; i++){
-        getSkill(&skillPemain, i);
-
+        getSkill(&skillPemain);
     }
-
+    // PrintForward(skillPemain);
     printSkill(skillPemain);
 }
