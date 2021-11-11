@@ -101,7 +101,7 @@ void DelFirst (List *L, address *P);
 /* F.S. P adalah alamat elemen pertama list sebelum penghapusan */
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
-void DelP (List *L, infotype X);
+void DelP (List *L, address p);
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
@@ -156,8 +156,11 @@ void Konkat1 (List *L1, List *L2, List *L3);
 /* dan L1 serta L2 menjadi list kosong.*/
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 
-
-
+// leSKILL LESGOOOOOOOOOOOOOOOOOO -----------------------------------------
+void printSkill(List skillPemain);
+/*  I.S. skillPemain mungking kosong
+    F.S. daftar skill yang dimiliki oleh player di output ke layar
+*/
 
 
 
