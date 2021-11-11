@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <time.h>
+#include "skill.h"
 
 int check(int x){
     if ((x >= 1) && (x <= 10)){
@@ -26,19 +27,45 @@ int check(int x){
     }
 }
 
-void getSkill(char *skillPemain[10], int i){
-    char daftarSkill[] = {'A', 'B', 'C', 'D', 'E', 'F', 'G'};
-    int x;
-    srand(time(NULL));
-    x = rand() % 100 +1;
-    x = check(x);
-    (&skillPemain[i]) = daftarSkill[x];
 
-}
-int main(){
-    char skillPemain[10] = {};
-    for (int i = 0; i < 10; i ++){
-        getSkill(&skillPemain[10], i);
-        printf("%c", skillPemain[i]);
+
+void printSkill(TabStr skillPemain)
+{
+    char daftarSkill[][22] =
+    {
+        "Pintu Ga Ke Mana Mana",
+        "Mesin Waktu",
+        "Baling Baling Jambu",
+        "Cermin Pengganda",
+        "Senter Pembesar Hoki",
+        "Senter Pengecil Hoki",
+        "Mesin Penukar Posisi"
+    };
+    for(int i = 0; i < 6; i++){
+        printf("%d. %s\n", i+1, daftarSkill[skillPemain.TI[i].skillId]);
     }
+}
+
+void getSkill(TabStr *skillPemain, int i){
+    int x;
+
+    x = rand();
+    srand(x);
+    x = check((x)%100 +1);
+
+    (*skillPemain).TI[i].skillId = x;
+    (*skillPemain).Neff += 1;
+}
+
+
+int main(){
+    TabStr skillPemain;
+    srand(time(NULL));
+
+    for(int i = 0; i < 6; i++){
+        getSkill(&skillPemain, i);
+
+    }
+
+    printSkill(skillPemain);
 }
