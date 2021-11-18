@@ -49,9 +49,6 @@ void MainSkill(List *skillPemain);
     F.S. skillpemain mungkin digunakan, mungkin dihapus
 */
 
-int NbElmt(List skillPemain);
-/*  I.S. skillPemain terdefinisi
-    F.S. skillPemain ditampilkan ke layar
-*/
+
 
 #endif // SKILL_H
