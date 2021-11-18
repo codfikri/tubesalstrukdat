@@ -3,7 +3,7 @@
 #include <time.h>
 #include "skill.h"
 #include "boolean.h"
-#include "Skill.c"
+// #include "Skill.c"
 
 
 

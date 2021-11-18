@@ -249,8 +249,6 @@ int check(int x){
     }
 }
 
-
-
 void printSkill(List skillPemain)
 {
     // Kamus Lokal
