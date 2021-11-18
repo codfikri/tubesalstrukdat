@@ -1,0 +1,31 @@
+# depslib dependency file v1.0
+1636624290 source:d:\codiing\tubesalstrukdat\skill\listlinier.c
+	<stdio.h>
+	<stdlib.h>
+	"listlinier.h"
+	"boolean.h"
+
+1636624280 d:\codiing\tubesalstrukdat\skill\listlinier.h
+	"boolean.h"
+
+1636610632 d:\codiing\tubesalstrukdat\skill\boolean.h
+
+1637244130 source:d:\codiing\tubesalstrukdat\skill\skill.c
+	<stdio.h>
+	<stdlib.h>
+	"skill.h"
+	"boolean.h"
+	"listlinier.h"
+
+1637240945 d:\codiing\tubesalstrukdat\skill\skill.h
+	"boolean.h"
+	"boolean.h"
+	"listlinier.h"
+
+1637243124 source:d:\codiing\tubesalstrukdat\skill\teslagi.c
+	<stdio.h>
+	<stdlib.h>
+	<time.h>
+	"skill.h"
+	"boolean.h"
+

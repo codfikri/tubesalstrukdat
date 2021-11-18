@@ -11,6 +11,7 @@ int main(){
     address p;
     int n;
 
+
     srand(time(NULL));
     CreateEmpty(&skillPemain);
     for(int i = 0; i < 10; i++){
