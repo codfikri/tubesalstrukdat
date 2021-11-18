@@ -17,6 +17,6 @@ int main(){
         getSkill(&skillPemain);
     }
     PrintForward(skillPemain);
-    MainSkill(&skillPemain);
+    MenuSkill(&skillPemain);
 
 }
