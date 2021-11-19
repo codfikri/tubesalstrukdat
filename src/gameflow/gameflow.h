@@ -4,7 +4,7 @@
 #define GAMEFLOW_H
 
 #include <stdio.h>
-#include "boolean.h"
+#include "../boolean.h"
 #include "array/array.h"
 #include "word/mesin_kar.h"
 
