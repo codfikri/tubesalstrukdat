@@ -184,33 +184,31 @@ void useSkill(List *skillPemain, int n)
         p = Next(p);
     }
     idSkill = Info(p);
-    printf("player menggunakan skill %s-nyan\n", daftarSkill[idSkill]);
+    // printf("player menggunakan skill %s-nyan\n", daftarSkill[idSkill]);
     switch (idSkill)
     {
     case 0:
-        printf("dengan kekuatan Pintu Ga Ke Mana Mana, player-sama mendapatkan imunitas terhadap teleport-nya \n");
+        pintuGaKemana(skillPemain, p);
         break;
     case 1:
-        printf("dengan kekuatan Mesin Waktu, Semua pemain mundur~~~ \n");
+        mesinwaktu(skillPemain, p);
         break;
     case 2:
-        printf("dengan kekuatan Baling Baling Jambu, Semua pemain dipaksa maju sejauh n \n");
+        balingjambu(skillPemain, p);
         break;
     case 3:
-        printf("dengan kekuatan Cermin Pengganda, player-sama mendapatkan imunitas terhadap teleport-nya \n");
+        cerminGanda(skillPemain, p);
         break;
-
     case 4:
-        printf("dengan kekuatan Senter Pembesar Hoki, player-sama mendapatkan imunitas terhadap teleport-nya \n");
+        senterBesarHoki(skillPemain, p);
         break;
     case 5:
-        printf("dengan kekuatan Senter Pengecil Hoki, player-sama mendapatkan imunitas terhadap teleport-nya \n");
+        senterKecilHoki(skillPemain, p);
         break;
     case 6:
-        printf("dengan kekuatan Mesin Penukar Posisi, player-sama mendapatkan imunitas terhadap teleport-nya \n");
+        mesinPenukarPosisi(skillPemain, p);
         break;
     }
-    DelAddress(skillPemain, p);
 }
 
 void MenuSkill(List *skillPemain) // main dari skill nya
@@ -219,11 +217,13 @@ void MenuSkill(List *skillPemain) // main dari skill nya
     int n = 0;
 
     // Algoritma
+    printf(">>====SKILL==============================================================+\n");
     printSkill(*skillPemain);
     while(n != -999){
-        printf("");
+        printf("\n>> Gunakan 0 untuk melihat skill sekarang\n");
+        printf(">> Gunakan -999 untuk keluar dari menu skill\n");
         scanf("%d", &n);
-        if(abs(n) <= NbElmt(*skillPemain)){
+        if(abs(n) <= NbElmt(*skillPemain) && n != 0){
             if(n < 0){
                 DelSkill(skillPemain, -n);
             }
@@ -231,6 +231,63 @@ void MenuSkill(List *skillPemain) // main dari skill nya
                 useSkill(skillPemain, n);
             }
         }
+        else if(n == 0){
+            printf("\n>>=======================================================================+\n");
+            printSkill(*skillPemain);
+        }
     }
 
+}
+
+// Use Skill uwu~~~~~~~~~~~~~~
+void pintuGaKemana(List *skillPemain, address p)
+/* Memberi buff kepada pemain */
+{
+    DelAddress(skillPemain, p);
+    printf(">> Walaupun pintu tersebut tidak menuju ke manapun, player-san merasakan dirinya\n   mendapatkan pilihan mengenai teleporter\n");
+}
+
+void mesinwaktu(List *skillPemain, address p)
+/* Membuat seluruh player kecuali pengguna skill sejauh roll dadu */
+{
+    DelAddress(skillPemain, p);
+    printf(">> Player-san mengubah waktu yang ada yang mengakibatkan setiap pemain selain player-san\n   Mundur sejauh rolldadu\n");
+}
+
+void balingjambu(List *skillPemain, address p)
+{
+    DelAddress(skillPemain, p);
+    printf(">> Player-san memaksa tiap pemain memakai Baling-Baling Jambu yang mengakibatkan\n   mereka maju sejauh rolldadu\n");
+}
+
+void cerminGanda(List *skillPemain, address p)
+{
+    if(NbElmt(*skillPemain) <= 9){
+        DelAddress(skillPemain, p);
+        getSkill(skillPemain);
+        getSkill(skillPemain);
+        printf(">> Dengan kekuatan Cermin Pengganda dan berkah dari Dolos-sama,\n   player-sama mendapatkan 2 skill baru \n");
+    }
+    else{
+        printf(">> skill anda sudah terlalu penuh, tidak dapat menggunakan skill ini\n");
+    }
+}
+
+void senterBesarHoki(List *skillPemain, address p)
+{
+
+    DelAddress(skillPemain, p);
+    printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing\" \n");
+}
+
+void senterKecilHoki(List *skillPemain, address p)
+{
+    DelAddress(skillPemain, p);
+    printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   terdengar suara asing yang mengutuk anda \"Misfortune\" \n");
+}
+
+void mesinPenukarPosisi(List *skillPemain, address p)
+{
+    DelAddress(skillPemain, p);
+    printf(">> Anda menggunakan Mesin Penukar Posisi!\n   Anda menukar posisi anda dengan Player-san\n");
 }

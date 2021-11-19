@@ -31,7 +31,16 @@
 		<Compiler>
 			<Add option="-Wall" />
 		</Compiler>
-		<Unit filename="main.c">
+		<Unit filename="boolean.h" />
+		<Unit filename="listlinier.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="listlinier.h" />
+		<Unit filename="skill.h" />
+		<Unit filename="tempkhususcodeblockjahat.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="teslagi.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Extensions>

@@ -22,10 +22,17 @@
 	"boolean.h"
 	"listlinier.h"
 
-1637243124 source:d:\codiing\tubesalstrukdat\skill\teslagi.c
+1637247021 source:d:\codiing\tubesalstrukdat\skill\teslagi.c
 	<stdio.h>
 	<stdlib.h>
 	<time.h>
 	"skill.h"
 	"boolean.h"
+
+1637244732 source:d:\codiing\tubesalstrukdat\skill\tempkhususcodeblockjahat.c
+	<stdio.h>
+	<stdlib.h>
+	"skill.h"
+	"boolean.h"
+	"listlinier.h"
 

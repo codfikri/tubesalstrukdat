@@ -17,7 +17,6 @@ int main(){
     for(int i = 0; i < 10; i++){
         getSkill(&skillPemain);
     }
-    PrintForward(skillPemain);
     MenuSkill(&skillPemain);
 
 }
