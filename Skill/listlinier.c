@@ -1,6 +1,14 @@
+/* 	NIM/Nama 	: 18220031/Muhammad Raihan Aulia
+	Nama file 	: listlinier.c
+	Tanggal		: 28/10/2021
+	Topik		: List Linier
+	Deskripsi	: mendefinisikan operasi primitif list linier
+
+*/
+
 #include <stdio.h>
 #include <stdlib.h>
-#include "skill.h"
+#include "listlinier.h"
 #include "boolean.h"
 
 
@@ -51,7 +59,7 @@ void Dealokasi (address *P)
 }
 
 /****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
-address SearchId (List L, infotype X)
+address Search (List L, infotype X)
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
@@ -63,7 +71,7 @@ address SearchId (List L, infotype X)
     p = First(L);
     found = false;
     while((p != Nil) && (!found)){
-        if (Info(p) == X){
+        if (Info(p)== X){
             found = true;
         }
         else{
@@ -150,31 +158,6 @@ void DelVLast (List *L, infotype *X)
     Dealokasi(&p);
 }
 
-void DelP(List *L, address nartoh)
-/* I.S. Sembarang */
-/* F.S. Jika ada elemen list beraddress P,  */
-/* Maka P dihapus dari list dan di-dealokasi */
-/* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
-/* List mungkin menjadi kosong karena penghapusan */
-{
-    // Kamus lokal
-    address hinata;
-
-    // Algoritma
-    hinata = First(*L);
-    if(nartoh != Nil){
-        if(nartoh == hinata){
-            DelFirst(L,&nartoh);
-        }
-        else{
-            while(Next(hinata) != nartoh){
-                hinata = Next(hinata);
-            }
-            DelAfter(L,&nartoh, hinata);
-        }
-        Dealokasi(&nartoh);
-    }
-}
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
 /*** PENAMBAHAN ELEMEN BERDASARKAN ALAMAT ***/
 void InsertFirst (List *L, address P)
@@ -233,7 +216,31 @@ void DelFirst (List *L, address *P)
     First(*L)= Next(First(*L));
 }
 
+void DelP(List *L, address nartoh)
+/* I.S. Sembarang */
+/* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
+/* Maka P dihapus dari list dan di-dealokasi */
+/* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
+/* List mungkin menjadi kosong karena penghapusan */
+{
+    // Kamus lokal
+    address hinata;
 
+    // Algoritma
+    hinata = First(*L);
+    if(nartoh != Nil){
+        if(nartoh == hinata){
+            DelFirst(L,&nartoh);
+        }
+        else{
+            while(Next(hinata) != nartoh){
+                hinata = Next(hinata);
+            }
+            DelAfter(L,&nartoh, hinata);
+        }
+        Dealokasi(&nartoh);
+    }
+}
 void DelLast (List *L, address *P)
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
@@ -271,8 +278,129 @@ void DelAfter (List *L, address *Pdel, address Prec)
     Next(*Pdel) = Nil;
 }
 
+/****************** PROSES SEMUA ELEMEN LIST ******************/
+void PrintInfo (List L)
+/* I.S. List mungkin kosong */
+/* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
+/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+/* Jika list kosong : menulis [] */
+/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+{
+    // Kamus lokal
+    address P;
+    // Algoritma
+    P = First(L);
+    if(IsEmpty(L)){
+        printf("[]");
+    }
+    else{
+        printf("[");
+        while(Next(P) != Nil){
+            printf("%d,", Info(P));
+            P = Next(P);
+        }
+        printf("%d]",Info(P));
+    }
+}
+int NbElmt (List L)
+/* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
+{
+    // Kamus lokal
+    int count;
+    address p;
+    // Algoritma
+    p = First(L);
+    count=0;
+    while(p != Nil){
+        p = Next(p);
+        count += 1;
+    }
+    return count;
+}
 
+/*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
+infotype Max (List L)
+/* Mengirimkan nilai Info(P) yang maksimum */
+{
+    // Kamus lokal
+    infotype max;
+    address p;
+    // Algoritma
+    max = Info(First(L));
+    p = Next(First(L));
+    while(Next(p) != Nil){
+        if(max < Info(p)){
+            max = Info(p);
+        }
+        p = Next(p);
+    }
+    if(max < Info(p)){
+        max = Info(p);
+    }
+    return max;
+}
 
+address AdrMax (List L)
+/* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
+{
+    // Kamus lokal
+
+    // Algoritma
+
+    return Search(L, Max(L));
+}
+infotype Min (List L)
+/* Mengirimkan nilai info(P) yang minimum */
+{
+    infotype min;
+    address p;
+    // Algoritma
+    min = Info(First(L));
+    p = Next(First(L));
+    while(Next(p) != Nil){
+        if(min > Info(p)){
+            min = Info(p);
+        }
+        p = Next(p);
+    }
+    if(min > Info(p)){
+        min = Info(p);
+    }
+    return min;
+}
+address AdrMin (List L)
+/* Mengirimkan address P, dengan info(P) yang bernilai minimum */
+{
+    // Kamus lokal
+
+    // Algoritma
+
+    return Search(L, Min(L));
+}
+
+float Average (List L)
+/* Mengirimkan nilai rata-rata info(P) */
+{
+    // Kamus lokal
+    address P;
+    float sum;
+    int count;
+    // Algoritma
+    if(IsEmpty(L)){
+        return 0;
+    }
+    else{
+        P = First(L);
+        sum = 0;
+        count = 0;
+        while (P != Nil){
+            sum += Info(P);
+            count ++;
+            P = Next(P);
+        }
+        return sum/count;
+    }
+}
 /****************** PROSES TERHADAP LIST ******************/
 void PrintForward(List L)
 {
@@ -291,145 +419,49 @@ void PrintForward(List L)
     }
 }
 
-int NbElmt(List Q)
-/* Mengirimkan banyaknya elemen list. Mengirimkan 0 jika Q kosong */
+void InversList (List *L)
+/* I.S. sembarang. */
+/* F.S. elemen list dibalik : */
+/* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
+/* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
 {
     // Kamus Lokal
-    int count = 0;
     address p;
-
+    List temp;
     // Algoritma
-    p = First(Q);
-    if(p == Nil){
-        return 0;
+    CreateEmpty(&temp);
+    while(!IsEmpty(*L)){
+        DelLast(L, &p);
+        InsertLast(&temp,p);
     }
-    else{
-        while(p != Nil){
-            count += 1;
-            p = Next(p);
-        }
-        return count+1;
-    }
-
+    *L = temp;
 }
 
-// SKILL LESGOOOOOO ----------------------------------------------------------------
-void printSkill(List skillPemain)
-{
-    // Kamus Lokal
-    address p;
-    int count = 1;
-    char daftarSkill[][22] =
-    {
-        "Pintu Ga Ke Mana Mana",
-        "Mesin Waktu",
-        "Baling Baling Jambu",
-        "Cermin Pengganda",
-        "Senter Pembesar Hoki",
-        "Senter Pengecil Hoki",
-        "Mesin Penukar Posisi"
-    };
-    if(IsEmpty(skillPemain)){
-        printf("Ndda ada skill-nya~~\n");
-    }
-    else{
-        p = First(skillPemain);
-        printf("Kamu memiliki skill:\n");
-        while(p != Nil){
-            printf("%d. %s\n", count, daftarSkill[Info(p)]);
-            count += 1;
-            p = Next(p);
-        }
-    }
-}
-
-void getSkill(List *skillPemain){
-    int x;
-    address p;
-
-    if(NbElmt(*skillPemain) <= 10){
-        x = rand();
-        srand(x);
-        x = chance((x)%100 +1);
-
-        if(x != -999){
-            InsVLast(skillPemain, x);
-        }
-    }
-}
-
-int chance(int x){
-    if ((x >= 1) && (x <= 10)){
-        return 0;
-    }
-    else if((x >= 11) && (x <= 20)){
-        return 1;
-    }
-    else if((x >= 21) && (x <= 30)){
-        return 2;
-    }
-    else if((x >= 31) && (x <= 36)){
-        return 3;
-    }
-    else if((x >= 37) && (x <= 51)){
-        return 4;
-    }
-    else if((x >= 52) && (x <= 66)){
-        return 5;
-    }
-    else if((x >= 67) && (x <= 70)){
-        return 6;
-    }
-    else{
-        return -999;
-    }
-}
-
-
-void SkillUse(List *skillPemain,int n)
+void Konkat1 (List *L1, List *L2, List *L3)
+/* I.S. L1 dan L2 sembarang */
+/* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
+/* Konkatenasi dua buah list : L1 dan L2    */
+/* menghasilkan L3 yang baru (dengan elemen list L1 dan L2) */
+/* dan L1 serta L2 menjadi list kosong.*/
+/* Tidak ada alokasi/dealokasi pada prosedur ini */
 {
     // Kamus lokal
     address p;
     // Algoritma
-    p = First(*skillPemain);
-    for(int i = 1; i < n; i++){
-        p = Next(p);
+    CreateEmpty(L3);
+    if(IsEmpty(*L1)){
+        First(*L3) = First(*L2);
+
     }
+    else
+        First(*L3) = First(*L1);
+        p = First(*L1);
+        while(Next(p) != Nil){
+            p = Next(p);
+        }
+        Next(p) = First(*L2);
 
-    DelP(skillPemain, p);
+    CreateEmpty(L1);
+    CreateEmpty(L2);
 }
-
-
-
-
-
-//------------- teslagi.c
-int main(){
-    List skillPemain;
-    address p;
-
-    srand(time(NULL));
-    CreateEmpty(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    getSkill(&skillPemain);
-    PrintForward(skillPemain);
-    printSkill(skillPemain);
-    SkillUse(&skillPemain, 5);
-    printSkill(skillPemain);
-}
-
-
 

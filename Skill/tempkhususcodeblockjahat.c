@@ -1,3 +1,4 @@
+
 #include <stdio.h>
 #include <stdlib.h>
 #include "skill.h"
@@ -99,7 +100,7 @@ void printSkill(List skillPemain)
 void getSkill(List *skillPemain){
     int x;
 
-    if(NbElmt(*skillPemain) <= 10){
+    if(NbElmt(*skillPemain) < 10){
         x = rand();
         srand(x);
         x = chance((x)%100 +1);
