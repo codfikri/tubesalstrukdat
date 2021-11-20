@@ -18,6 +18,10 @@ addressPlayer AlokasiPlayer(char* nama, List Skillpemain, int noUrut){ //sama ka
         NoUrut(AP) = noUrut;
         Nama(AP) = nama;
         Skill(AP) = Skillpemain;
+        isImmune(AP) = false;
+        isHokiBesar(AP) = false;
+        isHokiKecil(AP) = false;
+        isPostCermin(AP) = false;
         NextPlayer(AP) = Nil;
     } else {
         return Nil;
@@ -39,34 +43,43 @@ void insertPlayer(PlayerList *PL, addressPlayer P){ //sama kaya InsertLast pada 
     }
 }
 
-void insertPlayerToList(PlayerList *PL, char* nama, List Skillpemain, int noUrut){ //sama kaya InsVlast pada list
+void insertPlayerToList(PlayerList *PL, char* nama, List Skillpemain, int noUrut, boolean isLastPlayer){ //sama kaya InsVlast pada list
     addressPlayer P;
     P = AlokasiPlayer(nama, Skillpemain, noUrut);
     if (P != Nil){
         insertPlayer(PL, P);
+        if (isLastPlayer){
+            NextPlayer(P) = FirstPlayer(*PL);
+        }
     }
 }
 
 void inputPlayerList(PlayerList *P, int n){
     char playerName[16];
     List L;
+    boolean isLastPlayer = false;
     CreateEmpty(&L);
     for (int i=1; i<=n; i++){
         printf("Masukan nama pemain ke-%d: ", i);
         scanf("%s", playerName);
-        insertPlayerToList(P, playerName, L, i);
+        if (i==n){
+            isLastPlayer = true;
+        }
+        insertPlayerToList(P, playerName, L, i, isLastPlayer);
     }
 }
 
-void printPlayer(PlayerList PL){ //sama kaya printForward di list
+void printPlayer(PlayerList PL, int n){ //sama kaya printForward di list
     if (isListPlayerEmpty(PL)){printf("List player masih kosong");}
     else{
         addressPlayer P;
         P = FirstPlayer(PL);
-        while (P != Nil){
+        int i = 1;
+        while (i <= n){
             printf("Pemain ke %d telah terdaftar\n", NoUrut(P));
             printf("Pemain ke %d berada pada petak %d\n", NoUrut(P), Petak(P));
             P = NextPlayer(P);
+            i++;
         }
     }
 }

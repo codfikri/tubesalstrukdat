@@ -1,7 +1,7 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "../skill/skill.h"
+#include "skill.h"
 
 /* Player menggunakan circular linked list */
 typedef struct player *addressPlayer;
@@ -10,6 +10,10 @@ typedef struct player {
     char *nama;
     int Petak;
     List Skillpemain;
+    boolean isImmune;
+    boolean isHokiKecil;
+    boolean isHokiBesar;
+    boolean isPostCermin;
     addressPlayer next;
 } Player;
 
@@ -22,8 +26,12 @@ typedef struct {
 #define NoUrut(P) P->noUrut
 #define Petak(P) P->Petak
 #define Skill(P) P->Skillpemain
-#define FirstPlayer(P) (P).addrFirstPlayer
+#define isImmune(P) P->isImmune
+#define isHokiKecil(P) P->isHokiKecil
+#define isHokiBesar(P) P->isHokiBesar
+#define isPostCermin(P) P->isPostCermin
 #define NextPlayer(p) (p)->next
+#define FirstPlayer(P) (P).addrFirstPlayer
 
 void CreatePlayerList(PlayerList *P);
 
@@ -33,10 +41,10 @@ addressPlayer AlokasiPlayer(char* nama, List Skillpemain, int noUrut);
 
 void insertPlayer(PlayerList *PL, addressPlayer P);
 
-void insertPlayerToList(PlayerList *PL, char *nama, List Skillpemain, int noUrut);
+void insertPlayerToList(PlayerList *PL, char *nama, List Skillpemain, int noUrut, boolean isLastPlayer);
 
 void inputPlayerList(PlayerList *P, int n);
 
-void printPlayer(PlayerList PL);
+void printPlayer(PlayerList PL, int n);
 
 #endif

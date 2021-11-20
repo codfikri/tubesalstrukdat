@@ -1,4 +1,3 @@
-#include <stdio.h>
 #include "player.h"
 
 int main(){
@@ -19,7 +18,7 @@ int main(){
     default: printf("Pemain hanya dapat berjumlah 2, 3, atau 4 orang.\n");
     }
 
-    printPlayer(PL);
+    printPlayer(PL, l);
 
     return 0;
 }
