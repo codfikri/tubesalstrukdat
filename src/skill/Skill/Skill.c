@@ -3,6 +3,7 @@
 #include "skill.h"
 #include "boolean.h"
 #include "listlinier.h"
+#include "buff.h"
 
 // dari listlinier.c --------------------------------------------------
 /****************** TEST LIST KOSONG ******************/
@@ -617,7 +618,7 @@ void DelSkill(List *skillPemain,int n)
     DelAddress(skillPemain, p);
 }
 
-void useSkill(List *skillPemain, int n)
+void useSkill(List *skillPemain, int n, Buff *buff)
 {
     // Kamus Lokal
     address p;
@@ -643,7 +644,7 @@ void useSkill(List *skillPemain, int n)
     switch (idSkill)
     {
     case 0:
-        pintuGaKemana(skillPemain, p);
+        pintuGaKemana(skillPemain, p, buff);
         break;
     case 1:
         mesinwaktu(skillPemain, p);
@@ -652,13 +653,13 @@ void useSkill(List *skillPemain, int n)
         balingjambu(skillPemain, p);
         break;
     case 3:
-        cerminGanda(skillPemain, p);
+        cerminGanda(skillPemain, p, buff);
         break;
     case 4:
-        senterBesarHoki(skillPemain, p);
+        senterBesarHoki(skillPemain, p, buff);
         break;
     case 5:
-        senterKecilHoki(skillPemain, p);
+        senterKecilHoki(skillPemain, p, buff);
         break;
     case 6:
         mesinPenukarPosisi(skillPemain, p);
@@ -666,7 +667,7 @@ void useSkill(List *skillPemain, int n)
     }
 }
 
-void MenuSkill(List *skillPemain) // main dari skill nya
+void MenuSkill(List *skillPemain, Buff *buff) // main dari skill nya
 {
     // Kamus lokal
     int n = 0;
@@ -683,7 +684,7 @@ void MenuSkill(List *skillPemain) // main dari skill nya
                 DelSkill(skillPemain, -n);
             }
             else{
-                useSkill(skillPemain, n);
+                useSkill(skillPemain, n, buff);
             }
         }
         else if(n == 0){
@@ -695,9 +696,10 @@ void MenuSkill(List *skillPemain) // main dari skill nya
 }
 
 // Use Skill uwu~~~~~~~~~~~~~~
-void pintuGaKemana(List *skillPemain, address p)
+void pintuGaKemana(List *skillPemain, address p, Buff *buff)
 /* Memberi buff kepada pemain */
 {
+    (*buff).info[0] = true;
     DelAddress(skillPemain, p);
     printf(">> Walaupun pintu tersebut tidak menuju ke manapun, player-san merasakan dirinya\n   mendapatkan pilihan mengenai teleporter\n");
 }
@@ -715,9 +717,10 @@ void balingjambu(List *skillPemain, address p)
     printf(">> Player-san memaksa tiap pemain memakai Baling-Baling Jambu yang mengakibatkan\n   mereka maju sejauh rolldadu\n");
 }
 
-void cerminGanda(List *skillPemain, address p)
+void cerminGanda(List *skillPemain, address p, Buff *buff)
 {
     if(NbElmt(*skillPemain) <= 9){
+        (*buff).info[0] = true;
         DelAddress(skillPemain, p);
         getSkill(skillPemain);
         getSkill(skillPemain);
@@ -728,15 +731,16 @@ void cerminGanda(List *skillPemain, address p)
     }
 }
 
-void senterBesarHoki(List *skillPemain, address p)
+void senterBesarHoki(List *skillPemain, address p, Buff *buff)
 {
-
+    (*buff).info[2] = true;
     DelAddress(skillPemain, p);
     printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing\" \n");
 }
 
-void senterKecilHoki(List *skillPemain, address p)
+void senterKecilHoki(List *skillPemain, address p, Buff *buff)
 {
+    (*buff).info[3] = true;
     DelAddress(skillPemain, p);
     printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   terdengar suara asing yang mengutuk anda \"Misfortune\" \n");
 }
@@ -755,6 +759,10 @@ int main(){
     List skillPemain;
     address p;
     int n;
+    Buff buff;
+    for(int i=0; i< 4; i++){
+        buff.info[i] = false;
+    }
 
 
     srand(time(NULL));
@@ -762,6 +770,8 @@ int main(){
     for(int i = 0; i < 10; i++){
         getSkill(&skillPemain);
     }
-    MenuSkill(&skillPemain);
-
+    MenuSkill(&skillPemain, &buff);
+    for(int i = 0; i < 4; i++){
+        printf("%d ", buff.info[i]);
+    }
 }
