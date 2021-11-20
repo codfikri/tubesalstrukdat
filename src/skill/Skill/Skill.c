@@ -719,30 +719,45 @@ void balingjambu(List *skillPemain, address p)
 
 void cerminGanda(List *skillPemain, address p, Buff *buff)
 {
-    if(NbElmt(*skillPemain) <= 9){
-        (*buff).info[0] = true;
-        DelAddress(skillPemain, p);
-        getSkill(skillPemain);
-        getSkill(skillPemain);
-        printf(">> Dengan kekuatan Cermin Pengganda dan berkah dari Dolos-sama,\n   player-sama mendapatkan 2 skill baru \n");
+    if((*buff).info[1]){
+        printf(">> Maaf sudah menggunakan cermin pengganda... \n");
     }
     else{
-        printf(">> skill anda sudah terlalu penuh, tidak dapat menggunakan skill ini\n");
+        if(NbElmt(*skillPemain) <= 9){
+            (*buff).info[1] = true;
+            DelAddress(skillPemain, p);
+            getSkill(skillPemain);
+            getSkill(skillPemain);
+            printf(">> Dengan kekuatan Cermin Pengganda dan berkah dari Dolos-sama,\n   player-sama mendapatkan 2 skill baru \n");
+        }
+        else{
+            printf(">> skill anda sudah terlalu penuh, tidak dapat menggunakan skill ini\n");
+        }
     }
 }
 
 void senterBesarHoki(List *skillPemain, address p, Buff *buff)
 {
-    (*buff).info[2] = true;
-    DelAddress(skillPemain, p);
-    printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing\" \n");
+    if((*buff).info[2] || (*buff).info[3]){
+        printf(">> Maaf sudah menggunakan salah satu senter hoki... \n");
+    }
+    else{
+        (*buff).info[2] = true;
+        DelAddress(skillPemain, p);
+        printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing\" \n");
+    }
 }
 
 void senterKecilHoki(List *skillPemain, address p, Buff *buff)
 {
-    (*buff).info[3] = true;
-    DelAddress(skillPemain, p);
-    printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   terdengar suara asing yang mengutuk anda \"Misfortune\" \n");
+    if((*buff).info[2] || (*buff).info[3]){
+        printf(">> Maaf sudah menggunakan salah satu senter hoki... \n");
+    }
+    else{
+        (*buff).info[3] = true;
+        DelAddress(skillPemain, p);
+        printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   terdengar suara asing yang mengutuk anda \"Misfortune\" \n");
+    }
 }
 
 void mesinPenukarPosisi(List *skillPemain, address p)
