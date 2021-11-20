@@ -4,12 +4,12 @@
     Penempatan elemen selalu rapat kiri
 */
 
-#include "boolean.h"
+#include <stdio.h>
+#include <stdlib.h>
+#include "..\boolean.h"
 
 #ifndef SKILL_H
 #define SKILL_H
-
-#define Nil NULL
 
 typedef int infotype;
 typedef struct tElmtlist *address;
@@ -161,7 +161,9 @@ void printSkill(List skillPemain);
 */
 
 void getSkill(List *skillPemain);
+
 int check(int x);
+
 void printSkill(List skillPemain);
-void getSkill(List *skillPemain);
+
 #endif // SKILL_H

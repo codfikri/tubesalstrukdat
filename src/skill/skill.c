@@ -6,11 +6,9 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
 #include "skill.h"
-#include "boolean.h"
 
+#define Nil NULL
 
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmpty (List L)
