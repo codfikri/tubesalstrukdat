@@ -4,8 +4,92 @@
 #include "boolean.h"
 #include "listlinier.h"
 #include "buff.h"
+#include "player.h"
+// dari player.c
+void CreatePlayerList(PlayerList *P){ //sama kaya CreateEmpty pada List
+    FirstPlayer(*P) = Nil;
+}
+
+boolean isListPlayerEmpty(PlayerList PL){ //sama kaya IsEmpty pada list
+    return FirstPlayer(PL)==Nil;
+}
+
+addressPlayer AlokasiPlayer(char* nama, List Skillpemain, int noUrut){ //sama kaya Alokasi pada list
+    addressPlayer AP;
+    AP = (Player *) malloc(sizeof(Player));
+    if (AP != Nil){
+        Petak(AP) = 1;
+        NoUrut(AP) = noUrut;
+        Nama(AP) = nama;
+        Skill(AP) = Skillpemain;
+        isImmune(AP) = false;
+        isHokiBesar(AP) = false;
+        isHokiKecil(AP) = false;
+        isPostCermin(AP) = false;
+        NextPlayer(AP) = Nil;
+    } else {
+        return Nil;
+    }
+    return AP;
+}
+
+void insertPlayer(PlayerList *PL, addressPlayer P){ //sama kaya InsertLast pada list
+    addressPlayer last;
+    if (isListPlayerEmpty(*PL)){
+        NextPlayer(P) = FirstPlayer(*PL);
+        FirstPlayer(*PL) = P;
+    } else{
+        last = FirstPlayer(*PL);
+        while(NextPlayer(last) != Nil){
+            last = NextPlayer(last);
+        }
+        NextPlayer(last) = P;
+    }
+}
+
+void insertPlayerToList(PlayerList *PL, char* nama, List Skillpemain, int noUrut, boolean isLastPlayer){ //sama kaya InsVlast pada list
+    addressPlayer P;
+    P = AlokasiPlayer(nama, Skillpemain, noUrut);
+    if (P != Nil){
+        insertPlayer(PL, P);
+        if (isLastPlayer){
+            NextPlayer(P) = FirstPlayer(*PL);
+        }
+    }
+}
+
+void inputPlayerList(PlayerList *P, int n){
+    char playerName[16];
+    List L;
+    boolean isLastPlayer = false;
+    CreateEmpty(&L);
+    for (int i=1; i<=n; i++){
+        printf("Masukan nama pemain ke-%d: ", i);
+        scanf("%s", playerName);
+        if (i==n){
+            isLastPlayer = true;
+        }
+        insertPlayerToList(P, playerName, L, i, isLastPlayer);
+    }
+}
+
+void printPlayer(PlayerList PL, int n){ //sama kaya printForward di list
+    if (isListPlayerEmpty(PL)){printf("List player masih kosong");}
+    else{
+        addressPlayer P;
+        P = FirstPlayer(PL);
+        int i = 1;
+        while (i <= n){
+            printf("Pemain ke %d telah terdaftar\n", NoUrut(P));
+            printf("Pemain ke %d berada pada petak %d\n", NoUrut(P), Petak(P));
+            P = NextPlayer(P);
+            i++;
+        }
+    }
+}
 
 // dari listlinier.c --------------------------------------------------
+/* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
 boolean IsEmpty (List L)
 /* Mengirim true jika list kosong */
@@ -18,83 +102,55 @@ void CreateEmpty (List *L)
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
 {
-    // KAMUS LOKAL-------
-
-    // ALGORITMA---------
     First(*L) = Nil;
 }
 
-/****************** Manajemen Memori ******************/
 address Alokasi (infotype X)
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
 {
-    // KAMUS LOKAL
-    address p;
-    // ALGORITMA
-    p = (ElmtList *) malloc(sizeof(ElmtList));
-    if(p != Nil){
-        Info(p)= X;
-        Next(p)= Nil;
-    }
-    return p;
+    address P = (address) malloc(sizeof(address) + 1);
+    Info(P) = X;
+    Next(P) = Nil;
+    return P;
 }
+
 void Dealokasi (address *P)
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
 {
-    // Kamus lokal
-
-    // Algoritma
     free(*P);
 }
 
-/****************** PENCARIAN SEBUAH ELEMEN LIST ******************/
 address Search (List L, infotype X)
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan Nil */
 {
-    // Kamus lokal
-    address p;
-    boolean found;
-    // Algoritma
-    p = First(L);
-    found = false;
-    while((p != Nil) && (!found)){
-        if (Info(p)== X){
-            found = true;
-        }
-        else{
-            p = Next(p);
-        }
-    }
-    if(found) {
-        return p;
-    }
-    else{
+    if (IsEmpty(L)){
         return Nil;
     }
+
+    address p = First(L);
+    while (p != Nil && Info(p) != X){
+        p = Next(p);
+    }
+    return p;
 }
 
-
-/****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
 void InsVFirst (List *L, infotype X)
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen pertama dengan nilai X jika alokasi berhasil */
 {
-    // Kamus lokal
-    address p;
-    // Algoritma
-    p = Alokasi(X);
-    if(p != Nil){
-        Next(p) = First(*L);
-        First(*L) = p;
+    address newNode = Alokasi(X);
+    if (newNode != Nil){
+        Next(newNode) = First(*L);
+        First(*L) = newNode;
     }
 }
 
@@ -104,12 +160,17 @@ void InsVLast (List *L, infotype X)
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
 {
-    // Kamus lokal
-    address p;
-    // Algoritma
-    p = Alokasi(X);
-    if(p != Nil){
-        InsertLast(L,p);
+    address newNode = Alokasi(X);
+    if (IsEmpty(*L)){
+        InsVFirst(L, X);
+    }
+    else{
+        address p = First(*L);
+        while (Next(p) != Nil){
+            p = Next(p);
+        }
+        Next(p) = newNode;
+        Next(Next(p)) = Nil;
     }
 }
 
@@ -119,37 +180,31 @@ void DelVFirst (List *L, infotype *X)
 /* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen pertama di-dealokasi */
 {
-    // Kamus lokal
-    address p;
-    // Algoritma
-    p = First(*L);
+    address p = First(*L);
     *X = Info(p);
-    First(*L)= Next(p);
+    First(*L) = Next(p);
     Dealokasi(&p);
 }
+
 void DelVLast (List *L, infotype *X)
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
 {
-    // Kamus lokal
-    address p;
-    address loc;
-    // Algoritma
-    p = First(*L);
-    loc = Nil;
-    while(Next(p) != Nil){
-        loc = p;
-        p = Next(p);
-    }
-    if(loc == Nil){
-        First(*L) = Nil;
+    address p = First(*L);
+    address loc = Nil;
+
+    if (Next(p) != Nil){
+        while(Next(Next(p)) != Nil){
+            p = Next(p);
+        }
+        *X = Info(Next(p));
+        Dealokasi(&Next(p));
+        Next(p) = Nil;
     }
     else{
-        Next(loc) = Nil;
+        DelVFirst(L, X);
     }
-    *X = Info(p);
-    Dealokasi(&p);
 }
 
 /****************** PRIMITIF BERDASARKAN ALAMAT ******************/
@@ -158,20 +213,18 @@ void InsertFirst (List *L, address P)
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. Menambahkan elemen ber-address P sebagai elemen pertama */
 {
-    // Kamus lokal
-
-    // Algoritma
-    Next(P) = First(*L);
-    First(*L) = P;
+    address first = First(*L);
+    if (P != Nil){
+        Next(P) = first;
+        First(*L) = P;
+    }
 }
+
 void InsertAfter (List *L, address P, address Prec)
 /* I.S. Prec pastilah elemen list dan bukan elemen terakhir, */
 /*      P sudah dialokasi  */
 /* F.S. Insert P sebagai elemen sesudah elemen beralamat Prec */
 {
-    // Kamus lokal
-
-    // Algoritma
     Next(P) = Next(Prec);
     Next(Prec) = P;
 }
@@ -180,18 +233,15 @@ void InsertLast (List *L, address P)
 /* I.S. Sembarang, P sudah dialokasi  */
 /* F.S. P ditambahkan sebagai elemen terakhir yang baru */
 {
-    // Kamus lokal
-    address last;
-    // Algoritma
-    if(IsEmpty(*L)){
-        Next(P) = First(*L);
+    if (IsEmpty(*L)){
         First(*L) = P;
     }
     else{
-        last = First(*L);
-        while(Next(last) != Nil){
+        address last = First(*L);
+        while (Next(last) != Nil){
             last = Next(last);
         }
+        Next(P) = Nil;
         Next(last) = P;
     }
 }
@@ -203,38 +253,35 @@ void DelFirst (List *L, address *P)
 /*      Elemen list berkurang satu (mungkin menjadi kosong) */
 /* First element yg baru adalah suksesor elemen pertama yang lama */
 {
-    // Kamus lokal
-
-    // Algoritma
-    *P = First(*L);
-    First(*L)= Next(First(*L));
+    address delete = First(*L);
+    *P = delete;
+    First(*L) = Next(delete);
 }
 
-void DelP(List *L, address nartoh)
+void DelP (List *L, infotype X)
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P, dengan Info(P)=X  */
 /* Maka P dihapus dari list dan di-dealokasi */
 /* Jika tidak ada elemen list dengan Info(P)=X, maka list tetap */
 /* List mungkin menjadi kosong karena penghapusan */
 {
-    // Kamus lokal
-    address hinata;
-
-    // Algoritma
-    hinata = First(*L);
-    if(nartoh != Nil){
-        if(nartoh == hinata){
-            DelFirst(L,&nartoh);
+    if (!IsEmpty(*L)){
+        address p = First(*L);
+        address dummy;
+        if(Info(p) == X){
+            DelFirst(L, &dummy);
         }
         else{
-            while(Next(hinata) != nartoh){
-                hinata = Next(hinata);
+            while (Next(p) != Nil && Info(Next(p)) != X){
+                p = Next(p);
             }
-            DelAfter(L,&nartoh, hinata);
+            if(Next(p) != Nil){
+                DelAfter(L, &dummy, p);
+            }
         }
-        Dealokasi(&nartoh);
     }
 }
+
 void DelLast (List *L, address *P)
 /* I.S. List tidak kosong */
 /* F.S. P adalah alamat elemen terakhir list sebelum penghapusan  */
@@ -242,37 +289,27 @@ void DelLast (List *L, address *P)
 /* Last element baru adalah predesesor elemen terakhir yg lama, */
 /* jika ada */
 {
-    // Kamus lokal
-    address p, loc;
-    // Algoritma
-    p = First(*L);
-    loc = Nil;
-    while(Next(p) != Nil){
-        loc = p;
-        p = Next(p);
-    }
-    *P = p;
-    if(loc == Nil){
-        First(*L) = Nil;
+    address last = First(*L);
+    if (Next(last) == Nil){
+        DelFirst(L, P);
     }
     else{
-        Next(loc) = Nil;
+        while(Next(Next(last)) != Nil){
+            last = Next(last);
+        }
+        DelAfter(L, P, last);
     }
 }
+
 void DelAfter (List *L, address *Pdel, address Prec)
 /* I.S. List tidak kosong. Prec adalah anggota list  */
 /* F.S. Menghapus Next(Prec): */
 /*      Pdel adalah alamat elemen list yang dihapus  */
 {
-    // Kamus lokal
-
-    // Algoritma
     *Pdel = Next(Prec);
-    Next(Prec) = Next(Next(Prec));
-    Next(*Pdel) = Nil;
+    Next(Prec) = Next(*Pdel);
 }
 
-/****************** PROSES SEMUA ELEMEN LIST ******************/
 void PrintInfo (List L)
 /* I.S. List mungkin kosong */
 /* F.S. Jika list tidak kosong, iai list dicetak ke kanan: [e1,e2,...,en] */
@@ -280,56 +317,46 @@ void PrintInfo (List L)
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
 {
-    // Kamus lokal
-    address P;
-    // Algoritma
-    P = First(L);
-    if(IsEmpty(L)){
-        printf("[]");
-    }
-    else{
-        printf("[");
-        while(Next(P) != Nil){
-            printf("%d,", Info(P));
-            P = Next(P);
+    printf("[");
+    if (!IsEmpty(L)){
+        address p = First(L);
+        while (p != Nil){
+            printf("%d", Info(p));
+            p = Next(p);
+
+            if (p != Nil){
+                printf(",");
+            }
         }
-        printf("%d]",Info(P));
     }
+    printf("]");
 }
+
 int NbElmt (List L)
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
 {
-    // Kamus lokal
-    int count;
-    address p;
-    // Algoritma
-    p = First(L);
-    count=0;
-    while(p != Nil){
-        p = Next(p);
-        count += 1;
+    int ctr = 0;
+    if (!IsEmpty(L)){
+        address p = First(L);
+        while (p != Nil){
+            ctr++;
+            p = Next(p);
+        }
     }
-    return count;
+    return ctr;
 }
 
 /*** Prekondisi untuk Max/Min/rata-rata : List tidak kosong ***/
 infotype Max (List L)
 /* Mengirimkan nilai Info(P) yang maksimum */
 {
-    // Kamus lokal
-    infotype max;
-    address p;
-    // Algoritma
-    max = Info(First(L));
-    p = Next(First(L));
-    while(Next(p) != Nil){
-        if(max < Info(p)){
+    address p = First(L);
+    infotype max = Info(p);
+    while (Next(p) != Nil){
+        p = Next(p);
+        if(Info(p) > max){
             max = Info(p);
         }
-        p = Next(p);
-    }
-    if(max < Info(p)){
-        max = Info(p);
     }
     return max;
 }
@@ -337,81 +364,48 @@ infotype Max (List L)
 address AdrMax (List L)
 /* Mengirimkan address P, dengan info(P) yang bernilai maksimum */
 {
-    // Kamus lokal
-
-    // Algoritma
-
     return Search(L, Max(L));
 }
+
 infotype Min (List L)
 /* Mengirimkan nilai info(P) yang minimum */
 {
-    infotype min;
-    address p;
-    // Algoritma
-    min = Info(First(L));
-    p = Next(First(L));
-    while(Next(p) != Nil){
-        if(min > Info(p)){
+    address p = First(L);
+    infotype min = Info(p);
+    while (Next(p) != Nil){
+        p = Next(p);
+        if(Info(p) < min){
             min = Info(p);
         }
-        p = Next(p);
-    }
-    if(min > Info(p)){
-        min = Info(p);
     }
     return min;
 }
+
 address AdrMin (List L)
 /* Mengirimkan address P, dengan info(P) yang bernilai minimum */
 {
-    // Kamus lokal
-
-    // Algoritma
-
     return Search(L, Min(L));
 }
 
 float Average (List L)
 /* Mengirimkan nilai rata-rata info(P) */
 {
-    // Kamus lokal
-    address P;
-    float sum;
-    int count;
-    // Algoritma
-    if(IsEmpty(L)){
-        return 0;
-    }
-    else{
-        P = First(L);
-        sum = 0;
-        count = 0;
-        while (P != Nil){
-            sum += Info(P);
-            count ++;
-            P = Next(P);
-        }
-        return sum/count;
-    }
+    if (IsEmpty(L)){
+		return 0;
+	} else {
+		address P = First(L);
+		float tot = Info(P);
+		float ctr = 1;
+		while (Next(P) != Nil){
+			P = Next(P);
+			tot = tot + Info(P);
+			ctr++;
+		}
+		return (tot/ctr);
+	}
 }
+
 /****************** PROSES TERHADAP LIST ******************/
-void PrintForward(List L)
-{
-    if(IsEmpty(L)){
-        printf("[]\n");
-    }
-    else{
-        printf("[");
-        address p;
-        p = First(L);
-        while(Next(p) != Nil){
-            printf("%d,", Info(p));
-            p = Next(p);
-        }
-        printf("%d]\n", Info(p));
-    }
-}
 
 void InversList (List *L)
 /* I.S. sembarang. */
@@ -419,18 +413,25 @@ void InversList (List *L)
 /* Elemen terakhir menjadi elemen pertama, dan seterusnya. */
 /* Membalik elemen list, tanpa melakukan alokasi/dealokasi. */
 {
-    // Kamus Lokal
-    address p;
-    List temp;
-    // Algoritma
-    CreateEmpty(&temp);
-    while(!IsEmpty(*L)){
-        DelLast(L, &p);
-        InsertLast(&temp,p);
-    }
-    *L = temp;
+    if (!IsEmpty(*L)){
+		address P = First(*L);
+		while (Next(P) != Nil){
+			P = Next(P);
+		}
+		address last = P;
+		address Prec;
+		while (P != First(*L)){
+			Prec = First(*L);
+			while (Next(Prec) != P){
+				Prec = Next(Prec);
+			}
+			Next(P) = Prec;
+			P = Next(P);
+		}
+		Next(P) = Nil;
+		First(*L) = last;
+	}
 }
-
 void Konkat1 (List *L1, List *L2, List *L3)
 /* I.S. L1 dan L2 sembarang */
 /* F.S. L1 dan L2 kosong, L3 adalah hasil konkatenasi L1 & L2 */
@@ -439,24 +440,20 @@ void Konkat1 (List *L1, List *L2, List *L3)
 /* dan L1 serta L2 menjadi list kosong.*/
 /* Tidak ada alokasi/dealokasi pada prosedur ini */
 {
-    // Kamus lokal
-    address p;
-    // Algoritma
     CreateEmpty(L3);
-    if(IsEmpty(*L1)){
+    First(*L3) = First(*L1);
+    First(*L1) = Nil;
+    if (IsEmpty(*L3)){
         First(*L3) = First(*L2);
-
     }
-    else
-        First(*L3) = First(*L1);
-        p = First(*L1);
-        while(Next(p) != Nil){
+    else{
+        address p = First(*L3);
+        while (Next(p) != Nil){
             p = Next(p);
         }
         Next(p) = First(*L2);
-
-    CreateEmpty(L1);
-    CreateEmpty(L2);
+    }
+    First(*L2) = Nil;
 }
 
 // dari skill.c ----------------------------------------------------------------------------------
@@ -513,9 +510,6 @@ void DelAddress(List *L, address nartoh)
         Dealokasi(&nartoh);
     }
 }
-
-
-
 
 
 /****************** PROSES TERHADAP LIST ******************/
@@ -593,11 +587,42 @@ int chance(int x){
     }
 }
 
+void MenuSkill(addressPlayer AP) // main dari skill nya
+{
+    // Kamus lokal
+    int n = 0;
+
+    // Algoritma
+    printf(">>====SKILL==============================================================+\n");
+    printSkill(Skill(AP));
+    printf("\n>> Gunakan 0 untuk melihat skill sekarang\n");
+    printf(">> Gunakan -99 untuk keluar dari menu skill\n");
+    while(n != -99){
+        scanf("%d", &n);
+        if(abs(n) <= NbElmt(Skill(AP)) && n != 0){
+            if(n < 0){
+                DelSkill(&Skill(AP), -n);
+            }
+            else{
+                useSkill(AP, n);
+            }
+        }
+        else if(n == 0){
+            printf("\n>>=======================================================================+\n");
+            printSkill(Skill(AP));
+        }
+        else{
+            printf("Input kok ke urutan kosong, ngga masuk akal.\n");
+        }
+    }
+}
+
 
 void DelSkill(List *skillPemain,int n)
 {
     // Kamus lokal
     address p;
+    int x;
     char daftarSkill[][22] =
     {
         "Pintu Ga Ke Mana Mana",
@@ -613,16 +638,19 @@ void DelSkill(List *skillPemain,int n)
     p = First(*skillPemain);
     for(int i = 1; i < n; i++){
         p = Next(p);
-        printf("player membuang skill %s-nyan\n", daftarSkill[Info(p)]);
+
     }
+    printf("anda membuang skill %s-nyan\n", daftarSkill[Info(p)]);
     DelAddress(skillPemain, p);
 }
 
-void useSkill(List *skillPemain, int n, Buff *buff)
+void useSkill(addressPlayer AP, int n)
 {
     // Kamus Lokal
     address p;
     infotype idSkill;
+    List skillpemain = Skill(AP);
+
     char daftarSkill[][22] =
     {
         "Pintu Ga Ke Mana Mana",
@@ -635,7 +663,7 @@ void useSkill(List *skillPemain, int n, Buff *buff)
     };
 
     // Algoritma
-    p = First(*skillPemain);
+    p = First(skillpemain);
     for(int i = 1; i < n; i++){
         p = Next(p);
     }
@@ -644,163 +672,161 @@ void useSkill(List *skillPemain, int n, Buff *buff)
     switch (idSkill)
     {
     case 0:
-        pintuGaKemana(skillPemain, p, buff);
+        pintuGaKemana(AP, p);
         break;
     case 1:
-        mesinwaktu(skillPemain, p);
+        mesinwaktu(AP, p);
         break;
     case 2:
-        balingjambu(skillPemain, p);
+        balingjambu(AP, p);
         break;
     case 3:
-        cerminGanda(skillPemain, p, buff);
+        cerminGanda(AP, p);
         break;
     case 4:
-        senterBesarHoki(skillPemain, p, buff);
+        senterBesarHoki(AP, p);
         break;
     case 5:
-        senterKecilHoki(skillPemain, p, buff);
+        senterKecilHoki(AP, p);
         break;
     case 6:
-        mesinPenukarPosisi(skillPemain, p);
+        mesinPenukarPosisi(AP, p);
         break;
     }
 }
 
-void MenuSkill(List *skillPemain, Buff *buff) // main dari skill nya
-{
-    // Kamus lokal
-    int n = 0;
 
-    // Algoritma
-    printf(">>====SKILL==============================================================+\n");
-    printSkill(*skillPemain);
-    while(n != -999){
-        printf("\n>> Gunakan 0 untuk melihat skill sekarang\n");
-        printf(">> Gunakan -999 untuk keluar dari menu skill\n");
-        scanf("%d", &n);
-        if(abs(n) <= NbElmt(*skillPemain) && n != 0){
-            if(n < 0){
-                DelSkill(skillPemain, -n);
-            }
-            else{
-                useSkill(skillPemain, n, buff);
-            }
-        }
-        else if(n == 0){
-            printf("\n>>=======================================================================+\n");
-            printSkill(*skillPemain);
-        }
-    }
-
-}
 
 // Use Skill uwu~~~~~~~~~~~~~~
-void pintuGaKemana(List *skillPemain, address p, Buff *buff)
+void pintuGaKemana(addressPlayer AP, address p)
 /* Memberi buff kepada pemain */
 {
-    (*buff).info[0] = true;
-    DelAddress(skillPemain, p);
-    printf(">> Walaupun pintu tersebut tidak menuju ke manapun, player-san merasakan dirinya\n   mendapatkan pilihan mengenai teleporter\n");
+
+    List skillpemain = Skill(AP);
+
+    isImmune(AP) = true;
+    DelAddress(&skillpemain, p);
+    First(Skill(AP)) = First(skillpemain);
+    printf(">> Walaupun pintu tersebut tidak menuju ke manapun, %s-sama merasakan dirinya\n   mendapatkan tameng perlindungan teleportasi\n", Nama(AP));
 }
 
-void mesinwaktu(List *skillPemain, address p)
+void mesinwaktu(addressPlayer AP, address p)
 /* Membuat seluruh player kecuali pengguna skill sejauh roll dadu */
 {
-    DelAddress(skillPemain, p);
-    printf(">> Player-san mengubah waktu yang ada yang mengakibatkan setiap pemain selain player-san\n   Mundur sejauh rolldadu\n");
+
+    List skillpemain = Skill(AP);
+    int roll;
+
+
+    DelAddress(&skillpemain, p);
+    First(Skill(AP)) = First(skillpemain);
+    printf(">> %s-sama mengubah waktu yang ada yang mengakibatkan setiap pemain selain %s-sama\n   Mundur sejauh rolldadu\n", Nama(AP), Nama(AP));
 }
 
-void balingjambu(List *skillPemain, address p)
+void balingjambu(addressPlayer AP, address p)
 {
-    DelAddress(skillPemain, p);
-    printf(">> Player-san memaksa tiap pemain memakai Baling-Baling Jambu yang mengakibatkan\n   mereka maju sejauh rolldadu\n");
+
+    List skillpemain = Skill(AP);
+
+    DelAddress(&skillpemain, p);
+    First(Skill(AP)) = First(skillpemain);
+    printf(">> %s-sama memaksa tiap pemain memakai Baling-Baling Jambu yang mengakibatkan\n   mereka maju sejauh rolldadu.\n",Nama(AP));
 }
 
-void cerminGanda(List *skillPemain, address p, Buff *buff)
+void cerminGanda(addressPlayer AP, address p)
 {
-    if((*buff).info[1]){
-        printf(">> Maaf sudah menggunakan cermin pengganda... \n");
+
+    List skillpemain = Skill(AP);
+
+    if(isPostCermin(AP)){
+        printf(">> Maaf anda sudah menggunakan cermin pengganda pada giliran ini. \n");
     }
     else{
-        if(NbElmt(*skillPemain) <= 9){
-            (*buff).info[1] = true;
-            DelAddress(skillPemain, p);
-            getSkill(skillPemain);
-            getSkill(skillPemain);
-            printf(">> Dengan kekuatan Cermin Pengganda dan berkah dari Dolos-sama,\n   player-sama mendapatkan 2 skill baru \n");
+        if(NbElmt(skillpemain) <= 9){
+            isPostCermin(AP) = true;
+            DelAddress(&skillpemain, p);
+            First(Skill(AP)) = First(skillpemain);
+            getSkill(&skillpemain);
+            getSkill(&skillpemain);
+            printf(">> Dengan kekuatan Cermin Pengganda dan berkah dari Dolos-sama,\n   %s-sama mendapatkan 2 skill baru. \n", Nama(AP));
         }
         else{
-            printf(">> skill anda sudah terlalu penuh, tidak dapat menggunakan skill ini\n");
+            printf(">> skill anda sudah terlalu penuh, tidak dapat menggunakan skill ini.\n");
         }
     }
 }
 
-void senterBesarHoki(List *skillPemain, address p, Buff *buff)
+void senterBesarHoki(addressPlayer AP, address p)
 {
-    if((*buff).info[2] || (*buff).info[3]){
-        printf(">> Maaf sudah menggunakan salah satu senter hoki... \n");
+
+    List skillpemain = Skill(AP);
+
+    if(isHokiBesar(AP) || isHokiKecil(AP)){
+        printf(">> Maaf anda sudah menggunakan salah satu senter hoki... \n");
     }
     else{
-        (*buff).info[2] = true;
-        DelAddress(skillPemain, p);
+        isHokiBesar(AP) = true;
+        DelAddress(&skillpemain, p);
+        First(Skill(AP)) = First(skillpemain);
         printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing\" \n");
     }
 }
 
-void senterKecilHoki(List *skillPemain, address p, Buff *buff)
+void senterKecilHoki(addressPlayer AP, address p)
 {
-    if((*buff).info[2] || (*buff).info[3]){
-        printf(">> Maaf sudah menggunakan salah satu senter hoki... \n");
+    List skillpemain = Skill(AP);
+    if(isHokiBesar(AP) || isHokiKecil(AP)){
+        printf(">> Maaf anda sudah menggunakan salah satu senter hoki... \n");
     }
     else{
-        (*buff).info[3] = true;
-        DelAddress(skillPemain, p);
+        isHokiKecil(AP) = true;
+        DelAddress(&skillpemain, p);
+        First(Skill(AP)) = First(skillpemain);
         printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   terdengar suara asing yang mengutuk anda \"Misfortune\" \n");
     }
 }
 
-void mesinPenukarPosisi(List *skillPemain, address p)
+void mesinPenukarPosisi(addressPlayer AP, address p)
 {
-    DelAddress(skillPemain, p);
-    printf(">> Anda menggunakan Mesin Penukar Posisi!\n   Anda menukar posisi anda dengan Player-san\n");
+
+    List skillpemain = Skill(AP);
+    DelAddress(&skillpemain, p);
+    Skill(AP) = skillpemain;
+    printf(">> Anda menggunakan Mesin Penukar Posisi!\n   Anda menukar posisi anda dengan Player-sama\n", Nama(AP));
 }
 
 
-// dari buff.c -----------------------------------------------------------------------------------------------
-void CreateBuff(Buff *buff)
+void setAfterTurn(addressPlayer AP)
 {
-    for(int i=0; i< 4; i++){
-        (*buff).info[i] = false;
-    }
-}
-
-void setAfterTurn(Buff *buff)
-{
-    (*buff).info[1]= false;
-    (*buff).info[2]= false;
-    (*buff).info[3]= false;
+    isImmune(AP) = false;
+    isPostCermin(AP) = false;
+    isHokiBesar(AP) = false;
+    isHokiKecil(AP) = false;
 }
 
 
 // Masukin ke inisialisasi permainan -------------------------------------------
-int main(){
-    List skillPemain;
+int main()
+{
+    PlayerList PL;
+    CreatePlayerList(&PL);
+    int l = 1;
+
     address p;
-    int n;
-    Buff buff;
-    for(int i=0; i< 4; i++){
-        buff.info[i] = false;
-    }
+    inputPlayerList(&PL, l);
+    printPlayer(PL, l);
+    addressPlayer P1 = FirstPlayer(PL);
 
 
     srand(time(NULL));
-    CreateEmpty(&skillPemain);
     for(int i = 0; i < 10; i++){
-        getSkill(&skillPemain);
+        getSkill(Skill(&P1));
     }
-    MenuSkill(&skillPemain, &buff);
-    for(int i = 0; i < 4; i++){
-        printf("%d ", buff.info[i]);
-    }
+
+    // test(P1);
+
+
+
+    MenuSkill(P1);
+    MenuSkill(P1);
 }

@@ -12,6 +12,7 @@
 #include "boolean.h"
 #include "listlinier.h"
 #include "buff.h"
+#include "player.h"
 
 
 // leSKILL LESGOOOOOOOOOOOOOOOOOO -----------------------------------------
@@ -38,14 +39,14 @@ void DelSkill(List *skillPemain,int n);
     F.S. skillpemain berkurang satu pada urutan ke-n
 */
 
-void useSkill(List *skillPemain, int n, Buff *buff);
+void useSkill(Player *player, int n);
 /*  I.S. skillPemain tidak kosong
     F.S. pemain menggunakan skillnya, skill tersebut dihapus dari
          skillPemain.
 
 */
 
-void MainSkill(List *skillPemain);
+void MenuSkill(addressPlayer AP);
 /*  I.S. Sembarang
     F.S. skillpemain mungkin digunakan, mungkin dihapus
 */
