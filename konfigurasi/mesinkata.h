@@ -1,5 +1,4 @@
 /* File: mesinkata.h */
-/* Definisi Mesin Kata: Model Akuisisi Versi I */
 
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
@@ -54,5 +53,17 @@ void PrintKata(Kata Kata);
 /* Mencetak kata ke layar
    I.S. : Kata K terdefinisi
    F.S. : Kata K tercetak pada layar */
+
+char KataTOChar(Kata K, char kata[100]);
+/* Assign kata dari CKata ke sebuah variabel
+   I.S. : Kata K terdefinisi
+   F.S. : Kata K tersimpan pada variabel */
+
+int convertNumber(char Charnumber);
+    /* Mengonversi angka basis 10 dalam type char menjadi tipe int */
+
+int KataTOInteger(Kata CKata);
+    //mengembalikan angka dalam bentuk integer
+
 
 #endif

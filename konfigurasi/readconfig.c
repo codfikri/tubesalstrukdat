@@ -14,7 +14,7 @@ int main(){
 
       /*Membaca peta*/
       char map[100];
-      KataTOChar(CKata, map); //why masih ada error garbage output n.m
+      KataTOChar(CKata, map);
       ADVKATA();
 
       /*Membaca MaxRoll*/
@@ -35,6 +35,23 @@ int main(){
             LT.T[i].src = temp1;
             LT.T[i].dest = temp2;
       }
+
+
+      /*test output dari pembacaan konfigurasi*/
+
+      printf("%d\n", lengthMap);
+      for (int i= 0; i<lengthMap; i++){
+            printf("%c", map[i]);
+      }
+      printf("\n");
+      printf("%d\n", MaxRoll);
+      printf("%d\n", countTel);
+      for (int i= 0; i< countTel; i++){
+            int temp1 = LT.T[i].src;
+            int temp2 = LT.T[i].dest;
+            printf("%d %d\n", temp1, temp2);
+      }
+
       return 0;
 
 }

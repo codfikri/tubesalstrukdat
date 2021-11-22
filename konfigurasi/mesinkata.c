@@ -5,8 +5,6 @@
 boolean EndKata;
 Kata CKata;
 
-/* *** ADT untuk baca file eksternal *** */
-
 void IgnoreBlank()
 /* Mengabaikan satu atau beberapa BLANK
    I.S. : CC sembarang 
@@ -63,7 +61,12 @@ void SalinKata()
         ADV();
         i++;
     }
-    CKata.Length = (i < NMax) ? i : NMax;
+    if (i <NMax){
+        CKata.Length = i;
+    }
+    else{
+        CKata.Length = NMax;
+    }
 }
 
 void PrintKata(Kata Kata) 
@@ -76,7 +79,7 @@ void PrintKata(Kata Kata)
     }
 }
 
-void KataTOChar(Kata K, char kata[100]) 
+char KataTOChar(Kata K, char kata[100]) 
 /* Assign kata dari CKata ke sebuah variabel
    I.S. : Kata K terdefinisi
    F.S. : Kata K tersimpan pada variabel */
@@ -85,6 +88,7 @@ void KataTOChar(Kata K, char kata[100])
         kata[i] =  K.TabKata[i];
     }
 }
+
 
 int convertNumber(char Charnumber) {
     /* Mengonversi angka basis 10 dalam type char menjadi tipe int */
