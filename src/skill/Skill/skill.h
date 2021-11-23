@@ -51,6 +51,39 @@ void MenuSkill(addressPlayer AP);
     F.S. skillpemain mungkin digunakan, mungkin dihapus
 */
 
+void pintuGaKemana(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. Pemain mendapatkan buff imunitas teleport
+*/
 
+void mesinwaktu(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. seluruh pemain kecuali user mundur sejauh roll dadu
+*/
+
+void balingjambu(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. seluruh pemain selain user maju sejauh roll dadu
+*/
+
+void cerminGanda(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. jika jumlah skill <= 9, skill akan bertambah
+*/
+
+void senterBesarHoki(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. Memberi buff Hoki Besar jika belum ada buff hoki sebelumnya
+*/
+
+void senterKecilHoki(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. Memberi buff Hoki Besar jika belum ada buff hoki sebelumnya
+*/
+
+void mesinPenukarPosisi(addressPlayer AP, address p);
+/*  I.S. AP dan P terdefinisi
+    F.S. Menukar posisi user dengan player yang dipilih
+*/
 
 #endif // SKILL_H
