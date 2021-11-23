@@ -2,13 +2,17 @@
 #define inspect_h
 
 #include "teleporter.h"
+#include "array.h"
+#include "array.c"
 
-boolean isPetakTerlarang(int petak, char map[100]);
+#define terlarang '#'
+
+boolean isPetakTerlarang(int petak, TabChar Map);
 /* 
 Mengirimkan True jika petak adalah petak terlarang
 Petak terlarang ditandai dengan karakter "#"
 */
-int inspectPetak(int petak, ListTeleporter LT , int countTel, char map[100], int lengthmap);
+int inspectPetak(int petak, ListTeleporter LT , int countTel, TabChar Map, int lengthMap);
 /*
 Mengirimkan nilai petak
 Petak dapat terdefinisi sebagai petak kosong, petak terlarang, atau teleporter
