@@ -113,3 +113,22 @@ void printPlayer(PlayerList PL, int n){ //sama kaya printForward di list
         }
     }
 }
+
+void GetPlayer(Player* X, addressPlayer AP)
+{
+    (*X).nama = Nama(AP);
+    (*X).noUrut = NoUrut(AP) ;
+    (*X).Petak = Petak(AP);
+    (*X).Skillpemain = Skill(AP);
+    (*X).isImmune = isImmune(AP);
+    (*X).isHokiKecil = isHokiKecil(AP); 
+    (*X).isHokiBesar = isHokiBesar(AP);
+    (*X).isPostCermin = isPostCermin(AP); 
+    (*X).next = NextPlayer(AP);
+}
+
+void UpdatePetak(addressPlayer AP, int x)
+{
+    Petak(AP) = x;
+}
+

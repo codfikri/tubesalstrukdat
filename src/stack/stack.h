@@ -19,14 +19,9 @@ typedef struct {
   Saddress TOP;
 } Stack;
 
-
-
 #define Top(S) (S).TOP
 #define InfoTop(S) (S).T[(S).TOP]
 #define NextStack(S) (S).T[(S).TOP-1]
-
-
-
 
 void SCreateEmpty (Stack *S);
 
@@ -43,4 +38,5 @@ void PushUndef(Stack * S);
 void Undo(Stack * S);
 
 void UndoPlayerList(Stack S, PlayerList *PL, int l);
+
 #endif

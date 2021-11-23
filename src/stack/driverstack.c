@@ -2,25 +2,6 @@
 #include "stack.h"
 #include "../skill/skill.h"
 
-void GetPlayer(infostack * X, addressPlayer AP)
-    {
-        (*X).nama = Nama(AP);
-        (*X).noUrut = NoUrut(AP) ;
-        (*X).Petak = Petak(AP);
-        (*X).Skillpemain = Skill(AP);
-        (*X).isImmune = isImmune(AP);
-        (*X).isHokiKecil = isHokiKecil(AP); 
-        (*X).isHokiBesar = isHokiBesar(AP);
-        (*X).isPostCermin = isPostCermin(AP); 
-        (*X).next = NextPlayer(AP);
-
-    }
-    
-void UpdatePetak(addressPlayer AP, int x)
-    {
-        Petak(AP) = x;
-    }
-
 int main(){
     PlayerList PL;
     CreatePlayerList(&PL);
@@ -53,7 +34,7 @@ int main(){
     TempPetak = X.Petak;
     TempNoUrut = 0;
 
-    while (TempPetak < 10)
+    while (TempPetak < 20)
     {
         if( X.noUrut > TempNoUrut) 
         {

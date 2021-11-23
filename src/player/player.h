@@ -51,4 +51,8 @@ void inputPlayerList(PlayerList *P, int n);
 
 void printPlayer(PlayerList PL, int n);
 
+void GetPlayer(Player* X, addressPlayer AP);
+
+void UpdatePetak(addressPlayer AP, int x);
+
 #endif

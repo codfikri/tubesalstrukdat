@@ -6,8 +6,6 @@ void SCreateEmpty (Stack *S){
 	Top(*S) = SNil;
 }
 
-
-
 boolean IsSEmpty (Stack S){
 	return Top(S) == SNil;
 }
@@ -15,7 +13,6 @@ boolean IsSEmpty (Stack S){
 boolean IsSFull (Stack S){
 	return Top(S) == SMaxEl;
 }
-
 
 void Push (Stack * S, infostack X){
 	if(Top(*S) == SNil){
@@ -63,13 +60,14 @@ void Undo(Stack * S)
 
 void UndoPlayerList(Stack S, PlayerList *PL, int l)
 {
-	boolean isLastPlayer;
+  boolean isLastPlayer;
 	Player P;
+  CreatePlayerList(PL);
 	isLastPlayer = false;
-	for (int i = 0; i < l; i++)
+	for (int i = l; i > 0; i--)
 	{
-		if (i==l-1){isLastPlayer = true;}
-		P = (S).T[(S).TOP-l-1];
+		if (i==1){isLastPlayer = true;}
+		P = (S).T[(S).TOP-i];
 		insertUpdatePlayerToList(PL,P,isLastPlayer);
 	}
 }
