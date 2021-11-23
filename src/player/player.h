@@ -39,9 +39,13 @@ boolean isListPlayerEmpty(PlayerList PL);
 
 addressPlayer AlokasiPlayer(char* nama, List Skillpemain, int noUrut);
 
+addressPlayer AlokasiUpdatePlayer(Player P);
+
 void insertPlayer(PlayerList *PL, addressPlayer P);
 
 void insertPlayerToList(PlayerList *PL, char *nama, List Skillpemain, int noUrut, boolean isLastPlayer);
+
+void insertUpdatePlayerToList(PlayerList *PL, Player P, boolean isLastPlayer);
 
 void inputPlayerList(PlayerList *P, int n);
 
