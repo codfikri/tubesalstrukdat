@@ -32,7 +32,7 @@ int MapPlayer(PlayerList PL, TabChar Map, TabInt PositionToInteger)
 {
       updatePosition(PL, &PositionToInteger);
       int i = 1;
-      char v = "*"
+      char v = "*";
       TabChar tempMap;
       while (i <=4)
       {
