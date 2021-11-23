@@ -60,3 +60,16 @@ void Undo(Stack * S)
         temp = (InfoTop(*S)).Petak;
     }
 }
+
+void UndoPlayerList(Stack S, PlayerList *PL, int l)
+{
+	boolean isLastPlayer;
+	Player P;
+	isLastPlayer = false;
+	for (int i = 0; i < l; i++)
+	{
+		if (i==l-1){isLastPlayer = true;}
+		P = (S).T[(S).TOP-l-1];
+		insertUpdatePlayerToList(PL,P,isLastPlayer);
+	}
+}

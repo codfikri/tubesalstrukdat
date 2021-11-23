@@ -29,6 +29,25 @@ addressPlayer AlokasiPlayer(char* nama, List Skillpemain, int noUrut){ //sama ka
     return AP;
 }
 
+addressPlayer AlokasiUpdatePlayer(Player P){ //sama kaya Alokasi pada list
+    addressPlayer AP;
+    AP = (Player *) malloc(sizeof(Player));
+    if (AP != Nil){
+        Petak(AP) = P.Petak;
+        NoUrut(AP) = P.noUrut;
+        Nama(AP) = P.nama;
+        Skill(AP) = P.Skillpemain;
+        isImmune(AP) = P.isImmune;
+        isHokiBesar(AP) = P.isHokiBesar;
+        isHokiKecil(AP) = P.isHokiKecil;
+        isPostCermin(AP) = P.isPostCermin;
+        NextPlayer(AP) = Nil;
+    } else {
+        return Nil;
+    }
+    return AP;
+}
+
 void insertPlayer(PlayerList *PL, addressPlayer P){ //sama kaya InsertLast pada list
     addressPlayer last;
     if (isListPlayerEmpty(*PL)){
@@ -50,6 +69,17 @@ void insertPlayerToList(PlayerList *PL, char* nama, List Skillpemain, int noUrut
         insertPlayer(PL, P);
         if (isLastPlayer){
             NextPlayer(P) = FirstPlayer(*PL);
+        }
+    }
+}
+
+void insertUpdatePlayerToList(PlayerList *PL, Player P, boolean isLastPlayer){ //sama kaya InsVlast pada list
+    addressPlayer AP;
+    AP = AlokasiUpdatePlayer(P);
+    if (AP != Nil){
+        insertPlayer(PL, AP);
+        if (isLastPlayer){
+            NextPlayer(AP) = FirstPlayer(*PL);
         }
     }
 }

@@ -81,9 +81,11 @@ int main(){
     printf("Petak %d\n", NextStack(S).Petak);
     printf("No Urut %d\n", NextStack(S).noUrut);
     Undo(&S);
-    printf("AAA\n");
     printf("Petak %d\n", NextStack(S).Petak);
     printf("No Urut %d\n", NextStack(S).noUrut);
+
+    UndoPlayerList(S,&PL,l);
+    printPlayer(PL, l);
 
     return 0;
 }
