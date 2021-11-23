@@ -1,52 +1,89 @@
-#include <stdio.h>
-#include <stdlib.h>
+#include "../player/player.h"
 #include "stack.h"
+#include "../skill/skill.h"
 
-int main ()
-{
-    StackPlayer S;
-    Player P1, P2;
-    int temp;
-    addressStack A1, A2;
-    CreateEmptyStack(&S);
-    printf("isSEmpty? : %d\n", IsEmptyStack(S));
-    CreatePlayer(&P1);
-    CreatePlayer(&P2);
-    temp = 1;
-    PushUndef(&S);
-    while (temp < 10)
+void GetPlayer(infostack * X, addressPlayer AP)
     {
-        Push( &S,P1);
-        printf("infotopplayer : %d\n", (InfoTopPlayer(S)).Petak);
-        temp = P1.Petak;
-        Push( &S,P2);
-        printf("infotopplayer : %d\n", (InfoTopPlayer(S)).Petak);
-        temp = P2.Petak;
-        PushUndef(&S);
-        printf("infotopplayer : %d\n", (InfoTopPlayer(S)).Petak);
-
-        (P1).Petak = (P1).Petak + 2;
-        (P2).Petak = (P2).Petak + 5;
+        (*X).nama = Nama(AP);
+        (*X).noUrut = NoUrut(AP) ;
+        (*X).Petak = Petak(AP);
+        (*X).Skillpemain = Skill(AP);
+        (*X).isImmune = isImmune(AP);
+        (*X).isHokiKecil = isHokiKecil(AP); 
+        (*X).isHokiBesar = isHokiBesar(AP);
+        (*X).isPostCermin = isPostCermin(AP); 
+        (*X).next = NextPlayer(AP);
 
     }
-    printf("Before\n");
-    A1 = next(TopPlayer(S));
-    A2 = next(A1);
+    
+void UpdatePetak(addressPlayer AP, int x)
+    {
+        Petak(AP) = x;
+    }
 
-    (P1) = info(A1);
-    (P2) = info(A2);
+int main(){
+    PlayerList PL;
+    CreatePlayerList(&PL);
+    int l;
+    printf("Masukan jumlah pemain: ");
+    scanf("%d", &l);
+    switch (l)
+    {
+    case 1: printf("Minimal pemain adalah sebanyak 2 orang.\n");
+        break;
+    case 2: 
+    case 3:
+    case 4: 
+        inputPlayerList(&PL, l);
+        break;
+    default: printf("Pemain hanya dapat berjumlah 2, 3, atau 4 orang.\n");
+    }
 
-    printf("Petak1: %d\n", (P2).Petak);
-    printf("Petak2: %d\n", (P1).Petak);
+    printPlayer(PL, l);
+
+    Stack S;
+    addressPlayer AP;
+    infostack X;
+    int TempPetak, TempNoUrut, BanyakStack;
+
+    SCreateEmpty(&S);
+    PushUndef(&S);
+    AP = FirstPlayer(PL);
+    GetPlayer(&X, AP);
+    TempPetak = X.Petak;
+    TempNoUrut = 0;
+
+    while (TempPetak < 10)
+    {
+        if( X.noUrut > TempNoUrut) 
+        {
+            X.Petak += 3;
+            UpdatePetak(AP, X.Petak);
+            GetPlayer(&X, AP);
+            Push(&S, X);
+            printf("Petak %d\n", InfoTop(S).Petak);
+            printf("No Urut %d\n", InfoTop(S).noUrut);
+            
+            TempPetak = X.Petak;
+            TempNoUrut = X.noUrut;
+            AP = NextPlayer(AP);
+            GetPlayer(&X, AP);
+            printf("\n");
+        }
+        else
+        {
+            PushUndef(&S);
+            TempNoUrut = 0;
+        }
+    }
+    Pop(&S, &X);
+    
+    printf("Petak %d\n", NextStack(S).Petak);
+    printf("No Urut %d\n", NextStack(S).noUrut);
     Undo(&S);
-    printf("infotopplayer : %d\n", (InfoTopPlayer(S)).Petak);
-    A1 = next(TopPlayer(S));
-    A2 = next(A1);
+    printf("AAA\n");
+    printf("Petak %d\n", NextStack(S).Petak);
+    printf("No Urut %d\n", NextStack(S).noUrut);
 
-    (P1) = info(A1);
-    (P2) = info(A2);
-
-    printf("Petak1: %d\n", (P2).Petak);
-    printf("Petak2: %d\n", (P1).Petak);
     return 0;
 }

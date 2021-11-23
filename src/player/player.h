@@ -1,7 +1,7 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "skill.h"
+#include "../skill/skill.h"
 
 /* Player menggunakan circular linked list */
 typedef struct player *addressPlayer;
