@@ -5,6 +5,8 @@
 #include "listlinier.h"
 #include "buff.h"
 #include "player.h"
+
+
 // dari player.c
 void CreatePlayerList(PlayerList *P){ //sama kaya CreateEmpty pada List
     FirstPlayer(*P) = Nil;
@@ -611,7 +613,7 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
             printf("\n>>=======================================================================+\n");
             printSkill(Skill(AP));
         }
-        else{
+        else if(n!= -99){
             printf("Input kok ke urutan kosong, ngga masuk akal.\n");
         }
     }
@@ -716,21 +718,53 @@ void mesinwaktu(addressPlayer AP, address p)
 
     List skillpemain = Skill(AP);
     int roll;
+    addressPlayer tempP = NextPlayer(AP);
 
+
+    roll = rand() % 6 + 1;
+    srand(roll);
+    printf("%s melakukan roll daaaaaan, Mendapatkan %d !!!!\n", Nama(AP), roll);
+
+    while(tempP!= AP){
+        if(Petak(tempP)< roll){
+            printf("%s tidak dapat mundur sejauh %d.\n", Nama(tempP), roll);
+        }
+        else{
+            printf("%s  mundur sejauh %d.\n", Nama(tempP), roll);
+            Petak(tempP) -= roll;
+        }
+        tempP = NextPlayer(tempP);
+    }
 
     DelAddress(&skillpemain, p);
     First(Skill(AP)) = First(skillpemain);
-    printf(">> %s-sama mengubah waktu yang ada yang mengakibatkan setiap pemain selain %s-sama\n   Mundur sejauh rolldadu\n", Nama(AP), Nama(AP));
+
 }
 
 void balingjambu(addressPlayer AP, address p)
 {
 
     List skillpemain = Skill(AP);
+    int roll;
+    addressPlayer tempP = NextPlayer(AP);
+
+    roll = rand() % 6 + 1;
+    srand(roll);
+    printf("%s melakukan roll daaaaaan, Mendapatkan %d !!!!\n", Nama(AP), roll);
+
+    while(tempP!= AP){
+        if(Petak(tempP)< roll){
+            printf("%s tidak dapat mundur sejauh %d.\n", Nama(tempP), roll);
+        }
+        else{
+            printf("%s tidak dapat mundur sejauh %d.\n", Nama(tempP), roll);
+            Petak(tempP) += roll;
+        }
+        tempP = NextPlayer(tempP);
+    }
 
     DelAddress(&skillpemain, p);
     First(Skill(AP)) = First(skillpemain);
-    printf(">> %s-sama memaksa tiap pemain memakai Baling-Baling Jambu yang mengakibatkan\n   mereka maju sejauh rolldadu.\n",Nama(AP));
 }
 
 void cerminGanda(addressPlayer AP, address p)
@@ -788,11 +822,38 @@ void senterKecilHoki(addressPlayer AP, address p)
 
 void mesinPenukarPosisi(addressPlayer AP, address p)
 {
+    addressPlayer tempP = NextPlayer(AP);
+    int n, tempPetak;
+    int countp = 0;
+
+    while(tempP!= AP){
+        printf("%d. %s berada pada petak %d.\n", countp+1, Nama(tempP), Petak(tempP));
+        tempP = NextPlayer(tempP);
+        countp += 1;
+    }
+    printf("Anda ingin mengganti posisi dengan siapa?(\nmasukkan 0 jika ingin membatalkan): ");
+    scanf("%d", &n);
+    while(n < 0 || n > countp){
+        scanf("Masukan salah, mohon berikan masukan yang benar! :%d", &n);
+    }
+    if(n==0){
+        printf("Mesin penukar posisi dibatalkan, mesin dimatikan.\n");
+    }
+    else{
+        while(countp > 1){
+            tempP = NextPlayer(tempP);
+            countp -= 1;
+        }
+        tempPetak = Petak(AP);
+        Petak(AP) = Petak(tempP);
+        Petak(tempP) = tempPetak;
+        printf("Mesin Penukar posisi dijanlankan... Menukar posisi dengan %s...\n", Nama(tempP));
+        printf("Mesin penukar sukses dijalankan! tetapi energinya sudah habis.\n");
+    }
 
     List skillpemain = Skill(AP);
     DelAddress(&skillpemain, p);
     Skill(AP) = skillpemain;
-    printf(">> Anda menggunakan Mesin Penukar Posisi!\n   Anda menukar posisi anda dengan Player-sama\n", Nama(AP));
 }
 
 
@@ -804,13 +865,17 @@ void setAfterTurn(addressPlayer AP)
     isHokiKecil(AP) = false;
 }
 
+void test()
+{
+    srand(time(NULL));
+}
 
 // Masukin ke inisialisasi permainan -------------------------------------------
 int main()
 {
     PlayerList PL;
     CreatePlayerList(&PL);
-    int l = 1;
+    int l = 2;
 
     address p;
     inputPlayerList(&PL, l);
@@ -818,12 +883,10 @@ int main()
     addressPlayer P1 = FirstPlayer(PL);
 
 
-    srand(time(NULL));
+    test();
     for(int i = 0; i < 10; i++){
         getSkill(Skill(&P1));
     }
-
-    // test(P1);
 
 
 
