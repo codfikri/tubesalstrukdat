@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../boolean.h"
+#include "boolean.h"
 #include "array.h"
 
 /* ********** KONSTRUKTOR ********** */
@@ -13,7 +13,7 @@ void MakeEmpty (TabChar *T)
 
 /* ********** SELEKTOR ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt (TabChar T)
+int TCNbElmt (TabChar T)
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 {
@@ -97,7 +97,7 @@ boolean IsIdxEff (TabChar T, IdxType i)
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmpty (TabChar T)
+boolean TCIsEmpty (TabChar T)
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 {
     return (T.Neff == 0);

@@ -1,5 +1,6 @@
 #include "map.h"
 
+
 void PrintTabChar(TabChar T){
       for (int i = IdxMin; i<= T.Neff; i++){
             printf("%c ", T.TI[i]);
@@ -26,23 +27,24 @@ int CheckPlayerPosition(int nPlayer ,TabInt PositionToInteger)
       return a;
 }
 
-int MapPlayer(PlayerList PL, TabChar Map, TabInt PositionToInteger)
+void MapPlayer(PlayerList PL, TabChar Map, TabInt PositionToInteger)
 //Menampilkan current map dari player
 //Petak yang ditempati player ditandai dengan  karakter "*"
 {
       updatePosition(PL, &PositionToInteger);
       int i = 1;
-      char v = "*";
+      char  v = '*';
       TabChar tempMap;
       while (i <=4)
       {
             int temp;
             temp = CheckPlayerPosition(i, PositionToInteger);
             SetTab(Map, &tempMap);
+            SetEl(&Map, temp, v);
             Map.TI[temp] = v;
             PrintTabChar(Map);
             printf("%d\n", temp);
-            SetTab(tempMap, &Map);
+            
             i++;
       }
 }

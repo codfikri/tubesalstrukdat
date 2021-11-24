@@ -43,7 +43,7 @@ IdxType getLastIdx (TabInt T)
 }
 
 /* *** Menghasilkan sebuah elemen *** */
-ElType getElmt (TabInt T, IdxType i)
+ElIntType getElmt (TabInt T, IdxType i)
 /* Prekondisi : Tabel tidak kosong, i antara FirstIdx(T)..LastIdx(T) */
 /* Mengirimkan elemen tabel yang ke-i */
 {
@@ -63,7 +63,7 @@ void setTab (TabInt Tin, TabInt *Tout)
 }
 
 /* Assignment THsl -> Tin */
-void setEl (TabInt *T, IdxType i, ElType v)
+void setEl (TabInt *T, IdxType i, ElIntType v)
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 /* Mengeset nilai elemen tabel yang ke-i sehingga bernilai v */

@@ -2,7 +2,7 @@
 /* Berisi definisi dan semua primitif pemrosesan tabel integer */
 /* Penempatan elemen selalu rapat kiri */
 
-#include "../boolean.h"
+#include "boolean.h"
 
 #ifndef ARRAY_H 
 #define ARRAY_H
@@ -43,7 +43,7 @@ void MakeEmpty (TabChar *T);
 
 /* ********** SELEKTOR ********** */
 /* *** Banyaknya elemen *** */
-int NbElmt (TabChar T);
+int TCNbElmt (TabChar T);
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 /* *** Daya tampung container *** */
@@ -88,7 +88,7 @@ boolean IsIdxEff (TabChar T, IdxType i);
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean IsEmpty (TabChar T);
+boolean TCIsEmpty (TabChar T);
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 /* *** Test tabel penuh *** */
 boolean IsFull (TabChar T);
