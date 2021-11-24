@@ -642,7 +642,7 @@ void DelSkill(List *skillPemain,int n)
         p = Next(p);
 
     }
-    printf("anda membuang skill %s-nyan\n", daftarSkill[Info(p)]);
+    printf("Walaupun banyak yang menginginkan skill ini,\n anda membuang skill %s dihadapan mereka.\n", daftarSkill[Info(p)]);
     DelAddress(skillPemain, p);
 }
 
@@ -831,7 +831,7 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
         tempP = NextPlayer(tempP);
         countp += 1;
     }
-    printf("Anda ingin mengganti posisi dengan siapa?(\nmasukkan 0 jika ingin membatalkan): ");
+    printf("Anda ingin mengganti posisi dengan siapa?\n(masukkan 0 jika ingin membatalkan): ");
     scanf("%d", &n);
     while(n < 0 || n > countp){
         scanf("Masukan salah, mohon berikan masukan yang benar! :%d", &n);
@@ -840,9 +840,10 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
         printf("Mesin penukar posisi dibatalkan, mesin dimatikan.\n");
     }
     else{
-        while(countp > 1){
+        tempP = NextPlayer(AP);
+        while(n > 1){
             tempP = NextPlayer(tempP);
-            countp -= 1;
+            n -= 1;
         }
         tempPetak = Petak(AP);
         Petak(AP) = Petak(tempP);
@@ -881,7 +882,8 @@ int main()
     inputPlayerList(&PL, l);
     printPlayer(PL, l);
     addressPlayer P1 = FirstPlayer(PL);
-
+    addressPlayer P2 = NextPlayer(P1);
+    Petak(P2) = 2;
 
     test();
     for(int i = 0; i < 10; i++){
@@ -891,5 +893,7 @@ int main()
 
 
     MenuSkill(P1);
-    MenuSkill(P1);
+    printf("petak p1: %d\n",Petak(P1));
+    printf("petak p2: %d\n",Petak(P2));
+
 }

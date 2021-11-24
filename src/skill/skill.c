@@ -542,6 +542,7 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
 
 
 void DelSkill(List *skillPemain,int n)
+// Menghapus skill
 {
     // Kamus lokal
     address p;
@@ -563,11 +564,12 @@ void DelSkill(List *skillPemain,int n)
         p = Next(p);
 
     }
-    printf("anda membuang skill %s-nyan\n", daftarSkill[Info(p)]);
+    printf("Walaupun banyak yang menginginkan skill ini,\n anda membuang skill %s dihadapan mereka.\n", daftarSkill[Info(p)]);
     DelAddress(skillPemain, p);
 }
 
 void useSkill(addressPlayer AP, int n)
+// Menggunakan skill
 {
     // Kamus Lokal
     address p;
@@ -622,7 +624,7 @@ void useSkill(addressPlayer AP, int n)
 
 // Use Skill uwu~~~~~~~~~~~~~~
 void pintuGaKemana(addressPlayer AP, address p)
-/* Memberi buff kepada pemain */
+/* Memberi buff imunitas kepada pemain */
 {
 
     List skillpemain = Skill(AP);
@@ -752,7 +754,7 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
         tempP = NextPlayer(tempP);
         countp += 1;
     }
-    printf("Anda ingin mengganti posisi dengan siapa?(\nmasukkan 0 jika ingin membatalkan): ");
+    printf("Anda ingin mengganti posisi dengan siapa?\n(masukkan 0 jika ingin membatalkan): ");
     scanf("%d", &n);
     while(n < 0 || n > countp){
         scanf("Masukan salah, mohon berikan masukan yang benar! :%d", &n);
@@ -761,9 +763,10 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
         printf("Mesin penukar posisi dibatalkan, mesin dimatikan.\n");
     }
     else{
-        while(countp > 1){
+        tempP = NextPlayer(AP);
+        while(n > 1){
             tempP = NextPlayer(tempP);
-            countp -= 1;
+            n -= 1;
         }
         tempPetak = Petak(AP);
         Petak(AP) = Petak(tempP);
@@ -779,8 +782,8 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
 
 
 void setAfterTurn(addressPlayer AP)
+// ini buat bikin semuanya balik jadi false jika sudah lewat gilirannya
 {
-    isImmune(AP) = false;
     isPostCermin(AP) = false;
     isHokiBesar(AP) = false;
     isHokiKecil(AP) = false;
