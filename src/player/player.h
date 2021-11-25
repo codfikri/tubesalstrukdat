@@ -37,19 +37,15 @@ void CreatePlayerList(PlayerList *P);
 
 boolean isListPlayerEmpty(PlayerList PL);
 
-addressPlayer AlokasiPlayer(char* nama, List Skillpemain, int noUrut);
+addressPlayer AlokasiPlayer(int noUrut, char* playerName);
 
-addressPlayer AlokasiUpdatePlayer(Player P);
-
-void insertPlayer(PlayerList *PL, addressPlayer P);
-
-void insertPlayerToList(PlayerList *PL, char *nama, List Skillpemain, int noUrut, boolean isLastPlayer);
-
-void insertUpdatePlayerToList(PlayerList *PL, Player P, boolean isLastPlayer);
+void insertPlayer(PlayerList *PL, addressPlayer P, boolean isLastPlayer);
 
 void inputPlayerList(PlayerList *P, int n);
 
 void printPlayer(PlayerList PL, int n);
+
+addressPlayer AlokasiUpdatePlayer(Player P);
 
 void GetPlayer(Player* X, addressPlayer AP);
 
