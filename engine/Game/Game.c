@@ -106,7 +106,11 @@ void Turn(addressPlayer AP){
                                 AP = NextPlayer(AP);
                         }
                 } else if (command == 8){
-                        // Undo
+                        if (IsSEmpty(S)){
+                                Undo(&S, &PL);
+                        }else{
+                                printf("Player tidak dapat melakukan Undo!\n");
+                        }
                 } else if (command == 9){
                         showCommands();
                 } else {
@@ -132,7 +136,14 @@ void endTurn(addressPlayer AP, PlayerList PL, boolean isRolled){
         if (!isRolled){
                 print("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
         } else{
-                // Push(&S, PL);
+                Player X;
+                GetPlayer(&X, AP);
+                if (NoUrut(AP) == JumlahPlayer(PL)){
+                        Push(&S, X);
+                        PushUndef;
+                }else{
+                        Push(&S, X);
+                }
                 AP = Next(AP);
         }
 }

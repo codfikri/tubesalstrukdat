@@ -55,6 +55,6 @@ addressPlayer AlokasiUpdatePlayer(Player P);
 
 void GetPlayer(Player* X, addressPlayer AP);
 
-void UpdatePetak(addressPlayer AP, int x);
+void insertUpdatePlayerToList(PlayerList *PL, Player P, boolean isLastPlayer);
 
 #endif
