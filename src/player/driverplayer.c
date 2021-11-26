@@ -27,6 +27,8 @@ int main(){
             }
             insertPlayer(&PL, AP, isLastPlayer);
         }
+        setJumlahPlayer(&PL, l);
+        printf("%d\n", JumlahPlayer(PL));
         printPlayer(PL, l);
         break;
 

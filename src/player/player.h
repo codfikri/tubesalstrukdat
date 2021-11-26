@@ -18,6 +18,7 @@ typedef struct player {
 } Player;
 
 typedef struct {
+    int jumlahPlayer;
     addressPlayer addrFirstPlayer;
 } PlayerList;
 
@@ -32,6 +33,9 @@ typedef struct {
 #define isPostCermin(P) P->isPostCermin
 #define NextPlayer(p) (p)->next
 #define FirstPlayer(P) (P).addrFirstPlayer
+#define JumlahPlayer(P) (P).jumlahPlayer
+
+void setJumlahPlayer(PlayerList *PL, int jumlah);
 
 void CreatePlayerList(PlayerList *P);
 

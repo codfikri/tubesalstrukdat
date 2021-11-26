@@ -87,6 +87,10 @@ void inputPlayerList(PlayerList *PL, int n){
     }
 }
 
+void setJumlahPlayer(PlayerList *PL, int jumlah){
+    JumlahPlayer(*PL) = jumlah;
+}
+
 void printPlayer(PlayerList PL, int n){ //sama kaya printForward di list
     if (isListPlayerEmpty(PL)){printf("List player masih kosong");}
     else{
