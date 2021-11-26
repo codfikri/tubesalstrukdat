@@ -2,9 +2,7 @@
 
 #define Nil NULL
 
-#include "player.h"
 
-#define Nil NULL
 
 void CreatePlayerList(PlayerList *P){ //sama kaya CreateEmpty pada List
     FirstPlayer(*P) = Nil;
@@ -114,9 +112,9 @@ void GetPlayer(Player* X, addressPlayer AP)
     (*X).Petak = Petak(AP);
     (*X).Skillpemain = Skill(AP);
     (*X).isImmune = isImmune(AP);
-    (*X).isHokiKecil = isHokiKecil(AP); 
+    (*X).isHokiKecil = isHokiKecil(AP);
     (*X).isHokiBesar = isHokiBesar(AP);
-    (*X).isPostCermin = isPostCermin(AP); 
+    (*X).isPostCermin = isPostCermin(AP);
     (*X).next = NextPlayer(AP);
 }
 

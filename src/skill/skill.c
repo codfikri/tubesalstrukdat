@@ -12,6 +12,7 @@ untuk melakukan pemanggilan command skill, gunakan MenuSkill(AP) (AP : AddressPl
 #include "skill.h"
 #include "..\boolean.h"
 #include "..\player\player.h"
+#include <time.h>
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
@@ -808,3 +809,4 @@ void loading(int inputDetik) {
     }
     printf("\n");
 }
+
