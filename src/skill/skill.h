@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "..\boolean.h"
 #include "..\player\player.h"
 
@@ -242,5 +243,12 @@ void mesinPenukarPosisi(addressPlayer AP, address p);
 /*  I.S. AP dan P terdefinisi
     F.S. Menukar posisi user dengan player yang dipilih
 */
+
+void delay(int detik);
+/* Ini buat delay pas random skill */
+
+void loading(int inputDetik);
+/* Ini buat loading pas ngerandom skill */
+
 
 #endif // SKILL_H

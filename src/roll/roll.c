@@ -35,7 +35,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                   if (!isPetakTerlarang(tempB, Map)){
                         int inputMove;
                         printf("%s dapat maju dan mundur\n", Nama(P));
-                        printf("Kemana %s bergerak?\n", Nama(P));
+                        printf("Kemana %s mau bergerak?\n", Nama(P));
                         printf("1. %d\n", forward);
                         printf("2. %d\n", backward);
                         scanf("Masukkan pilihan %d\n", &inputMove);
@@ -48,7 +48,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     {
                                           char tempInput;
                                           printf("%s memiliki imunitas teleport\n");
-                                          printf("Apakah %s ingin telepor? (Y/N)\n");
+                                          printf("Apakah %s ingin teleport? (Y/N)\n");
                                           scanf("%c", &tempInput);
                                           if (tempInput == "Y"){
                                                 printf("%s teleport\n", Nama(P));
@@ -60,6 +60,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
 
                                           }
                                           printf("Buff imunitas teleport hilang\n");
+                                          isImmune(P) = false;
                                     }
                                     updatePosition(PL, &PositionTOInteger);
                               }
@@ -80,7 +81,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     {
                                           char tempInput;
                                           printf("%s memiliki imunitas teleport\n");
-                                          printf("Apakah %s ingin telepor? (Y/N)\n");
+                                          printf("Apakah %s ingin teleport? (Y/N)\n");
                                           scanf("%c", &tempInput);
                                           if (tempInput == "Y"){
                                                 printf("%s teleport\n", Nama(P));
@@ -92,6 +93,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
 
                                           }
                                           printf("Buff imunitas teleport hilang\n");
+                                          isImmune(P) = false;
                                     }
                                     updatePosition(PL, &PositionTOInteger);
                               }
@@ -129,7 +131,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                               {
                                     char tempInput;
                                     printf("%s memiliki imunitas teleport\n");
-                                    printf("Apakah %s ingin telepor? (Y/N)\n");
+                                    printf("Apakah %s ingin teleport? (Y/N)\n");
                                     scanf("%c", &tempInput);
                                     if (tempInput == "Y")
                                     {

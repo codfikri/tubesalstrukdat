@@ -1,5 +1,9 @@
 #include "Game.h"
 
+PlayerList PL;
+Stack S;
+boolean isEndGame = false;
+
 void showCommands(){
         printf("Perintah-perintah yang tersedia: \n");
         printf("[1] SKILL: Menampilkan skill yang dimiliki player\n"); //skill
@@ -47,66 +51,81 @@ int getNum(char *cmd){
         }
 }
 
+void Turn(addressPlayer AP){
+        boolean isRolled = false;
+        boolean isEndTurn = false;
+        int option, command;
+        char* cmd;
+        // Print Map Player
+        printf("Giliran Player %d untuk Bermain\n", NoUrut(AP));
+        printf("Merandom Skill...");
+        printf("\n");
+        delay(100);
+        getSkill(&Skill(AP));
+        //printf("Anda mendapatkan skill %s", )
+        showCommands();
+        while (!isEndGame && !isEndTurn){
+                printf("Masukkan perintah: ");
+                scanf("%s", cmd);
+                command = getNum(cmd);
+                if (command == 1){
+                        MenuSkill(AP);
+                } else if (command == 2){
+                        // MapPlayer()
+                } else if (command == 3){
+                        if (isImmune(AP)){
+                                printf("Anda memiliki buff imunitas teleport!\n");
+                        } else {printf("Anda tidak immune terhadap teleport!\n");}
+                        if (isHokiKecil(AP)){
+                                printf("Buff Senter Pengecil Hoki sedang aktif pada diri Anda!\n");
+                        } else{ printf("Buff Senter Pengecil Hoki sedang tidak aktif pada diri Anda!\n");}
+                        if (isHokiBesar(AP)){
+                                printf("Buff Senter Pembesar Hoki sedang aktif pada diri Anda!\n");
+                        } else {printf("Buff Senter Pembesar Hoki sedang tidak aktif pada diri Anda!\n");}
+                        if (isPostCermin(AP)){
+                                printf("Anda sudah menggunakan Cermin Pengganda pada ronde ini!\n");
+                        } else {printf("Anda belum menggunakan Cermin Pengganda pada ronde ini!\n");}
+                } else if (command == 4){
+                        // InspectPetak();
+                } else if (command == 5){
+                        // startroll
+                        isRolled = true;
+                        /* check posisi dia udh sampe akhir apa blm,
+                        kalo udah, isEndGame = true */
+                        /* if (isEndGame){
+                                gameFinished(AP);
+                        } */
+                } else if (command == 6){
+                        // save
+                } else if (command == 7){
+                        if (!isRolled){
+                                printf("Player tidak dapat melakukan End Turn karena belum melakukan Roll!\n");
+                        } else {
+                                setAfterTurn(AP);
+                                isEndTurn = true;
+                                AP = NextPlayer(AP);
+                        }
+                } else if (command == 8){
+                        // Undo
+                } else if (command == 9){
+                        showCommands();
+                } else {
+                        printf("Perintah tidak valid!\n");
+                }
+        }
+
+}
+
+void gameFinished(addressPlayer AP){
+        printf("Selamat! %s telah mencapai finish!\n", Nama(AP));
+}
+
 void gameView(int option){
     if (option == 1){
         // New Game
     } else if (option == 2){
         // Load Game
     }
-}
-
-void startGame(){
-        PlayerList PL;
-        CreatePlayerList(&PL);
-        InputAllPlayer(&PL);
-        TabChar Map;
-        TabInt PositionTOInteger;
-        ListTeleporter LT;
-        int countTel;
-        int maxRoll;
-        int nPlayer;
-        int countTel;
-        int lengthMap;
-
-        switch (n)
-        {
-        case 1:
-                // Skill
-                break;
-        case 2:
-                // Map
-                break;
-        case 3:
-                // Buff
-                break;
-        case 4: 
-                int petak;
-                printf("Masukkan petak: \n");
-                scanf("%d", &petak);
-                inspectPetak(petak, LT, countTel, Map, lengthMap);
-                break;
-        case 5:
-                // Roll
-                boolean isRolled = false;
-                //Roll, isRolled = true;
-                break;
-        case 6:
-                // Save
-                break;
-        case 7:
-                // EndTurn
-                endTurn(AP, PL, isRolled);
-                break;
-        case 8:
-                // Undo
-                break;
-        case 9:
-                showCommands();
-                break;
-        default:
-                printf("Command tidak valid!\n");
-                break;
-        }
 }
 
 void endTurn(addressPlayer AP, PlayerList PL, boolean isRolled){
@@ -118,10 +137,61 @@ void endTurn(addressPlayer AP, PlayerList PL, boolean isRolled){
         }
 }
 
-int mundur(int n, int m){
-    return n-m;
+void newGame(){
+        CreatePlayerList(&PL);
+        char* playerName;
+        boolean isLastPlayer = false;
+        int numberOfPlayer;
+        printf("Masukan jumlah pemain: ");
+        scanf("%d", &numberOfPlayer);
+        if (numberOfPlayer < 2 || numberOfPlayer > 4){
+                printf("Pemain hanya dapat berjumlah 2, 3, atau 4 orang.\n");
+                newGame();
+        } else {
+                for (int i=1; i<=numberOfPlayer; i++){
+                        printf("PLAYER %d\n", i);
+                        printf("Masukan nama pemain: ");
+                        scanf("%s", playerName);
+                        addressPlayer AP = AlokasiPlayer(i, playerName);
+                        if (i==numberOfPlayer){
+                                isLastPlayer = true;
+                        }
+                        insertPlayer(&PL, AP, isLastPlayer);
+                        }
+                printPlayer(PL, numberOfPlayer);
+        }
 }
 
-int maju(int n, int m){
-    return n+m;
+void startNewGame(){
+        SCreateEmpty(&S);
+        newGame();
+        addressPlayer AP = FirstPlayer(PL);
+        while (!isEndGame){
+                Turn(AP);
+        }
+
+}
+
+void inputPlayer(){
+        CreatePlayerList(&PL);
+        char* playerName;
+        boolean isLastPlayer = false;
+        int numberOfPlayer;
+        printf("Masukan jumlah pemain: ");
+        scanf("%d", &numberOfPlayer);
+        if (numberOfPlayer < 2 || numberOfPlayer > 4){
+                printf("Pemain hanya dapat berjumlah 2, 3, atau 4 orang.\n");
+        } else {
+                for (int i=1; i<=numberOfPlayer; i++){
+                        printf("PLAYER %d\n", i);
+                        printf("Masukan nama pemain: ");
+                        scanf("%s", playerName);
+                        addressPlayer AP = AlokasiPlayer(i, playerName);
+                        if (i==numberOfPlayer){
+                                isLastPlayer = true;
+                        }
+                        insertPlayer(&PL, AP, isLastPlayer);
+                        }
+                printPlayer(PL, numberOfPlayer);
+        }
 }

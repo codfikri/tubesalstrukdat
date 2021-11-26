@@ -643,7 +643,6 @@ void mesinwaktu(addressPlayer AP, address p)
     int roll;
     addressPlayer tempP = NextPlayer(AP);
 
-
     roll = rand() % 6 + 1;
     srand(roll);
     printf("%s melakukan roll daaaaaan, Mendapatkan %d !!!!\n", Nama(AP), roll);
@@ -787,4 +786,22 @@ void setAfterTurn(addressPlayer AP)
     isPostCermin(AP) = false;
     isHokiBesar(AP) = false;
     isHokiKecil(AP) = false;
+}
+
+void delay(int detik) {
+    // Converting time into milli_seconds
+    int mili_seconds = 1000 * detik;
+    // Storing start time
+    clock_t start_time = clock();
+    // looping till required time is not achieved
+    while (clock() < start_time + mili_seconds);
+}
+
+void loading(int inputDetik) {
+    int i;
+    for (i = 0; i < inputDetik; i++) {
+        // delay of one second
+        delay(1);
+    }
+    printf("\n");
 }

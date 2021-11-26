@@ -35,6 +35,25 @@ addressPlayer AlokasiPlayer(int noUrut, char* playerName){ //sama kaya Alokasi p
     return AP;
 }
 
+addressPlayer AlokasiUpdatePlayer(Player P){ //sama kaya Alokasi pada list
+    addressPlayer AP;
+    AP = (Player *) malloc(sizeof(Player));
+    if (AP != Nil){
+        Petak(AP) = P.Petak;
+        NoUrut(AP) = P.noUrut;
+        Nama(AP) = P.nama;
+        Skill(AP) = P.Skillpemain;
+        isImmune(AP) = P.isImmune;
+        isHokiBesar(AP) = P.isHokiBesar;
+        isHokiKecil(AP) = P.isHokiKecil;
+        isPostCermin(AP) = P.isPostCermin;
+        NextPlayer(AP) = Nil;
+    } else {
+        return Nil;
+    }
+    return AP;
+}
+
 void insertPlayer(PlayerList *PL, addressPlayer P, boolean isLastPlayer){ //sama kaya InsertLast pada list
     addressPlayer last;
     if (isListPlayerEmpty(*PL)){
@@ -63,9 +82,8 @@ void inputPlayerList(PlayerList *PL, int n){
         if (i==n){
             isLastPlayer = true;
         }
-        Nama(AP) = playerName;
+        printf("%s", Nama(AP));
         insertPlayer(PL, AP, isLastPlayer);
-        printPlayer(*PL, n);
     }
 }
 
@@ -101,23 +119,4 @@ void GetPlayer(Player* X, addressPlayer AP)
 void UpdatePetak(addressPlayer AP, int x)
 {
     Petak(AP) = x;
-}
-
-addressPlayer AlokasiUpdatePlayer(Player P){ //sama kaya Alokasi pada list
-    addressPlayer AP;
-    AP = (Player *) malloc(sizeof(Player));
-    if (AP != Nil){
-        Petak(AP) = P.Petak;
-        NoUrut(AP) = P.noUrut;
-        Nama(AP) = P.nama;
-        Skill(AP) = P.Skillpemain;
-        isImmune(AP) = P.isImmune;
-        isHokiBesar(AP) = P.isHokiBesar;
-        isHokiKecil(AP) = P.isHokiKecil;
-        isPostCermin(AP) = P.isPostCermin;
-        NextPlayer(AP) = Nil;
-    } else {
-        return Nil;
-    }
-    return AP;
 }
