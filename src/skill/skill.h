@@ -4,16 +4,15 @@
 
 */
 
-
-
 #ifndef SKILL_H
 #define SKILL_H
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "../boolean.h"
-#include "../player/player.h"
+#include <time.h>
 #include "listlinier.h"
+#include "../player/player.h"
+
 #define Nil NULL
 
 /* Definisi list : */
@@ -26,9 +25,14 @@
 
 // temp---------------------------------------------
 /* Player menggunakan circular linked list */
-typedef struct player *addressPlayer;
 
 // leSKILL LESGOOOOOOOOOOOOOOOOOO -----------------------------------------
+
+address SearchId (List L, infotype X);
+/* Mencari apakah ada elemen list dengan Info(P)= X */
+/* Jika ada, mengirimkan address elemen tersebut. */
+/* Jika tidak ada, mengirimkan Nil */
+
 void printSkill(List skillPemain);
 /*  I.S. skillPemain mungking kosong
     F.S. daftar skill yang dimiliki oleh player di output ke layar
@@ -51,6 +55,9 @@ void DelSkill(List *skillPemain,int n);
 /*  I.S. skillpemain tidak kosong
     F.S. skillpemain berkurang satu pada urutan ke-n
 */
+
+int chance(int x);
+/* Peluang dapetin skill berapa besar */
 
 void useSkill(addressPlayer AP, int n);
 /*  I.S. skillPemain tidak kosong
@@ -93,6 +100,8 @@ void senterKecilHoki(addressPlayer AP, address p);
 /*  I.S. AP dan P terdefinisi
     F.S. Memberi buff Hoki Besar jika belum ada buff hoki sebelumnya
 */
+
+void setAfterTurn(addressPlayer AP);
 
 void mesinPenukarPosisi(addressPlayer AP, address p);
 /*  I.S. AP dan P terdefinisi
