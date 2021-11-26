@@ -1,8 +1,9 @@
-/* 	NIM/Nama 	: 18220031/Muhammad Raihan Aulia
-	Nama file 	: listlinier.c
-	Tanggal		: 28/10/2021
-	Topik		: List Linier
-	Deskripsi	: mendefinisikan operasi primitif list linier
+/*
+PENGGUNAAN SKILL
+menggunakan seed sebelumya untuk random
+
+gunakan getSkill(&skillPemain) untuk mendapatkan skill (skillPemain : List)
+untuk melakukan pemanggilan command skill, gunakan MenuSkill(AP) (AP : AddressPlayer)
 
 */
 
@@ -643,6 +644,7 @@ void mesinwaktu(addressPlayer AP, address p)
     int roll;
     addressPlayer tempP = NextPlayer(AP);
 
+
     roll = rand() % 6 + 1;
     srand(roll);
     printf("%s melakukan roll daaaaaan, Mendapatkan %d !!!!\n", Nama(AP), roll);
@@ -787,6 +789,7 @@ void setAfterTurn(addressPlayer AP)
     isHokiBesar(AP) = false;
     isHokiKecil(AP) = false;
 }
+
 
 void delay(int detik) {
     // Converting time into milli_seconds

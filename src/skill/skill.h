@@ -4,15 +4,15 @@
 
 */
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
-#include "..\boolean.h"
-#include "..\player\player.h"
+
 
 #ifndef SKILL_H
 #define SKILL_H
 
+#include <stdio.h>
+#include <stdlib.h>
+#include "..\boolean.h"
+#include "..\player\player.h"
 #define Nil NULL
 
 typedef int infotype;
@@ -197,7 +197,7 @@ void DelSkill(List *skillPemain,int n);
     F.S. skillpemain berkurang satu pada urutan ke-n
 */
 
-void useSkill(Player *player, int n);
+void useSkill(addressPlayer AP, int n);
 /*  I.S. skillPemain tidak kosong
     F.S. pemain menggunakan skillnya, skill tersebut dihapus dari
          skillPemain.
