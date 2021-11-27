@@ -3,24 +3,33 @@
 #ifndef TELEPORTER_H
 #define TELEPORTER_H
 
-#include "../boolean.h"
+#include "boolean.h"
 #include "../array/array.h"
-#include <stdio.h>
-#include <stdlib.h>
 
-#define NMAX 50
+#define NMAX 100
 
 typedef struct{
-    int src;
-    int dest;
+    int src;    int dest;
 } Teleporter;
 
 typedef struct{
     Teleporter T[NMAX];
 } ListTeleporter;
 
-void createTeleporter(int n, int m, Teleporter *Tel);
+extern int countTel;
+extern ListTeleporter LT;
+extern Teleporter *Tel;
 
-boolean isPetakTeleport(int n, int countTel, ListTeleporter LT);
+void createTeleporter(int n, int m);
+//Membuat Teleporter
+
+boolean isPetakTeleport(int n);
+//Mengembalikan true apabila petak memiliki teleport
+
+int srcTeleporter(int n);
+ //mengembalikan nilai int asal dari sebuah teleport
+
+int destTeleporter(int n);
+//mengembalikan nilai int destinasi dari sebuah teleport
 
 #endif

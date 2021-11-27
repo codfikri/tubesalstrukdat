@@ -1,7 +1,7 @@
 #ifndef inspect_h
 #define inspect_h
 
-#include "teleporter.h"
+#include "../teleporter/teleporter.h"
 
 extern TabChar Map;
 extern int lengthMap;
