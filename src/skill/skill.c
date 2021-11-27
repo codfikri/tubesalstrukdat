@@ -114,19 +114,6 @@ void getSkill(List *skillPemain){
 }
 
 int chance(int x){
-    char daftarSkill[][22] =
-    {
-        "Pintu Ga Ke Mana Mana",
-        "Mesin Waktu",
-        "Baling Baling Jambu",
-        "Cermin Pengganda",
-        "Senter Pembesar Hoki",
-        "Senter Pengecil Hoki",
-        "Mesin Penukar Posisi"
-    };
-    if ((x >= 1) && (x <= 10)){
-        return 0; // Pintu ga kemana mana
-    }
     /*
     else if((x >= 11) && (x <= 20)){
         return 1; // Mesin Waktu
@@ -135,16 +122,19 @@ int chance(int x){
         return 2; // Baling baling jambu
     }
     */
-    else if((x >= 11) && (x <= 36)){
+    if ((x >= 1) && (x <= 14)){
+        return 0; // Pintu ga kemana mana
+    }
+    else if((x >= 15) && (x <= 24)){
         return 3; // Cermin Pengganda
     }
-    else if((x >= 37) && (x <= 51)){
+    else if((x >= 25) && (x <= 43)){
         return 4; // Senter pembesar hoki
     }
-    else if((x >= 52) && (x <= 66)){
+    else if((x >= 44) && (x <= 62)){
         return 5; // senter pengecil hoki
     }
-    else if((x >= 67) && (x <= 70)){
+    else if((x >= 63) && (x <= 70)){
         return 6; // Mesin penukar posisi
     }
     else{
@@ -201,7 +191,6 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
         }
     }
     printf(">> Memberhentikan command skill....\n");
-    delay(1);
 }
 
 
@@ -347,6 +336,7 @@ void cerminGanda(addressPlayer AP, address p)
 {
 
     List skillpemain = Skill(AP);
+    int jlhpre = NbElmt(skillpemain);
     if(isPostCermin(AP)){
         printf(">> Maaf anda sudah menggunakan cermin pengganda pada giliran ini. \n");
     }
@@ -354,9 +344,13 @@ void cerminGanda(addressPlayer AP, address p)
         if(NbElmt(skillpemain) <= 9){
             isPostCermin(AP) = true;
             DelAddress(&skillpemain, p);
+            getSkill(&skillpemain);
+            getSkill(&skillpemain);
+            while(NbElmt(skillpemain) < jlhpre+1){
+                getSkill(&skillpemain);
+            }
             First(Skill(AP)) = First(skillpemain);
-            getSkill(&skillpemain);
-            getSkill(&skillpemain);
+
             printf(">> Dengan kekuatan Cermin Pengganda dan berkah dari Dolos-sama,\n   %s-sama mendapatkan 2 skill baru. \n", Nama(AP));
         }
         else{

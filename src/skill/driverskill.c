@@ -44,40 +44,9 @@ int main(){
     getSkill(Skill(&P1));
     getSkill(Skill(&P1));
     Petak(P2) = 3;
-    P1 = FirstPlayer(PL);
     MenuSkill(P1);
-
-    P2 = NextPlayer(P1);
     printPlayer(PL,2);
     // MenuSkill(P1);
 
     return 0;
 }
-/*
-int main()
-{
-    PlayerList PL;
-    CreatePlayerList(&PL);
-    int l = 2;
-
-    address p;
-    inputPlayerList(&PL, l);
-    printPlayer(PL, l);
-
-
-    Petak(P2) = 2;
-
-    srand(time(NULL));
-    for(int i = 0; i < 10; i++){
-        getSkill(Skill(&P1));
-    }
-
-
-
-    MenuSkill(P1);
-    printf("petak p1: %d\n",Petak(P1));
-    printf("petak p2: %d\n",Petak(P2));
-    MenuSkill(P1);
-
-}
-*/
