@@ -8,7 +8,6 @@
 int main(){
     PlayerList PL;
     CreatePlayerList(&PL);
-    char* playerName;
     boolean isLastPlayer = false;
     int l;
     printf("Masukan jumlah pemain: ");
@@ -21,6 +20,7 @@ int main(){
     case 3:
     case 4:
         for (int i=1; i<=l; i++){
+            char playerName[50];
             printf("PLAYER %d\n", i);
             printf("Masukan nama pemain: ");
             scanf("%s", playerName);
@@ -28,6 +28,7 @@ int main(){
             if (i==l){
                 isLastPlayer = true;
             }
+            strcpy(Nama(AP), playerName);
             insertPlayer(&PL, AP, isLastPlayer);
         }
         setJumlahPlayer(&PL, l);
@@ -42,12 +43,14 @@ int main(){
     srand(time(NULL));
     getSkill(Skill(&P1));
     getSkill(Skill(&P1));
-    getSkill(Skill(&P1));
-    getSkill(Skill(&P1));
-    getSkill(Skill(&P1));
-    getSkill(Skill(&P1));
-    printSkill(Skill(P1));
+    Petak(P2) = 3;
+    P1 = FirstPlayer(PL);
     MenuSkill(P1);
+
+    P2 = NextPlayer(P1);
+    printPlayer(PL,2);
+    // MenuSkill(P1);
+
     return 0;
 }
 /*
