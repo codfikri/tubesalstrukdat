@@ -20,16 +20,16 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
       int backward = currPostition - getdice;
       if ((forward <= lengthMap) && (backward >= 1))
       {
-            int tempForward = LT.TI[tempForward];
-            int tempBackward = LT.TI[tempBackward];
-            if (isPetakTerlarang(forward, Map)){
-                  if (isPetakTerlarang(backward, Map)){
+            int tempF = LT.T[forward].src;
+            int tempB = LT.T[backward].src;
+            if (isPetakTerlarang(tempF, Map)){
+                  if (isPetakTerlarang(tempB, Map)){
                         printf("%s mendapatkan angka %d\n", Nama(P), getdice);
                         printf("%s tidak dapat bergerak\n", Nama(P));
                   }
             }
             else{
-                  if (!isPetakTerlarang(backward, Map)){
+                  if (!isPetakTerlarang(tempB, Map)){
                         int inputMove;
                         printf("%s dapat maju dan mundur\n", Nama(P));
                         printf("Kemana %s mau bergerak?\n", Nama(P));
@@ -37,7 +37,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                         printf("2. %d\n", backward);
                         scanf("Masukkan pilihan %d\n", &inputMove);
                         if (inputMove == forward){
-                              if (isPetakTeleport(forward)){
+                              if (isPetakTeleport(forward, countTel, LT)){
                                     printf("%s maju %d langkah\n", Nama(P), getdice);
                                     Petak(P) = forward;
                                     printf("%s menemukan teleporter\n");
@@ -49,8 +49,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                           scanf("%c", &tempInput);
                                           if (tempInput == "Y"){
                                                 printf("%s teleport\n", Nama(P));
-                                                printf("%s teleport ke petak %d\n", Nama(P), tempForward);
-                                                Petak(P) = tempForward;
+                                                printf("%s teleport ke petak %d\n", Nama(P), tempF);
+                                                Petak(P) = tempF;
                                           }
                                           else{
                                                 printf("%s tidak teleport\n", Nama(P));
@@ -82,8 +82,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                           scanf("%c", &tempInput);
                                           if (tempInput == "Y"){
                                                 printf("%s teleport\n", Nama(P));
-                                                printf("%s teleport ke petak %d\n", Nama(P), tempForward);
-                                                Petak(P) = tempBackward;
+                                                printf("%s teleport ke petak %d\n", Nama(P), tempF);
+                                                Petak(P) = tempB;
                                           }
                                           else{
                                                 printf("%s tidak teleport\n", Nama(P));
@@ -115,8 +115,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                   printf("%s dapat mundur\n", Nama(P));
                   printf("%s mundur %d langkah\n", Nama(P), getdice);
                   Petak(P) = backward;
-                  int tempBackward = LT.T[backward].src;
-                  int tempBackwarddest = LT.T[backward].dest;
+                  int tempB = LT.T[backward].src;
+                  int tempBdest = LT.T[backward].dest;
                   if (!isPetakTeleport(backward, countTel, LT))
                   {
                         printf("%s berada di petak %d\n", Nama(P), backward);
@@ -133,8 +133,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     if (tempInput == "Y")
                                     {
                                           printf("%s teleport\n", Nama(P));
-                                          printf("%s teleport ke petak %d\n", Nama(P), tempBackwarddest);
-                                          Petak(P) = tempBackwarddest;
+                                          printf("%s teleport ke petak %d\n", Nama(P), tempBdest);
+                                          Petak(P) = tempBdest;
                                     }
                                     else
                                     {
@@ -156,8 +156,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                   printf("%s dapat maju\n", Nama(P));
                   printf("%s maju %d langkah\n", Nama(P), getdice);
                   Petak(P) = forward;
-                  int tempForward = LT.T[forward].src;
-                  int tempForwarddest = LT.T[forward].dest;
+                  int tempF = LT.T[forward].src;
+                  int tempFdest = LT.T[forward].dest;
                   if (!isPetakTeleport(forward, countTel, LT))
                   {
                         printf("%s berada di petak %d\n", Nama(P), forward);
@@ -174,8 +174,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     if (tempInput == "Y")
                                     {
                                           printf("%s teleport\n", Nama(P));
-                                          printf("%s teleport ke petak %d\n", Nama(P), tempForwarddest);
-                                          Petak(P) = tempForwarddest;
+                                          printf("%s teleport ke petak %d\n", Nama(P), tempFdest);
+                                          Petak(P) = tempFdest;
                                     }
                                     else
                                     {

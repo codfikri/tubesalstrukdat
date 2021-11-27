@@ -3,6 +3,7 @@
 /* Penempatan elemen selalu rapat kiri */
 
 #include "../boolean.h"
+#include <stdio.h>
 
 #ifndef arrayint_h
 #define arrayint_h
@@ -22,6 +23,7 @@ typedef struct
 	ElIntType TI [idxMax-idxMin+1]; /* memori tempat penyimpan elemen (container) */
 	int neff; /* banyaknya elemen efektif */
 } TabInt;
+
 
 /* Indeks yang digunakan [IdxMin..IdxMax] */
 /* Jika T adalah TabInt, cara deklarasi dan akses: */

@@ -42,7 +42,7 @@ int main(){
       }
       printf("\n");
       printf("%d\n", GetFirstIdx(Map));
-      printf("%d\n", NbElmt(Map));
+      printf("%d\n", TCNbElmt(Map));
       printf("%d\n", GetLastIdx(Map));
       printf("%c\n", GetElmt(Map, 19));
       printf("%d\n", MaxRoll);
@@ -60,6 +60,7 @@ int main(){
       inspectPetak(petak1);
       inspectPetak(petak2);
       inspectPetak(petak3);
+
       if (!isPetakTerlarang(petak3)){
             printf("sign\n");
       }
