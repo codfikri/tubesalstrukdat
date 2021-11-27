@@ -1,16 +1,15 @@
 #include <stdio.h>
 #include "mesinkar.h"
 #include "mesinkata.h"
-#include "inspect.h"
+#include "../inspect/inspect.h"
 
 int main(){
       /*Membaca panjang peta*/
       STARTGAME("map.txt");
-      int lengthMap = KataTOInteger(CKata);
+      lengthMap = KataTOInteger(CKata);
       ADVKATA();
 
       /*Membaca peta*/
-      TabChar Map;
       MakeEmpty(&Map);
       SetNeff(&Map, lengthMap);
       setMap(CKata, &Map, lengthMap);
@@ -21,11 +20,10 @@ int main(){
       ADVKATA();
 
       /*Membaca banyaknya teleporter pada map*/
-      int countTel = KataTOInteger(CKata);
+      countTel = KataTOInteger(CKata);
       ADVKATA();
 
       /*Membaca destinasi teleporter*/
-      ListTeleporter LT;
       for (int i= 0; i< countTel; i++){
             int temp1 = KataTOInteger(CKata);
             ADVKATA();
@@ -56,13 +54,15 @@ int main(){
       }
       printf("\n---111------\n");
 
-      int petak1 = 2;
-      int petak2 = 3;
+      int petak1 = 6;
+      int petak2 = 8;
       int petak3 = 4;
-      inspectPetak(petak1, LT, countTel, Map, lengthMap);
-      inspectPetak(petak2, LT, countTel, Map, lengthMap);
-      inspectPetak(petak3, LT, countTel, Map, lengthMap);
-
+      inspectPetak(petak1);
+      inspectPetak(petak2);
+      inspectPetak(petak3);
+      if (!isPetakTerlarang(petak3)){
+            printf("sign\n");
+      }
       return 0;
 
 }
