@@ -12,114 +12,114 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
 │   </br>
 ├───src </br>
 │   │boolean.h </br>
-│   │src.zip
-│   ├───array
-│   │       array.c
-│   │       array.h
-│   │       
-│   ├───konfigurasi
-│   │       driverconfig.c
-│   │       map.txt
-│   │       mesinkar.c
-│   │       mesinkar.h
-│   │       mesinkata.c
-│   │       mesinkata.h
-│   │
-│   ├───load
-│   │       driverload.c
-│   │       load.c
-│   │       load.h
-│   │       
-│   ├───map
-│   │       arrayint.c
-│   │       arrayint.h
-│   │       drivermap.c
-│   │       map.c
-│   │       map.h
-│   │       
-│   ├───player
-│   │       driver.exe
-│   │       driverplayer.c
-│   │       player.c
-│   │       player.h
-│   │       
-│   ├───roll
-│   │       roll.c
-│   │       roll.h
-│   │       
-│   ├───save
-│   │       driversave.c
-│   │       save.c
-│   │       save.h
-│   │       
-│   ├───savefile
-│   │       TesSave.txt
-│   │       tessave2.txt
-│   │       
-│   ├───skill
-│   │       driverskill.c
-│   │       listlinier.c
-│   │       listlinier.h
-│   │       skill.c
-│   │       skill.h
-│   │       
-│   ├───stack
-│   │       driverstack.c
-│   │       stack.c
-│   │       stack.h
-│   │       
-│   ├───telepoorter & inspect
-│   │       inspect.c
-│   │       inspect.h
-│   │       teleporter.c
-│   │       teleporter.h
-│   │       
-│   ├───teleporter
-│   │       driverteleporter.c
-│   │       driverteleporter.exe
-│   │       teleporter.c
-│   │       teleporter.h
-│   │       
-│   └───word
-│           driverword.c
-│           driverword.exe
-│           mesin_kar.c
-│           mesin_kar.h
-│           mesin_kata.c
-│           mesin_kata.h
-│           
-├───konfigurasi
-│       array.h
-│       boolean.h
-│       map.txt
-│       mesinkar.c
-│       mesinkar.h
-│       mesinkata.c
-│       mesinkata.h
-│       readconfig.c
-│       readconfig.exe
-│       teleporter.c
-│       teleporter.h
-│       
-├───engine
-│   ├───Exit
-│   │       exit.c
-│   │       exit.h
-│   │       
-│   ├───Game
-│   │       Game.c
-│   │       Game.h
-│   │
-│   ├───Main Menu
-│   │       menu.c
-│   │       menu.h
-│   │       
-│   └───map
-│           arrayint.c
-│           arrayint.h
-│           drivermap.c
-│           map.c
-│           map.h
-│       
-├───.vscode
-└──    settings.json
+│   │src.zip </br>
+│   ├───array </br>
+│   │       array.c </br>
+│   │       array.h </br>
+│   │        </br>
+│   ├───konfigurasi </br>
+│   │       driverconfig.c </br>
+│   │       map.txt </br>
+│   │       mesinkar.c </br>
+│   │       mesinkar.h </br>
+│   │       mesinkata.c </br>
+│   │       mesinkata.h </br>
+│   │ </br>
+│   ├───load </br>
+│   │       driverload.c </br>
+│   │       load.c </br>
+│   │       load.h </br>
+│   │        </br>
+│   ├───map </br>
+│   │       arrayint.c </br>
+│   │       arrayint.h </br>
+│   │       drivermap.c </br>
+│   │       map.c </br>
+│   │       map.h </br>
+│   │        </br>
+│   ├───player </br>
+│   │       driver.exe </br>
+│   │       driverplayer.c </br>
+│   │       player.c </br>
+│   │       player.h </br>
+│   │        </br>
+│   ├───roll </br>
+│   │       roll.c </br>
+│   │       roll.h </br>
+│   │        </br>
+│   ├───save </br>
+│   │       driversave.c </br>
+│   │       save.c </br>
+│   │       save.h </br>
+│   │        </br>
+│   ├───savefile </br>
+│   │       TesSave.txt </br>
+│   │       tessave2.txt </br>
+│   │        </br>
+│   ├───skill </br>
+│   │       driverskill.c </br>
+│   │       listlinier.c </br>
+│   │       listlinier.h </br>
+│   │       skill.c </br>
+│   │       skill.h </br>
+│   │        </br>
+│   ├───stack </br>
+│   │       driverstack.c </br>
+│   │       stack.c </br>
+│   │       stack.h </br>
+│   │        </br>
+│   ├───teleporter & inspect </br>
+│   │       inspect.c </br>
+│   │       inspect.h </br>
+│   │       teleporter.c </br>
+│   │       teleporter.h </br>
+│   │        </br>
+│   ├───teleporter </br>
+│   │       driverteleporter.c </br>
+│   │       driverteleporter.exe </br>
+│   │       teleporter.c </br>
+│   │       teleporter.h </br>
+│   │        </br>
+│   └───word </br>
+│           driverword.c </br>
+│           driverword.exe </br>
+│           mesin_kar.c </br>
+│           mesin_kar.h </br>
+│           mesin_kata.c </br>
+│           mesin_kata.h </br>
+│            </br>
+├───konfigurasi </br>
+│       array.h </br>
+│       boolean.h </br>
+│       map.txt </br>
+│       mesinkar.c </br>
+│       mesinkar.h </br>
+│       mesinkata.c </br>
+│       mesinkata.h </br>
+│       readconfig.c </br>
+│       readconfig.exe </br>
+│       teleporter.c </br>
+│       teleporter.h </br>
+│        </br>
+├───engine </br>
+│   ├───Exit </br>
+│   │       exit.c </br>
+│   │       exit.h </br>
+│   │        </br>
+│   ├───Game </br>
+│   │       Game.c </br>
+│   │       Game.h </br>
+│   │ </br>
+│   ├───Main Menu </br>
+│   │       menu.c </br>
+│   │       menu.h </br>
+│   │        </br>
+│   └───map </br>
+│           arrayint.c </br>
+│           arrayint.h </br>
+│           drivermap.c </br>
+│           map.c </br>
+│           map.h </br>
+│        </br>
+├───.vscode </br>
+└──    settings.json </br>
