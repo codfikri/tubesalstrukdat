@@ -9,24 +9,27 @@
 #define NMAX 100
 
 typedef struct{
-    int src;
-    int dest;
+    int src;    int dest;
 } Teleporter;
 
 typedef struct{
     Teleporter T[NMAX];
 } ListTeleporter;
 
-void createTeleporter(int n, int m, Teleporter *Tel);
+extern int countTel;
+extern ListTeleporter LT;
+extern Teleporter *Tel;
+
+void createTeleporter(int n, int m);
 //Membuat Teleporter
 
-boolean isPetakTeleport(int n, int countTel, ListTeleporter LT);
+boolean isPetakTeleport(int n);
 //Mengembalikan true apabila petak memiliki teleport
 
-int srcTeleporter(int n, int countTel, ListTeleporter LT);
+int srcTeleporter(int n);
  //mengembalikan nilai int asal dari sebuah teleport
 
-int destTeleporter(int n, int countTel, ListTeleporter LT);
+int destTeleporter(int n);
 //mengembalikan nilai int destinasi dari sebuah teleport
 
 #endif

@@ -5,14 +5,17 @@
 #include "array.h"
 #include "array.c"
 
+extern TabChar Map;
+extern int lengthMap;
+
 #define terlarang '#'
 
-boolean isPetakTerlarang(int petak, TabChar Map);
+boolean isPetakTerlarang(int petak);
 /* 
 Mengirimkan True jika petak adalah petak terlarang
 Petak terlarang ditandai dengan karakter "#"
 */
-int inspectPetak(int petak, ListTeleporter LT , int countTel, TabChar Map, int lengthMap);
+void inspectPetak(int petak);
 /*
 Mengirimkan nilai petak
 Petak dapat terdefinisi sebagai petak kosong, petak terlarang, atau teleporter

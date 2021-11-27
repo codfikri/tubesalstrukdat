@@ -3,13 +3,17 @@
 #include "teleporter.h"
 #include "array.h"
 
-void createTeleporter(int n, int m, Teleporter *Tel){
+ListTeleporter LT;
+Teleporter *Tel;
+int countTel;
+
+void createTeleporter(int n, int m){
     //Membuat Teleporter
     (*Tel).src = n;
     (*Tel).dest = m;
 }
 
-boolean isPetakTeleport(int n, int countTel, ListTeleporter LT){
+boolean isPetakTeleport(int n){
     //Mengembalikan true apabila petak memiliki teleport
     int i = 0;
     boolean flag = false;
@@ -21,7 +25,7 @@ boolean isPetakTeleport(int n, int countTel, ListTeleporter LT){
     return flag;
 }
 
-int srcTeleporter(int n, int countTel, ListTeleporter LT){
+int srcTeleporter(int n){
     //mengembalikan nilai int asal dari sebuah teleport
     int i = 0;
     boolean flag = false;
@@ -33,7 +37,7 @@ int srcTeleporter(int n, int countTel, ListTeleporter LT){
     return LT.T[i].src;
 }
 
-int destTeleporter(int n, int countTel, ListTeleporter LT){
+int destTeleporter(int n){
     //mengembalikan nilai int destinasi dari sebuah teleport
     int i = 0;
     boolean flag = false;
