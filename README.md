@@ -119,8 +119,8 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
 1. 18220001 - Stephanie Hutagalung
 2. 18220031 - Muhammad Raihan Aulia
 3. 18220071 - Muhammad Zaky
-- Membuat ADT
-- Mengisi Laporan
-- Membuat file readme
+  - Membuat ADT
+  - Mengisi Laporan
+  - Membuat file readme
 4. 18220097 - Muhamad Fikri Nurohman
 5. 18220105 - Made Adi Surya Pramana
