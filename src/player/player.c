@@ -2,8 +2,6 @@
 
 #define Nil NULL
 
-
-
 void CreatePlayerList(PlayerList *P){ //sama kaya CreateEmpty pada List
     FirstPlayer(*P) = Nil;
 }
@@ -26,7 +24,6 @@ addressPlayer AlokasiPlayer(int noUrut, char* playerName){ //sama kaya Alokasi p
         isHokiKecil(AP) = false;
         isPostCermin(AP) = false;
         NextPlayer(AP) = Nil;
-        Nama(AP) = playerName;
     } else {
         return Nil;
     }
@@ -39,7 +36,7 @@ addressPlayer AlokasiUpdatePlayer(Player P){ //sama kaya Alokasi pada list
     if (AP != Nil){
         Petak(AP) = P.Petak;
         NoUrut(AP) = P.noUrut;
-        Nama(AP) = P.nama;
+        // Nama(AP) = P.nama;
         Skill(AP) = P.Skillpemain;
         isImmune(AP) = P.isImmune;
         isHokiBesar(AP) = P.isHokiBesar;
@@ -107,7 +104,7 @@ void printPlayer(PlayerList PL, int n){ //sama kaya printForward di list
 
 void GetPlayer(Player* X, addressPlayer AP)
 {
-    (*X).nama = Nama(AP);
+    // (*X).nama = Nama(AP);
     (*X).noUrut = NoUrut(AP) ;
     (*X).Petak = Petak(AP);
     (*X).Skillpemain = Skill(AP);

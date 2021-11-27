@@ -1,11 +1,8 @@
 #include "player.h"
 
-// Masi ada bug kalo input player itu yang kesimpen cuma nama plauer terakhir aja
-
 int main(){
     PlayerList PL;
     CreatePlayerList(&PL);
-    char* playerName;
     boolean isLastPlayer = false;
     int l;
     printf("Masukan jumlah pemain: ");
@@ -18,6 +15,7 @@ int main(){
     case 3:
     case 4: 
         for (int i=1; i<=l; i++){
+            char playerName[50];
             printf("PLAYER %d\n", i);
             printf("Masukan nama pemain: ");
             scanf("%s", playerName);
@@ -25,6 +23,7 @@ int main(){
             if (i==l){
                 isLastPlayer = true;
             }
+            strcpy(Nama(AP), playerName);
             insertPlayer(&PL, AP, isLastPlayer);
         }
         setJumlahPlayer(&PL, l);

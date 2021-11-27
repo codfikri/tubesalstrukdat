@@ -4,12 +4,13 @@
 #include "../skill/listlinier.h"
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 /* Player menggunakan circular linked list */
 typedef struct player *addressPlayer;
 typedef struct player {
     int noUrut;
-    char *nama;
+    char nama[50];
     int Petak;
     List Skillpemain;
     boolean isImmune;
