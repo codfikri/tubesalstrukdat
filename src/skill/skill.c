@@ -86,13 +86,13 @@ void printSkill(List skillPemain)
         "Mesin Penukar Posisi"
     };
     if(IsEmpty(skillPemain)){
-        printf("Ndda ada skill-nya~~\n");
+        printf(">> Ndda ada skill-nya~~\n");
     }
     else{
         p = First(skillPemain);
-        printf("Kamu memiliki skill:\n");
+        printf(">> Kamu memiliki skill:\n");
         while(p != Nil){
-            printf("%d. %s\n", count, daftarSkill[Info(p)]);
+            printf("       %d. %s\n", count, daftarSkill[Info(p)]);
             count += 1;
             p = Next(p);
         }
@@ -114,26 +114,38 @@ void getSkill(List *skillPemain){
 }
 
 int chance(int x){
+    char daftarSkill[][22] =
+    {
+        "Pintu Ga Ke Mana Mana",
+        "Mesin Waktu",
+        "Baling Baling Jambu",
+        "Cermin Pengganda",
+        "Senter Pembesar Hoki",
+        "Senter Pengecil Hoki",
+        "Mesin Penukar Posisi"
+    };
     if ((x >= 1) && (x <= 10)){
-        return 0;
+        return 0; // Pintu ga kemana mana
     }
+    /*
     else if((x >= 11) && (x <= 20)){
-        return 1;
+        return 1; // Mesin Waktu
     }
     else if((x >= 21) && (x <= 30)){
-        return 2;
+        return 2; // Baling baling jambu
     }
-    else if((x >= 31) && (x <= 36)){
-        return 3;
+    */
+    else if((x >= 11) && (x <= 36)){
+        return 3; // Cermin Pengganda
     }
     else if((x >= 37) && (x <= 51)){
-        return 4;
+        return 4; // Senter pembesar hoki
     }
     else if((x >= 52) && (x <= 66)){
-        return 5;
+        return 5; // senter pengecil hoki
     }
     else if((x >= 67) && (x <= 70)){
-        return 6;
+        return 6; // Mesin penukar posisi
     }
     else{
         return -999;
@@ -144,14 +156,27 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
 {
     // Kamus lokal
     int n = 0;
+    int easteregg = 0;
+
 
     // Algoritma
-    printf(">>====SKILL==============================================================+\n");
-    printSkill(Skill(AP));
-    printf("\n>> Gunakan 0 untuk melihat skill sekarang\n");
-    printf(">> Gunakan -99 untuk keluar dari menu skill\n");
+    printf("\n\\_____/SKILL\\____________________________________________________________________________/\n");
+    printf(">> Masukkan urutan skill yang ingin dipakai.\n   Jika ingin membuang skill, tambahkan \"-\" didepan urutan skill yang ingin dibuang.\n");
+    printf(">> DILARANG KERAS MEMASUKKAN INPUT SELAIN BILANGAN\n");
     while(n != -99){
-        scanf("%d", &n);
+        if(easteregg >= 20){
+            printf(">> Baiklah %s-san, Sudah cukup main-mainnya.\n", Nama(AP));
+            delay(2);
+            printf(">> BEGOOONEEEEE!!\n");
+            n = -99;
+        }
+        else{
+            printf("\n>>================+\n");
+            printSkill(Skill(AP));
+            printf(">> Gunakan -99 untuk keluar dari menu skill\n");
+            printf("\n>> Masukkan urutan skill: ");
+            scanf("%d", &n);
+        }
         if(abs(n) <= NbElmt(Skill(AP)) && n != 0){
             if(n < 0){
                 DelSkill(&Skill(AP), -n);
@@ -160,14 +185,23 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
                 useSkill(AP, n);
             }
         }
-        else if(n == 0){
-            printf("\n>>=======================================================================+\n");
-            printSkill(Skill(AP));
-        }
         else if(n!= -99){
-            printf("Input kok ke urutan kosong, ngga masuk akal.\n");
+            if(easteregg >= 10){
+                printf(">> Tomete kudasai,%s-san\n", Nama(AP));
+                easteregg += 2;
+            }
+            else if(NbElmt(Skill(AP)) == 0){
+                printf(">> Skill anda sudah habis mohon hentikan.\n");
+                easteregg += 10;
+            }
+            else{
+                printf(">> Input anda menunjuk ke urutan kosong, Masukkan input yang benar.\n");
+                easteregg += 1;
+            }
         }
     }
+    printf(">> Memberhentikan command skill....\n");
+    delay(1);
 }
 
 
@@ -194,7 +228,7 @@ void DelSkill(List *skillPemain,int n)
         p = Next(p);
 
     }
-    printf("Walaupun banyak yang menginginkan skill ini,\n anda membuang skill %s dihadapan mereka.\n", daftarSkill[Info(p)]);
+    printf(">> Walaupun banyak yang menginginkan skill ini,\n   anda membuang skill %s dihadapan mereka.\n", daftarSkill[Info(p)]);
     DelAddress(skillPemain, p);
 }
 
@@ -206,24 +240,12 @@ void useSkill(addressPlayer AP, int n)
     infotype idSkill;
     List skillpemain = Skill(AP);
 
-    char daftarSkill[][22] =
-    {
-        "Pintu Ga Ke Mana Mana",
-        "Mesin Waktu",
-        "Baling Baling Jambu",
-        "Cermin Pengganda",
-        "Senter Pembesar Hoki",
-        "Senter Pengecil Hoki",
-        "Mesin Penukar Posisi"
-    };
-
     // Algoritma
     p = First(skillpemain);
     for(int i = 1; i < n; i++){
         p = Next(p);
     }
     idSkill = Info(p);
-    // printf("player menggunakan skill %s-nyan\n", daftarSkill[idSkill]);
     switch (idSkill)
     {
     case 0:
@@ -263,6 +285,7 @@ void pintuGaKemana(addressPlayer AP, address p)
     DelAddress(&skillpemain, p);
     First(Skill(AP)) = First(skillpemain);
     printf(">> Walaupun pintu tersebut tidak menuju ke manapun, %s-sama merasakan dirinya\n   mendapatkan tameng perlindungan teleportasi\n", Nama(AP));
+    printf(">> %s mendapatkan status buff Imunitas Teleport\n", Nama(AP));
 }
 
 void mesinwaktu(addressPlayer AP, address p)
@@ -324,7 +347,6 @@ void cerminGanda(addressPlayer AP, address p)
 {
 
     List skillpemain = Skill(AP);
-
     if(isPostCermin(AP)){
         printf(">> Maaf anda sudah menggunakan cermin pengganda pada giliran ini. \n");
     }
@@ -355,7 +377,8 @@ void senterBesarHoki(addressPlayer AP, address p)
         isHokiBesar(AP) = true;
         DelAddress(&skillpemain, p);
         First(Skill(AP)) = First(skillpemain);
-        printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing\" \n");
+        printf(">> Ketika anda menggunakan Senter Pembesar Hoki, muncul cahaya keemasan\n   beserta suara Aqua-sama yang menyebutkan \"Blessing!!!\" \n");
+        printf(">> %s mendapatkan status buff Luck\n", Nama(AP));
     }
 }
 
@@ -369,7 +392,8 @@ void senterKecilHoki(addressPlayer AP, address p)
         isHokiKecil(AP) = true;
         DelAddress(&skillpemain, p);
         First(Skill(AP)) = First(skillpemain);
-        printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   terdengar suara asing yang mengutuk anda \"Misfortune\" \n");
+        printf(">> Ketika anda menggunakan Senter Pengecil Hoki, Senter tersebut menghisap cahaya,\n   anda merasakan keburuntungan anda tersisa sedikit \n");
+        printf(">> %s mendapatkan status buff Unluck\n", Nama(AP));
     }
 }
 
@@ -378,19 +402,19 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
     addressPlayer tempP = NextPlayer(AP);
     int n, tempPetak;
     int countp = 0;
-
     while(tempP!= AP){
         printf("%d. %s berada pada petak %d.\n", countp+1, Nama(tempP), Petak(tempP));
         tempP = NextPlayer(tempP);
         countp += 1;
     }
-    printf("Anda ingin mengganti posisi dengan siapa?\n(masukkan 0 jika ingin membatalkan): ");
+    printf(">> Anda ingin mengganti posisi dengan siapa?\n   (masukkan 0 jika ingin membatalkan): ");
     scanf("%d", &n);
-    while(n < 0 || n > countp){
-        scanf("Masukan salah, mohon berikan masukan yang benar! :%d", &n);
+    while(n > countp || n < 0){
+        printf(">> Masukan salah, mohon berikan masukan yang benar! : ");
+        scanf("%d", &n);
     }
     if(n==0){
-        printf("Mesin penukar posisi dibatalkan, mesin dimatikan.\n");
+        printf(">> Mesin penukar posisi dibatalkan, mesin dimatikan.\n");
     }
     else{
         tempP = NextPlayer(AP);
@@ -401,8 +425,9 @@ void mesinPenukarPosisi(addressPlayer AP, address p)
         tempPetak = Petak(AP);
         Petak(AP) = Petak(tempP);
         Petak(tempP) = tempPetak;
-        printf("Mesin Penukar posisi dijanlankan... Menukar posisi dengan %s...\n", Nama(tempP));
-        printf("Mesin penukar sukses dijalankan! tetapi energinya sudah habis.\n");
+        printf(">> Mesin Penukar posisi dijanlankan... Menukar posisi %s-sama dengan %s...\n", Nama(AP),Nama(tempP));
+        delay(1);
+        printf(">> Mesin penukar sukses dijalankan! tetapi energinya sudah habis.\n");
     }
 
     List skillpemain = Skill(AP);
