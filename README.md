@@ -18,14 +18,6 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
 │   ├───array 
 │   │       array.c 
 │   │       array.h 
-│   │        
-│   ├───konfigurasi 
-│   │       driverconfig.c 
-│   │       map.txt
-│   │       mesinkar.c 
-│   │       mesinkar.h 
-│   │       mesinkata.c 
-│   │       mesinkata.h 
 │   │ 
 │   ├───load 
 │   │       driverload.c 
@@ -53,11 +45,7 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
 │   │       driversave.c
 │   │       save.c 
 │   │       save.h 
-│   │        
-│   ├───savefile 
-│   │       TesSave.txt 
-│   │       tessave2.txt 
-│   │        
+│   │             
 │   ├───skill 
 │   │       driverskill.c 
 │   │       listlinier.c 
