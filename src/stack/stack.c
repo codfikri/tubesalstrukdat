@@ -56,7 +56,7 @@ void Undo(Stack *S, PlayerList *PL)
         Pop (S, &X);
         temp = (InfoTop(*S)).Petak;
     }
-	UndoPlayerList(*S, PL);
+	UndoPlayerList(*S,PL);
 }
 
 void UndoPlayerList(Stack S, PlayerList *PL)

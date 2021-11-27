@@ -36,7 +36,7 @@ addressPlayer AlokasiUpdatePlayer(Player P){ //sama kaya Alokasi pada list
     if (AP != Nil){
         Petak(AP) = P.Petak;
         NoUrut(AP) = P.noUrut;
-        // Nama(AP) = P.nama;
+        strcpy(Nama(AP), P.nama);
         Skill(AP) = P.Skillpemain;
         isImmune(AP) = P.isImmune;
         isHokiBesar(AP) = P.isHokiBesar;
@@ -104,7 +104,8 @@ void printPlayer(PlayerList PL, int n){ //sama kaya printForward di list
 
 void GetPlayer(Player* X, addressPlayer AP)
 {
-    // (*X).nama = Nama(AP);
+    
+    strcpy((*X).nama, Nama(AP));
     (*X).noUrut = NoUrut(AP) ;
     (*X).Petak = Petak(AP);
     (*X).Skillpemain = Skill(AP);

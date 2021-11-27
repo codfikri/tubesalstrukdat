@@ -22,10 +22,11 @@ void LoadFile(PlayerList * LP)
     CreatePlayerList(LP);
     isLastPlayer = false;
     n = KataTOInteger(CKata);
+    JumlahPlayer(*LP) = n;
     ADVKATA();
     printf("%d\n", n);
     for (int i = 0; i < n; i++){
-        P.nama = KataToChar(CKata);
+        strcpy(P.nama, KataToChar(CKata));
         ADVKATA();
         P.Petak = KataTOInteger(CKata);
         ADVKATA();

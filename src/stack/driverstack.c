@@ -5,6 +5,7 @@
 int main(){
     PlayerList PL;
     CreatePlayerList(&PL);
+    boolean isLastPlayer = false;
     int l;
     printf("Masukan jumlah pemain: ");
     scanf("%d", &l);
@@ -15,12 +16,25 @@ int main(){
     case 2: 
     case 3:
     case 4: 
-        inputPlayerList(&PL, l);
+        for (int i=1; i<=l; i++){
+            char playerName[50];
+            printf("PLAYER %d\n", i);
+            printf("Masukan nama pemain: ");
+            scanf("%s", playerName);
+            addressPlayer AP = AlokasiPlayer(i, playerName);
+            if (i==l){
+                isLastPlayer = true;
+            }
+            strcpy(Nama(AP), playerName);
+            insertPlayer(&PL, AP, isLastPlayer);
+        }
+        setJumlahPlayer(&PL, l);
+        printf("%d\n", JumlahPlayer(PL));
+        printPlayer(PL, l);
         break;
+
     default: printf("Pemain hanya dapat berjumlah 2, 3, atau 4 orang.\n");
     }
-
-    printPlayer(PL, l);
 
     Stack S;
     addressPlayer AP;
@@ -38,8 +52,8 @@ int main(){
     {
         if( X.noUrut > TempNoUrut) 
         {
-            X.Petak += 3;
-            UpdatePetak(AP, X.Petak);
+            Petak(AP) += 3;
+
             GetPlayer(&X, AP);
             Push(&S, X);
             printf("Petak %d\n", InfoTop(S).Petak);
@@ -58,14 +72,12 @@ int main(){
         }
     }
     Pop(&S, &X);
-    
+    printPlayer(PL, l);
     printf("Petak %d\n", NextStack(S).Petak);
     printf("No Urut %d\n", NextStack(S).noUrut);
-    Undo(&S);
+    Undo(&S, &PL);
     printf("Petak %d\n", NextStack(S).Petak);
     printf("No Urut %d\n", NextStack(S).noUrut);
-
-    UndoPlayerList(S,&PL,l);
     printPlayer(PL, l);
 
     return 0;

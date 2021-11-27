@@ -6,16 +6,16 @@ void saveData(PlayerList PL)
 {
     int n, jumlahskill;
     
-    char input[100] = "savefile/";
+    char input[100] = "src/savefile/";
     addressPlayer AP;
     printf("Masukkan nama file yang akan disimpan: ");
-    scanf("%s", input + 9);
+    scanf("%s", input + 13);
     FILE *fp = fopen(input, "w");
     n = JumlahPlayer(PL);
     fprintf(fp, "%d\n", n);
     AP = FirstPlayer(PL);
     for (int i = 0; i < n; i++){
-        fprintf(fp, "%c\n", Nama(AP));
+        fprintf(fp, "%s\n", Nama(AP));
         fprintf(fp, "%d\n", Petak(AP));
         fprintf(fp, "%d\n", NoUrut(AP));
         jumlahskill = NbElmt(Skill(AP));
@@ -33,6 +33,7 @@ void saveData(PlayerList PL)
         fprintf(fp, "%d\n", isPostCermin(AP));
         AP = NextPlayer(AP);
     }
+
     fprintf(fp, ";\n");
 
     fclose(fp);
