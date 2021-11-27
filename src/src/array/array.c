@@ -1,49 +1,48 @@
 #include <stdio.h>
-#include "../boolean.h"
-#include "arrayint.h"
+#include "array.h"
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong */
-void makeEmpty (TabInt *T)
+void MakeEmpty (TabChar *T)
 /* I.S. sembarang */
-/* F.S. Terbentuk tabel T kosong dengan kapasitas idxMax-idxMin+1 */
+/* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 {
-    (*T).neff = 0;
+    (*T).Neff = 0;
 }
 
 /* ********** SELEKTOR ********** */
 /* *** Banyaknya elemen *** */
-int nbElmt (TabInt T)
+int TCNbElmt (TabChar T)
 /* Mengirimkan banyaknya elemen efektif tabel */
 /* Mengirimkan nol jika tabel kosong */
 {
-    return T.neff;
+    return T.Neff;
 }
 
 /* *** Daya tampung container *** */
-int maxNbEl (TabInt T)
+int MaxNbEl (TabChar T)
 /* Mengirimkan maksimum elemen yang dapat ditampung oleh tabel */
 {
-    return idxMax;
+    return IdxMax;
 }
 
 /* *** Selektor INDEKS *** */
-IdxType getFirstIdx (TabInt T)
+IdxType GetFirstIdx (TabChar T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen pertama */
 {
-    return idxMin;
+    return IdxMin;
 }
 
-IdxType getLastIdx (TabInt T)
+IdxType GetLastIdx (TabChar T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen terakhir */
 {
-    return T.neff;
+    return T.Neff;
 }
 
 /* *** Menghasilkan sebuah elemen *** */
-ElIntType getElmt (TabInt T, IdxType i)
+ElType GetElmt (TabChar T, IdxType i)
 /* Prekondisi : Tabel tidak kosong, i antara FirstIdx(T)..LastIdx(T) */
 /* Mengirimkan elemen tabel yang ke-i */
 {
@@ -52,60 +51,60 @@ ElIntType getElmt (TabInt T, IdxType i)
 
 /* *** Selektor SET : Mengubah nilai TABEL dan elemen tabel *** */
 /* Untuk type private/limited private pada bahasa tertentu */
-void setTab (TabInt Tin, TabInt *Tout)
+void SetTab (TabChar Tin, TabChar *Tout)
 /* I.S. Tin terdefinisi, sembarang */
 /* F.S. Tout berisi salinan Tin */
 {
     int i;
-    for (i=idxMin;i<=idxMax;i++){
+    for (i=IdxMin;i<=IdxMax;i++){
         (*Tout).TI[i] = Tin.TI[i];
     }
 }
 
 /* Assignment THsl -> Tin */
-void setEl (TabInt *T, IdxType i, ElIntType v)
+void SetEl (TabChar *T, IdxType i, ElType v)
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Elemen T yang ke-i bernilai v */
 /* Mengeset nilai elemen tabel yang ke-i sehingga bernilai v */
 {   
     (*T).TI[i] = v;
 }
-void setneff (TabInt *T, IdxType N)
+void SetNeff (TabChar *T, IdxType N)
 /* I.S. T terdefinisi, sembarang */
 /* F.S. Nilai indeks efektif T bernilai N */
 /* Mengeset nilai indeks elemen efektif sehingga bernilai N */
 {
-    (*T).neff = N;
+    (*T).Neff = N;
 }
 
 /* ********** Test Indeks yang valid ********** */
-boolean isIdxValid (TabInt T, IdxType i)
+boolean IsIdxValid (TabChar T, IdxType i)
 /* Prekondisi : i sembarang */
 /* Mengirimkan true jika i adalah indeks yang valid utk ukuran tabel */
 /* yaitu antara indeks yang terdefinisi utk container*/
 {
-    return ((i >= idxMin) && (i <= idxMax));
+    return ((i >= IdxMin) && (i <= IdxMax));
 }
 
-boolean isIdxEff (TabInt T, IdxType i)
+boolean IsIdxEff (TabChar T, IdxType i)
 /* Prekondisi : i sembarang*/
 /* Mengirimkan true jika i adalah indeks yang terdefinisi utk tabel */
 /* yaitu antara FirstIdx(T)..LastIdx(T) */
 {
-    return (i >= getFirstIdx(T)) && (i <= getLastIdx(T));
+    return (i >= GetFirstIdx(T)) && (i <= GetLastIdx(T));
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
-boolean isEmpty (TabInt T)
+boolean TCIsEmpty (TabChar T)
 /* Mengirimkan true jika tabel T kosong, mengirimkan false jika tidak */
 {
-    return (T.neff == 0);
+    return (T.Neff == 0);
 }
 
 /* *** Test tabel penuh *** */
-boolean isFull (TabInt T)
+boolean IsFull (TabChar T)
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 {
-    return (T.neff == idxMax);
+    return (T.Neff == IdxMax);
 }

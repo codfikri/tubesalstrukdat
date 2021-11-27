@@ -2,21 +2,23 @@
 #define MAP_H
 
 #include "../player/player.h"
-#include "../inspect/inspect.h"
 #include "../array/array.h"
+#include "../inspect/inspect.h"
 #include "arrayint.h"
 
 #define Nil NULL
-extern TabInt PositionTOInteger;
-extern addressPlayer;
 
-int updatePosition(addressPlayer AP);
+extern TabInt PositionToInteger;
+
+void PrintTabChar(TabChar T);
+
+int updatePosition(PlayerList PL, TabInt *PositionToInteger);
 //Menampilkan posisi petak seorang pemain dalam bentuk integer
 
-void MapPlayer(addressPlayer AP);
+void MapPlayer(PlayerList PL, TabInt PositionToInteger);
 //Menampilkan current map dari player
 //Petak yang ditempati player ditandai dengan  karakter "*"
 
-int CheckPlayerPosition(int nPlayer);
+int CheckPlayerPosition(int nPlayer ,TabInt PositionToInteger);
 
 #endif
