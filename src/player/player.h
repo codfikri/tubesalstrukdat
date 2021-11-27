@@ -1,7 +1,9 @@
 #ifndef _PLAYER_H
 #define _PLAYER_H
 
-#include "../skill/skill.h"
+#include "../skill/listlinier.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 /* Player menggunakan circular linked list */
 typedef struct player *addressPlayer;
@@ -53,6 +55,6 @@ addressPlayer AlokasiUpdatePlayer(Player P);
 
 void GetPlayer(Player* X, addressPlayer AP);
 
-void UpdatePetak(addressPlayer AP, int x);
+void insertUpdatePlayerToList(PlayerList *PL, Player P, boolean isLastPlayer);
 
 #endif

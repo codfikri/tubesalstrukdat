@@ -35,8 +35,8 @@ void Pop (Stack * S, infostack* X);
 
 void PushUndef(Stack * S);
 
-void Undo(Stack * S);
+void Undo(Stack * S, PlayerList *PL);
 
-void UndoPlayerList(Stack S, PlayerList *PL, int l);
+void UndoPlayerList(Stack S, PlayerList *PL);
 
 #endif

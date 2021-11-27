@@ -41,7 +41,7 @@ void PushUndef(Stack * S){
 	InfoTop(*S) = X;
 }
 
-void Undo(Stack * S)
+void Undo(Stack *S, PlayerList *PL)
 {
     infostack X;
     int temp;
@@ -56,13 +56,15 @@ void Undo(Stack * S)
         Pop (S, &X);
         temp = (InfoTop(*S)).Petak;
     }
+	UndoPlayerList(*S, PL);
 }
 
-void UndoPlayerList(Stack S, PlayerList *PL, int l)
+void UndoPlayerList(Stack S, PlayerList *PL)
 {
-  boolean isLastPlayer;
+  	boolean isLastPlayer;
 	Player P;
-  CreatePlayerList(PL);
+	int l = JumlahPlayer(*PL);
+  	CreatePlayerList(PL);
 	isLastPlayer = false;
 	for (int i = l; i > 0; i--)
 	{

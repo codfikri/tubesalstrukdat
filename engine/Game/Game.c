@@ -106,7 +106,7 @@ void Turn(addressPlayer AP){
                                 AP = NextPlayer(AP);
                         }
                 } else if (command == 8){
-                        // Undo
+                        endTurn(AP, isRolled);
                 } else if (command == 9){
                         showCommands();
                 } else {
@@ -128,11 +128,19 @@ void gameView(int option){
     }
 }
 
-void endTurn(addressPlayer AP, PlayerList PL, boolean isRolled){
+void endTurn(addressPlayer AP, boolean isRolled){
         if (!isRolled){
                 print("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
         } else{
-                // Push(&S, PL);
+                Player X;
+                GetPlayer(&X, AP);
+                if (NoUrut(AP) == JumlahPlayer(PL)){
+                        Push(&S, X);
+                        PushUndef;
+                }else{
+                        Push(&S, X);
+                }
+                setAfterTurn(AP);
                 AP = Next(AP);
         }
 }
@@ -170,28 +178,4 @@ void startNewGame(){
                 Turn(AP);
         }
 
-}
-
-void inputPlayer(){
-        CreatePlayerList(&PL);
-        char* playerName;
-        boolean isLastPlayer = false;
-        int numberOfPlayer;
-        printf("Masukan jumlah pemain: ");
-        scanf("%d", &numberOfPlayer);
-        if (numberOfPlayer < 2 || numberOfPlayer > 4){
-                printf("Pemain hanya dapat berjumlah 2, 3, atau 4 orang.\n");
-        } else {
-                for (int i=1; i<=numberOfPlayer; i++){
-                        printf("PLAYER %d\n", i);
-                        printf("Masukan nama pemain: ");
-                        scanf("%s", playerName);
-                        addressPlayer AP = AlokasiPlayer(i, playerName);
-                        if (i==numberOfPlayer){
-                                isLastPlayer = true;
-                        }
-                        insertPlayer(&PL, AP, isLastPlayer);
-                        }
-                printPlayer(PL, numberOfPlayer);
-        }
 }
