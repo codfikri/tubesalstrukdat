@@ -1,10 +1,11 @@
 #ifndef roll_h
 #define roll_h
- 
-#include "map.h"
-#include "inspect.h"
-#include "inspect.c"
-#include "map.c"
+
+#include <stdio.h>
+#include <stdlib.h>
+#include <time.h>
+#include "../map/map.h"
+#include "../teleporter & inspect/inspect.h"
 
 int randomroll(int maxRoll);
 //Memberikan nilai int secara random

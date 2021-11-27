@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include "../boolean.h"
-#include "../array/array.h"
 #include "teleporter.h"
 
 void createTeleporter(int n, int m, Teleporter *Tel){

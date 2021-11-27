@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "teleporter.c"
 #include "inspect.h"
 
 TabChar Map;

@@ -7,8 +7,8 @@
 #include "../../src/teleporter & inspect/teleporter.h"
 #include "../../src/teleporter & inspect/inspect.h"
 #include "../../src/map/map.h"
-#include "../Exit/exit.h"
-#include "../Main Menu/menu.h"
+#include "../../src/load/load.h"
+#include "../../src/save/save.h"
 
 void showCommands();
 

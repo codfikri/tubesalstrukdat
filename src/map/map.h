@@ -1,10 +1,9 @@
 #ifndef MAP_H
 #define MAP_H
 
-#include "player.h"
-#include "array.h"
+#include "../player/player.h"
+#include "../array/array.h"
 #include "arrayint.h"
-#include "boolean.h"
 
 #define Nil NULL
 int updatePosition(PlayerList PL, TabInt *PositionToInteger);

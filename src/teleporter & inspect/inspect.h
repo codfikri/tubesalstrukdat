@@ -2,8 +2,6 @@
 #define inspect_h
 
 #include "teleporter.h"
-#include "array.h"
-#include "array.c"
 
 extern TabChar Map;
 extern int lengthMap;

@@ -1,10 +1,7 @@
 #include <stdio.h>
 #include "mesinkar.h"
-#include "mesinkar.c"
 #include "mesinkata.h"
-#include "mesinkata.c"
 #include "inspect.h"
-#include "inspect.c"
 
 int main(){
       /*Membaca panjang peta*/

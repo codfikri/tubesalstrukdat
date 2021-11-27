@@ -3,8 +3,8 @@
 #ifndef TELEPORTER_H
 #define TELEPORTER_H
 
-#include "boolean.h"
-#include "array.h"
+#include "../boolean.h"
+#include "../array/array.h"
 
 #define NMAX 100
 

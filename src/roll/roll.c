@@ -1,6 +1,3 @@
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
 #include "roll.h"
  
 int randomroll(int maxRoll)

@@ -3,7 +3,7 @@
 PlayerList PL;
 Stack S;
 boolean isEndGame = false;
-
+countTel = 3;
 void showCommands(){
         printf("Perintah-perintah yang tersedia: \n");
         printf("[1] SKILL: Menampilkan skill yang dimiliki player\n"); //skill

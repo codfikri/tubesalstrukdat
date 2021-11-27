@@ -5,6 +5,8 @@
 
 #include "../boolean.h"
 #include "../array/array.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 #define NMAX 50
 

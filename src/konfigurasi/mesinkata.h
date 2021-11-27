@@ -3,9 +3,8 @@
 #ifndef __MESINKATA_H__
 #define __MESINKATA_H__
 
-#include "boolean.h"
 #include "mesinkar.h"
-#include "array.h"
+#include "../array/array.h"
 
 #define NMax 100
 #define BLANK ' '

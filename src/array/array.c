@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include "boolean.h"
 #include "array.h"
 
 /* ********** KONSTRUKTOR ********** */

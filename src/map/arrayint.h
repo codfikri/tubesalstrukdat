@@ -2,7 +2,7 @@
 /* Berisi definisi dan semua primitif pemrosesan tabel integer */
 /* Penempatan elemen selalu rapat kiri */
 
-#include "boolean.h"
+#include "../boolean.h"
 
 #ifndef arrayint_h
 #define arrayint_h
