@@ -43,6 +43,10 @@ int main(){
     srand(time(NULL));
     getSkill(Skill(&P1));
     getSkill(Skill(&P1));
+    getSkill(Skill(&P1));
+    getSkill(Skill(&P1));
+    getSkill(Skill(&P1));
+    getSkill(Skill(&P1));
     Petak(P2) = 3;
     MenuSkill(P1);
     printPlayer(PL,2);

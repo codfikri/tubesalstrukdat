@@ -60,9 +60,9 @@ void Turn(addressPlayer AP){
         printf("Giliran Player %d untuk Bermain\n", NoUrut(AP));
         printf("Merandom Skill...");
         printf("\n");
-        delay(100);
+        delay(1);
+        srand(time(NULL));
         getSkill(&Skill(AP));
-        //printf("Anda mendapatkan skill %s", )
         showCommands();
         while (!isEndGame && !isEndTurn){
                 printf("Masukkan perintah: ");

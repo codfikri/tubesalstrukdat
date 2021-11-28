@@ -5,6 +5,8 @@ menggunakan seed sebelumya untuk random
 gunakan getSkill(&skillPemain) untuk mendapatkan skill (skillPemain : List)
 untuk melakukan pemanggilan command skill, gunakan MenuSkill(AP) (AP : AddressPlayer)
 
+PERINGATAN!!
+random pada getskill tidak menggunakan seed yang digenerate oleh fungsi, melainkan menghasilkan seed baru
 */
 
 #include "skill.h"
@@ -101,14 +103,28 @@ void printSkill(List skillPemain)
 
 void getSkill(List *skillPemain){
     int x;
+    char daftarSkill[][22] =
+    {
+        "Pintu Ga Ke Mana Mana",
+        "Mesin Waktu",
+        "Baling Baling Jambu",
+        "Cermin Pengganda",
+        "Senter Pembesar Hoki",
+        "Senter Pengecil Hoki",
+        "Mesin Penukar Posisi"
+    };
 
     if(NbElmt(*skillPemain) <= 10){
         x = rand();
         srand(x);
         x = chance((x)%100 +1);
-
         if(x != -999){
             InsVLast(skillPemain, x);
+            printf("Anda mendapatkan skill %s.\n", daftarSkill[x]);
+
+        }
+        else{
+            printf("Anda Mendapatkan skill yang tidak berguna. anda langsung membuangnya.\n");
         }
     }
 }
