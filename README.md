@@ -117,10 +117,28 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
 ```
 # Pembagian Tugas
 1. 18220001 - Stephanie Hutagalung
+     - Membuat ADT Stack
+     - Membuat fitur Load
+     - Membuat firut Save
+     - Membuat Main Program
 2. 18220031 - Muhammad Raihan Aulia
+     - Membuat ADT List Linear
+     - Membuat ADT Skill
+     - Membuat Main Program
 3. 18220071 - Muhammad Zaky
-     - Membuat ADT
-     - Mengisi Laporan
-     - Membuat file readme
+     - Membuat ADT List Linear
+     - Membuat ADT Skill
+     - Membuat Main Program
 4. 18220097 - Muhamad Fikri Nurohman
+     - Membuat ADT Player
+     - Membuat ADT Teleporter dan List Teleporter
+     - Membuat ADT Array
+     - Membuat Main Program
 5. 18220105 - Made Adi Surya Pramana
+     - Membuat ADT Teleporter dan List Teleporter
+     - Membuat ADT Array
+     - Membuat ADT Mesin Kata dan Mesin Karakter
+     - Membuat fitur Inspect
+     - Membuat fitur Roll
+     - Membuat fitur Map
+     - Membuat Main Program
