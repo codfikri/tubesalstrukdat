@@ -37,7 +37,7 @@ void MapPlayer(PlayerList PL, TabInt PositionToInteger)
       char  v = '*';
       TabChar tempMap;
       addressPlayer AP = FirstPlayer(PL);
-      while (i <=4)
+      while (i <= JumlahPlayer(PL))
       {
             TabChar CopyMap;
             int temp;

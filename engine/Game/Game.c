@@ -2,6 +2,7 @@
 
 PlayerList PL;
 Stack S;
+addressPlayer AP;
 boolean isEndGame = false;
 boolean isExitGame = false;
 boolean isRolled = false;
@@ -9,16 +10,16 @@ boolean isEndTurn = false;
 
 void showCommands(){
         printf("Perintah-perintah yang tersedia: \n");
-        printf("[1] SKILL: Menampilkan skill yang dimiliki player\n"); //skill
-        printf("[2] MAP: Menampilkan map dan posisi player pada map\n"); //map
-        printf("[3] BUFF: Menampilkan daftar buff yang dimiliki player\n"); //buff
-        printf("[4] INSPECT: Melihat apakah petak n merupakan sebuah teleporter\n"); //inspect
-        printf("[5] ROLL: Memutar dadu\n"); //roll
-        printf("[6] SAVE: Menyimpan state permainan\n"); //save
-        printf("[7] ENDTURN: Mengakhiri giliran\n"); //endturn
-        printf("[8] UNDO: Mengembalikan state seperti akhir ronde sebelumnya\n");
-        printf("[8] EXIT: Keluar dari permainan\n");
-        printf("[0] HELP: Menampilkan perintah-perintah yang tersedia\n");
+        printf("SKILL: Menampilkan skill yang dimiliki player\n"); //skill
+        printf("MAP: Menampilkan map dan posisi player pada map\n"); //map
+        printf("BUFF: Menampilkan daftar buff yang dimiliki player\n"); //buff
+        printf("INSPECT: Melihat apakah petak n merupakan sebuah teleporter\n"); //inspect
+        printf("ROLL: Memutar dadu\n"); //roll
+        printf("SAVE: Menyimpan state permainan\n"); //save
+        printf("ENDTURN: Mengakhiri giliran\n"); //endturn
+        printf("UNDO: Mengembalikan state seperti akhir ronde sebelumnya\n");
+        printf("EXIT: Keluar dari permainan\n");
+        printf("HELP: Menampilkan perintah-perintah yang tersedia\n");
 }
 
 int getNum(char *cmd){
@@ -60,7 +61,7 @@ int getNum(char *cmd){
 
 void Turn(addressPlayer AP){
         int option, command;
-        char* cmd;
+        char cmd[50];
         MapPlayer(PL, PositionToInteger);
         printf("Giliran Player %d untuk Bermain\n", NoUrut(AP));
         printf("Merandom Skill...");
@@ -102,20 +103,28 @@ void Turn(addressPlayer AP){
                                 isEndGame = true;
                                 isExitGame = true;
                         }
+                        printf("%d roled\n", isRolled);
                 } else if (command == 6){ // SAVE
                         saveData(PL);
                 } else if (command == 7){ // END TURN
-                        endTurn(AP, isRolled);
-                        isEndTurn = true;
-                } else if (command == 8){
-                        // UNDO;
+                        endTurn(&AP, isRolled);
+                } else if (command == 8){ 
+                        if (IsSEmpty)
+                        {
+                                printf("Yes\n");
+                                printf("Tidak dapat melakukan Undo\n");
+                        }
+                        else{
+                                printf("No\n");
+                                Undo(&S, &PL);
+                        }
                 } else if (command == 9){
                         showCommands();
                 } else if (command == 10){
                         Exit();
                         isExitGame = true;
                 } else {
-
+                        printf("Perintah tidak valid! Harap masukan kembali perintah!\n");
                 }
         }
 
@@ -134,30 +143,34 @@ void gameView(int option){
     }
 }
 
-void Exit(){
-        char prompt;
-        printf("Yakin ingin keluar dari permainan? [Y/N]\n");
-        scanf("%c", &prompt);
-        if (prompt == 'Y'){
+int Exit(){
+        char prompt[1];
+        printf("Yakin ingin keluar dari permainan? [Y/N]: ");
+        scanf("%s", prompt);
+        if (strcmp(prompt, "Y") == 0 ){
+                isEndTurn = true;
+                isExitGame = true;
                 exitView();
         }
 }
 
-void endTurn(addressPlayer AP, boolean isRolled){
-        if (!isRolled){
-                printf("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
-        } else{
+void endTurn(addressPlayer *AP, boolean isRolled){
+        if (isRolled){
                 Player X;
-                GetPlayer(&X, AP);
-                if (NoUrut(AP) == JumlahPlayer(PL)){
+                GetPlayer(&X, *AP);
+                if (X.noUrut == JumlahPlayer(PL)){
                         Push(&S, X);
                         PushUndef;
                 }else{
                         Push(&S, X);
                 }
-                setAfterTurn(AP);
-                AP = Next(AP);
+                
+                isEndTurn = true;
+                setAfterTurn(*AP);
+                *AP = NextPlayer(*AP);
                 isRolled = false;
+        } else{
+                printf("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
         }
 }
 
@@ -184,6 +197,7 @@ void newGame(){
                         insertPlayer(&PL, AP, isLastPlayer);
                         }
                 printPlayer(PL, numberOfPlayer);
+                setJumlahPlayer(&PL, numberOfPlayer);
         }
 }
 
@@ -192,11 +206,12 @@ void startNewGame(){
         newGame();
         printf("\n");
         printf("Membaca konfigurasi...\n");
-        STARTGAME("../../data/map.txt");
+        startConfig();
+        updatePosition(PL, &PositionToInteger);
         delay(3);
-        printf("Pembacaan Selesai");
+        printf("Pembacaan Selesai.\n");
         printf("Selamat Bermain!\n");
-        addressPlayer AP = FirstPlayer(PL);
+        AP = FirstPlayer(PL);
         while (!isExitGame && !isEndGame){
                 Turn(AP);
         }
@@ -207,4 +222,57 @@ void startNewGame(){
 
 boolean isGameFinished(addressPlayer AP){
         return Petak(AP) == lengthMap;
+}
+
+void startConfig(){
+        STARTGAME("data/map.txt");
+        lengthMap = KataTOInteger(CKata);
+        ADVKATA();
+
+        /*Membaca peta*/
+        MakeEmpty(&Map);
+        SetNeff(&Map, lengthMap);
+        setMap(CKata, &Map, lengthMap);
+        ADVKATA();
+
+        TabChar CopyMap;
+        SetTab(Map, &CopyMap);
+
+        /*Membaca MaxRoll*/
+        maxRoll = KataTOInteger(CKata);
+        ADVKATA();
+
+        /*Membaca banyaknya teleporter pada map*/
+        countTel = KataTOInteger(CKata);
+        ADVKATA();
+
+        /*Membaca destinasi teleporter*/
+        for (int i= 0; i< countTel; i++){
+                int temp1 = KataTOInteger(CKata);
+                ADVKATA();
+                int temp2 = KataTOInteger(CKata);
+                ADVKATA();
+                LT.T[i].src = temp1;
+                LT.T[i].dest = temp2;
+        }
+}
+
+void Load(){
+        PlayerList LP;
+        SCreateEmpty(&S);
+        LoadFile(&LP);
+        printf("\n");
+        printf("Membaca konfigurasi...\n");
+        STARTGAME("data/map.txt");
+        lengthMap = KataTOInteger(CKata);
+        ADVKATA();
+
+        MakeEmpty(&Map);
+        SetNeff(&Map, lengthMap);
+        setMap(CKata, &Map, lengthMap);
+        ADVKATA();
+        int MaxRoll = KataTOInteger(CKata);
+        ADVKATA();
+        countTel = KataTOInteger(CKata);
+        ADVKATA();
 }

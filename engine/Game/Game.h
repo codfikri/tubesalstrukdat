@@ -2,6 +2,8 @@
 #define GAME_H
 
 // #include "../../src/player/player.h"
+#include <stdio.h>
+#include <stdlib.h>
 #include "../../src/skill/skill.h"
 #include "../../src/stack/stack.h"
 #include "../../src/teleporter/teleporter.h"
@@ -13,7 +15,7 @@
 #include "../../src/konfigurasi/mesinkata.h"
 #include "../../src/roll/roll.h"
 #include "../Exit/exit.h"
-#include "../Main Menu/menu.h"
+#include "../Mainmenu/menu.h"
 
 void showCommands();
 
@@ -25,14 +27,18 @@ void gameFinished(addressPlayer AP);
 
 void gameView(int option);
 
-void Exit();
+int Exit();
 
-void endTurn(addressPlayer AP, boolean isRolled);
+void endTurn(addressPlayer *AP, boolean isRolled);
 
 void newGame();
 
 void startNewGame();
 
+void startConfig();
+
 boolean isGameFinished(addressPlayer AP);
+
+void Load();
 
 #endif
