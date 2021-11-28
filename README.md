@@ -120,25 +120,40 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
      - Membuat ADT Stack
      - Membuat fitur Load
      - Membuat firut Save
-     - Membuat Main Program
+     - Merevisi fitur Map
+     - Membuat fitur Undo
+     - Mengujicoba Main Program
+     - Mengisi Laporan
 2. 18220031 - Muhammad Raihan Aulia
      - Membuat ADT List Linear
-     - Membuat ADT Skill
+     - Membuat dan merevisi ADT Skill
      - Membuat Main Program
+     - Mengimplementasikan ADT Skill
+     - Merevisi main program
+     - Merivisi ADT Player
 3. 18220071 - Muhammad Zaky
      - Membuat ADT List Linear
      - Membuat ADT Skill
-     - Membuat Main Program
+     - Merevisi Main Program
+     - Mengimplementasikan ADT Skill
+     - Membuat kerangka laporan
+     - Mengisi laporan
+     - Membuat file readme
 4. 18220097 - Muhamad Fikri Nurohman
-     - Membuat ADT Player
-     - Membuat ADT Teleporter dan List Teleporter
-     - Membuat ADT Array
+     - Membuat dan Merevisi ADT Player
+     - Membuat rancangan awal ADT Teleporter dan List Teleporter
+     - Membuat ADT Array of Character
      - Membuat Main Program
+     - Menambahkan menu exit dan game awal
+     - Membuat file game yang menggabungkan seluruh ADT
+     - Merevisi fitur Roll, Map, Inspect
 5. 18220105 - Made Adi Surya Pramana
      - Membuat ADT Teleporter dan List Teleporter
-     - Membuat ADT Array
+     - Membuat ADT Array of Integer
      - Membuat ADT Mesin Kata dan Mesin Karakter
+     - Membuat fitur pembacaan file konfigurasi
      - Membuat fitur Inspect
      - Membuat fitur Roll
      - Membuat fitur Map
-     - Membuat Main Program
+     - Merevisi Main Program
+     - Mengisi Laporan
