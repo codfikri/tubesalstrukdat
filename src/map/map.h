@@ -22,4 +22,6 @@ void MapPlayer(PlayerList PL, TabInt PositionToInteger);
 
 int CheckPlayerPosition(int nPlayer ,TabInt PositionToInteger);
 
+int getIdxTeleporter(int n);
+
 #endif

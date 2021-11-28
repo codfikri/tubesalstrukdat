@@ -9,7 +9,6 @@ void PrintTabChar(TabChar T){
       }
 }
 
-
 int updatePosition(PlayerList PL, TabInt *PositionToInteger)
 //Mengembalikan value posisi petak seorang pemain dalam bentuk integer
 {
@@ -52,4 +51,14 @@ void MapPlayer(PlayerList PL, TabInt PositionToInteger)
             SetTab(tempMap, &Map);
             i++;
       }
+}
+
+int getIdxTeleporter(int n){
+      int i = 0;
+      while (i<countTel){
+            if (n!=LT.T[i].src){
+                  i++;
+            } else break;
+      }
+      return i;
 }

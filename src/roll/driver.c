@@ -18,9 +18,6 @@ int main(){
     ADVKATA();
     printf("%d\n", lengthMap);
 
-    TabChar CopyMap;
-    SetTab(Map, &CopyMap);
-
     /*Membaca MaxRoll*/
     maxRoll = KataTOInteger(CKata);
     ADVKATA();
@@ -29,7 +26,7 @@ int main(){
     countTel = KataTOInteger(CKata);
     ADVKATA();
 
-    /*Membaca destinasi teleporter*/
+    /*Membaca destinasi teleporter*/ 
     for (int i= 0; i< countTel; i++){
         int temp1 = KataTOInteger(CKata);
         ADVKATA();
@@ -58,12 +55,13 @@ int main(){
     int urut4 = 4;
     addressPlayer AP1 = AlokasiPlayer(urut1, nama1);
     strcpy(Nama(AP1), nama1);
-    Petak(AP1) = 5;
+    Petak(AP1) = 10;
     addressPlayer AP2 = AlokasiPlayer(urut2, nama2);
     strcpy(Nama(AP2), nama2);
-    Petak(AP2) = 3;
+    Petak(AP2) = 10;
     addressPlayer AP3 = AlokasiPlayer(urut3, nama3);
     strcpy(Nama(AP3), nama3);
+    Petak(AP3) = 18;
     addressPlayer AP4 = AlokasiPlayer(urut4, nama4);
     strcpy(Nama(AP4), nama4);
 
@@ -76,18 +74,23 @@ int main(){
     printf("%s\n", Nama(AP2));
     printf("%s\n", Nama(AP3));
     printf("%s\n", Nama(AP4));
+    printf("countel %d\n", countTel);
+    printf("maxroll %d\n", maxRoll);
+    printf("dest %d\n", LT.T[3].dest);
     // insertPlayerToList(&PL, nama1, Skill1, urut1, false);
     // insertPlayerToList(&PL, nama2, Skill1, urut2, false);
     // insertPlayerToList(&PL, nama3, Skill1, urut3, false);
     // insertPlayerToList(&PL, nama4, Skill1, urut4, true);
 
-    TabInt PositionTOInteger;
-    makeEmpty(&PositionTOInteger);
-    updatePosition(PL, &PositionTOInteger);
-    MapPlayer(PL, PositionTOInteger);
-
-    STARTROLL(PL, urut1);
-    STARTROLL(PL, urut2);
-    STARTROLL(PL, urut3);
-    STARTROLL(PL, urut4);
+    printf("indeks tele 6: %d\n", getIdxTeleporter(6));
+    printf("indeks tele 13: %d\n", getIdxTeleporter(13));
+    makeEmpty(&PositionToInteger);
+    updatePosition(PL, &PositionToInteger);
+    MapPlayer(PL, PositionToInteger);
+    STARTROLL(PL, AP1, urut1);
+   
+    STARTROLL(PL, AP1, urut1);
+    
+    STARTROLL(PL, AP1, urut1);
+    
 } 

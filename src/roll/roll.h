@@ -11,7 +11,7 @@ int randomroll(int maxRoll);
 //Memberikan nilai int secara random
 //randomRoll mengembalikan nilai integer n> 1 and n <MaxRoll
 
-int STARTROLL(PlayerList PL, int nPlayer);
+int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer);
 //melakukan roll untuk setiap player
 /*
 PL adalah Playerlist yang berisi 4 pemain
