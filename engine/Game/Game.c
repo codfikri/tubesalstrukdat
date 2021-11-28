@@ -101,6 +101,7 @@ void Turn(addressPlayer AP){
                         } */
                 } else if (command == 6){
                         // save
+                        saveData(PL);
                 } else if (command == 7){
                         if (!isRolled){
                                 printf("Player tidak dapat melakukan End Turn karena belum melakukan Roll!\n");
