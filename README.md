@@ -148,7 +148,7 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
      - Membuat file game yang menggabungkan seluruh ADT
      - Merevisi fitur Roll, Map, Inspect
 5. 18220105 - Made Adi Surya Pramana
-     - Membuat ADT Teleporter dan List Teleporter
+     - Merevisi ADT Teleporter dan List Teleporter
      - Membuat ADT Array of Integer
      - Membuat ADT Mesin Kata dan Mesin Karakter
      - Membuat fitur pembacaan file konfigurasi
