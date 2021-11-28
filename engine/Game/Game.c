@@ -86,7 +86,11 @@ void Turn(addressPlayer AP){
                                 printf("Anda sudah menggunakan Cermin Pengganda pada ronde ini!\n");
                         } else {printf("Anda belum menggunakan Cermin Pengganda pada ronde ini!\n");}
                 } else if (command == 4){
-                        // InspectPetak();
+                        // InspectPetak()
+                        int petak;
+                        printf("Masukkan petak: ");
+                        scanf("%d", &petak);
+                        inspectPetak(petak);
                 } else if (command == 5){
                         // startroll
                         isRolled = true;
