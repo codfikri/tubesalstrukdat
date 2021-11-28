@@ -41,28 +41,28 @@ address SearchId (List L, infotype X)
 }
 
 
-void DelAddress(List *L, address nartoh)
+void DelAddress(List *L, address p)
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P,  */
 /* Maka P dihapus dari list dan di-dealokasi */
 /* List mungkin menjadi kosong karena penghapusan */
 {
     // Kamus lokal
-    address hinata;
+    address q;
 
     // Algoritma
-    hinata = First(*L);
-    if(nartoh != Nil){
-        if(nartoh == hinata){
-            DelFirst(L,&nartoh);
+    q = First(*L);
+    if(p != Nil){
+        if(p == q){
+            DelFirst(L,&p);
         }
         else{
-            while(Next(hinata) != nartoh){
-                hinata = Next(hinata);
+            while(Next(q) != p){
+                q = Next(q);
             }
-            DelAfter(L,&nartoh, hinata);
+            DelAfter(L,&p, q);
         }
-        Dealokasi(&nartoh);
+        Dealokasi(&p);
     }
 }
 
@@ -88,7 +88,7 @@ void printSkill(List skillPemain)
         "Mesin Penukar Posisi"
     };
     if(IsEmpty(skillPemain)){
-        printf(">> Ndda ada skill-nya~~\n");
+        printf(">> Tidak Tersedia skill...\n");
     }
     else{
         p = First(skillPemain);
@@ -162,7 +162,6 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
 {
     // Kamus lokal
     int n = 0;
-    int easteregg = 0;
 
 
     // Algoritma
@@ -170,19 +169,13 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
     printf(">> Masukkan urutan skill yang ingin dipakai.\n   Jika ingin membuang skill, tambahkan \"-\" didepan urutan skill yang ingin dibuang.\n");
     printf(">> DILARANG KERAS MEMASUKKAN INPUT SELAIN BILANGAN\n");
     while(n != -99){
-        if(easteregg >= 20){
-            printf(">> Baiklah %s-san, Sudah cukup main-mainnya.\n", Nama(AP));
-            delay(2);
-            printf(">> BEGOOONEEEEE!!\n");
-            n = -99;
-        }
-        else{
-            printf("\n>>================+\n");
-            printSkill(Skill(AP));
-            printf(">> Gunakan -99 untuk keluar dari menu skill\n");
-            printf("\n>> Masukkan urutan skill: ");
-            scanf("%d", &n);
-        }
+        printf("\n>>================+\n");
+        printSkill(Skill(AP));
+        printf(">> Gunakan -99 untuk keluar dari menu skill\n");
+        printf("\n>> Masukkan urutan skill: ");
+        scanf("%d", &n);
+
+
         if(abs(n) <= NbElmt(Skill(AP)) && n != 0){
             if(n < 0){
                 DelSkill(&Skill(AP), -n);
@@ -192,21 +185,12 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
             }
         }
         else if(n!= -99){
-            if(easteregg >= 10){
-                printf(">> Tomete kudasai,%s-san\n", Nama(AP));
-                easteregg += 2;
-            }
-            else if(NbElmt(Skill(AP)) == 0){
-                printf(">> Skill anda sudah habis mohon hentikan.\n");
-                easteregg += 10;
-            }
-            else{
-                printf(">> Input anda menunjuk ke urutan kosong, Masukkan input yang benar.\n");
-                easteregg += 1;
-            }
+            printf(">> Input anda menunjuk ke urutan kosong, Masukkan input yang benar.\n");
         }
     }
     printf(">> Memberhentikan command skill....\n");
+    delay(1);
+    printf("\n\\__________________________________________________________________________________________/\n\n");
 }
 
 
@@ -276,7 +260,6 @@ void useSkill(addressPlayer AP, int n)
         break;
     }
 }
-
 
 
 // Use Skill uwu~~~~~~~~~~~~~~
