@@ -47,8 +47,10 @@ int main(){
     getSkill(Skill(&P1));
     getSkill(Skill(&P1));
     getSkill(Skill(&P1));
+    printf("%s\n", Nama(P1));
     Petak(P2) = 3;
-    MenuSkill(P1);
+    balingjambu(P1,First(Skill(P1)));
+    // MenuSkill(P1);
     printPlayer(PL,2);
     // MenuSkill(P1);
 

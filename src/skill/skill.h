@@ -12,6 +12,7 @@
 #include <time.h>
 #include "listlinier.h"
 #include "../player/player.h"
+#include"../roll/roll.h"
 
 #define Nil NULL
 
@@ -114,5 +115,8 @@ void delay(int detik);
 void loading(int inputDetik);
 /* Ini buat loading pas ngerandom skill */
 
+void changeposbaling(addressPlayer AP, int roll);
+
+void changeposmesin(addressPlayer AP, int roll);
 
 #endif // SKILL_H
