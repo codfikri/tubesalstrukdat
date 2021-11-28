@@ -3,7 +3,10 @@
 PlayerList PL;
 Stack S;
 boolean isEndGame = false;
-countTel = 3;
+boolean isExitGame = false;
+boolean isRolled = false;
+boolean isEndTurn = false;
+
 void showCommands(){
         printf("Perintah-perintah yang tersedia: \n");
         printf("[1] SKILL: Menampilkan skill yang dimiliki player\n"); //skill
@@ -14,6 +17,7 @@ void showCommands(){
         printf("[6] SAVE: Menyimpan state permainan\n"); //save
         printf("[7] ENDTURN: Mengakhiri giliran\n"); //endturn
         printf("[8] UNDO: Mengembalikan state seperti akhir ronde sebelumnya\n");
+        printf("[8] EXIT: Keluar dari permainan\n");
         printf("[0] HELP: Menampilkan perintah-perintah yang tersedia\n");
 }
 
@@ -27,6 +31,7 @@ int getNum(char *cmd){
         char endturn[] = "ENDTURN";
         char undo[] = "UNDO";
         char help[] = "HELP";
+        char exit[] = "EXIT";
 
         if (strcmp(cmd,skill) == 0) {
                 return 1;
@@ -46,17 +51,17 @@ int getNum(char *cmd){
                 return 8;
         } else if (strcmp(cmd,help) == 0){
                 return 9;
-        } else {
+        } else if (strcmp(cmd, exit) == 0){
                 return 10;
+        } else {
+                return 11;
         }
 }
 
 void Turn(addressPlayer AP){
-        boolean isRolled = false;
-        boolean isEndTurn = false;
         int option, command;
         char* cmd;
-        // Print Map Player
+        MapPlayer(PL, PositionToInteger);
         printf("Giliran Player %d untuk Bermain\n", NoUrut(AP));
         printf("Merandom Skill...");
         printf("\n");
@@ -64,15 +69,15 @@ void Turn(addressPlayer AP){
         srand(time(NULL));
         getSkill(&Skill(AP));
         showCommands();
-        while (!isEndGame && !isEndTurn){
+        while (!isEndTurn){
                 printf("Masukkan perintah: ");
                 scanf("%s", cmd);
                 command = getNum(cmd);
-                if (command == 1){
+                if (command == 1){ // SKILL
                         MenuSkill(AP);
-                } else if (command == 2){
-                        // MapPlayer()
-                } else if (command == 3){
+                } else if (command == 2){ // MAP
+                        MapPlayer(PL, PositionToInteger);
+                } else if (command == 3){ // BUFF
                         if (isImmune(AP)){
                                 printf("Anda memiliki buff imunitas teleport!\n");
                         } else {printf("Anda tidak immune terhadap teleport!\n");}
@@ -85,37 +90,32 @@ void Turn(addressPlayer AP){
                         if (isPostCermin(AP)){
                                 printf("Anda sudah menggunakan Cermin Pengganda pada ronde ini!\n");
                         } else {printf("Anda belum menggunakan Cermin Pengganda pada ronde ini!\n");}
-                } else if (command == 4){
-                        // InspectPetak()
+                } else if (command == 4){ // INSPECT
                         int petak;
                         printf("Masukkan petak: ");
                         scanf("%d", &petak);
                         inspectPetak(petak);
-                } else if (command == 5){
-                        // startroll
+                } else if (command == 5){ // ROLL
+                        STARTROLL(PL,AP,NoUrut(AP));
                         isRolled = true;
-                        /* check posisi dia udh sampe akhir apa blm,
-                        kalo udah, isEndGame = true */
-                        /* if (isEndGame){
-                                gameFinished(AP);
-                        } */
-                } else if (command == 6){
-                        // save
-                        saveData(PL);
-                } else if (command == 7){
-                        if (!isRolled){
-                                printf("Player tidak dapat melakukan End Turn karena belum melakukan Roll!\n");
-                        } else {
-                                setAfterTurn(AP);
-                                isEndTurn = true;
-                                AP = NextPlayer(AP);
+                        if (isGameFinished(AP)){
+                                isEndGame = true;
+                                isExitGame = true;
                         }
-                } else if (command == 8){
+                } else if (command == 6){ // SAVE
+                        saveData(PL);
+                } else if (command == 7){ // END TURN
                         endTurn(AP, isRolled);
+                        isEndTurn = true;
+                } else if (command == 8){ 
+                        // UNDO;
                 } else if (command == 9){
                         showCommands();
+                } else if (command == 10){
+                        Exit();
+                        isExitGame = true;
                 } else {
-                        printf("Perintah tidak valid!\n");
+
                 }
         }
 
@@ -127,10 +127,20 @@ void gameFinished(addressPlayer AP){
 
 void gameView(int option){
     if (option == 1){
-        // New Game
-    } else if (option == 2){
-        // Load Game
+        printf("Let's start the game!\n");
+        startNewGame();
+    } else if (option == 3){
+        // load game
     }
+}
+
+void Exit(){
+        char prompt;
+        printf("Yakin ingin keluar dari permainan? [Y/N]\n");
+        scanf("%c", &prompt);
+        if (prompt == 'Y'){
+                exitView();
+        }
 }
 
 void endTurn(addressPlayer AP, boolean isRolled){
@@ -147,6 +157,7 @@ void endTurn(addressPlayer AP, boolean isRolled){
                 }
                 setAfterTurn(AP);
                 AP = Next(AP);
+                isRolled = false;
         }
 }
 
@@ -179,9 +190,21 @@ void newGame(){
 void startNewGame(){
         SCreateEmpty(&S);
         newGame();
+        printf("\n");
+        printf("Membaca konfigurasi...\n");
+        STARTGAME("../../data/map.txt");
+        delay(3);
+        printf("Pembacaan Selesai");
+        pritnf("Selamat Bermain!\n");
         addressPlayer AP = FirstPlayer(PL);
-        while (!isEndGame){
+        while (!isExitGame && !isEndGame){
                 Turn(AP);
         }
+        if (isEndGame){
+                gameFinished(AP);
+        }
+}
 
+boolean isGameFinished(addressPlayer AP){
+        return Petak(AP) == lengthMap;
 }

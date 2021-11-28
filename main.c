@@ -4,17 +4,18 @@
 #include "engine/Game/Game.h"
 #include "engine/Main Menu/menu.h"
 
-void initial(){
-    MenuView();
-    if (selection != 0){
-        // GameView(selection);
-        initial();
-    }
+void Welcome(){
+    printf("Selamat datang di Mobitangga!\n");
 }
 
 int main(){
-    initial();
-    exitView();
+    Welcome();
+    MenuView();
+    if (selection == 1 || selection == 3){
+        GameView(selection);
+    } else if (selection == 2){
+        exitView();
+    }
 
     return 0;
 }

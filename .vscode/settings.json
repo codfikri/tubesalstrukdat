@@ -3,6 +3,7 @@
         "html": "html",
         "boolean.h": "c",
         "teleporter.h": "c",
-        "mesinkata.h": "c"
+        "mesinkata.h": "c",
+        "menu.h": "c"
     }
 }
