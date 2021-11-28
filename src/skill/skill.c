@@ -261,82 +261,6 @@ void useSkill(addressPlayer AP, int n)
     }
 }
 
-
-void changeposbaling(addressPlayer AP, int roll)
-{
-    int currPos = Petak(AP);
-    int forward = currPos + roll;
-    if((!isPetakTerlarang(forward))){
-        if(isPetakTeleport(forward)){
-            int idxB = getIdxTeleporter(forward);
-            int tempB = LT.T[idxB].dest;
-            if(isImmune(AP)){
-                char choice[1];
-                printf("%s menjumpai teleport. Apakah anda ingin menggunakan teleporter? (Y/N): ", Nama(AP));
-                scanf("%c", &choice);
-                if(strcmp(choice, "Y") == 0){
-                    printf("%s masuk ke teleporter\n", Nama(AP));
-                    printf("%s teleport ke petak %d\n", Nama(AP), tempB);
-                    Petak(AP) = tempB;
-                }
-                else{
-                    printf("%s menggunakan imunitas teleportnya.\n", Nama(AP));
-                    printf("Buff imunitas teleport hilang\n");
-                    isImmune(AP) = false;
-                }
-            }
-            else{
-                printf("%s terhisap kedalam teleporter dan diteleport ke petak %d\n", Nama(AP), tempB);
-                Petak(AP) = tempB;
-            }
-        }
-        else{
-            printf("%s dipaksa maju sejauh %d\n", Nama(AP),forward);
-            Petak(AP) = forward;
-        }
-    }
-    else{
-        printf("%s tidak dapat maju dan efek Baling-baling jambu kepada %s berhasil dibatalkan\n", Nama(AP),Nama(AP));
-    }
-}
-
-void changeposmesin(addressPlayer AP, int roll)
-{
-    int currPos = Petak(AP);
-    int backward = currPos - roll;
-    if((backward >= 1) && (!isPetakTerlarang(backward))){
-        if(isPetakTeleport(backward)){
-            int idxB = getIdxTeleporter(backward);
-            int tempB = LT.T[idxB].dest;
-            if(isImmune(AP)){
-                char choice[1];
-                printf("%s menjumpai teleport. Apakah anda ingin menggunakan teleporter? (Y/N): ", Nama(AP));
-                scanf("%c", &choice);
-                if(strcmp(choice, "Y") == 0){
-                    printf("%s masuk ke teleporter\n", Nama(AP));
-                    printf("%s teleport ke petak %d\n", Nama(AP), tempB);
-                    Petak(AP) = tempB;
-                }
-                else{
-                    printf("%s menggunakan imunitas teleportnya.\n", Nama(AP));
-                    printf("Buff imunitas teleport hilang\n");
-                    isImmune(AP) = false;
-                }
-            }
-            else{
-                printf("%s terhisap kedalam teleporter dan diteleport ke petak %d\n", Nama(AP),tempB);
-                Petak(AP) = tempB;
-            }
-        }
-        else{
-            printf("%s dipaksa maju sejauh %d\n", Nama(AP),backward);
-            Petak(AP) = backward;
-        }
-    }
-    else{
-        printf("%s tidak dapat mundur dan efek mesin waktu kepada %s berhasil dibatalkan\n", Nama(AP), Nama(AP));
-    }
-}
 // Use Skill uwu~~~~~~~~~~~~~~
 void pintuGaKemana(addressPlayer AP, address p)
 /* Memberi buff imunitas kepada pemain */
@@ -354,7 +278,7 @@ void pintuGaKemana(addressPlayer AP, address p)
 void mesinwaktu(addressPlayer AP, address p)
 /* Membuat seluruh player kecuali pengguna skill sejauh roll dadu */
 {
-
+    /*
     List skillpemain = Skill(AP);
     int roll;
     addressPlayer tempP = NextPlayer(AP);
@@ -371,12 +295,12 @@ void mesinwaktu(addressPlayer AP, address p)
 
     DelAddress(&skillpemain, p);
     First(Skill(AP)) = First(skillpemain);
-
+    */
 }
 
 void balingjambu(addressPlayer AP, address p)
 {
-
+    /*
     List skillpemain = Skill(AP);
     int roll;
     addressPlayer tempP = NextPlayer(AP);
@@ -392,6 +316,7 @@ void balingjambu(addressPlayer AP, address p)
 
     DelAddress(&skillpemain, p);
     First(Skill(AP)) = First(skillpemain);
+    */
 }
 
 void cerminGanda(addressPlayer AP, address p)
