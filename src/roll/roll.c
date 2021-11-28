@@ -3,9 +3,9 @@
 int randomroll(int maxRoll)
 {
       srand(time(0));
-      int dice = rand()%maxRoll - 1;  
+      int dice = rand()%maxRoll;  
       while (dice == 0){
-            dice = rand()%maxRoll - 1;  
+            dice = rand()%maxRoll;  
       }    
       return dice;
 }
@@ -20,16 +20,16 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
       int backward = currPostition - getdice;
       if ((forward <= lengthMap) && (backward >= 1))
       {
-            int tempF = LT.T[forward].src;
-            int tempB = LT.T[backward].src;
-            if (isPetakTerlarang(tempF, Map)){
-                  if (isPetakTerlarang(tempB, Map)){
+            int tempF = LT.T[forward].dest;
+            int tempB = LT.T[backward].dest;
+            if (isPetakTerlarang(forward)){
+                  if (isPetakTerlarang(backward)){
                         printf("%s mendapatkan angka %d\n", Nama(P), getdice);
                         printf("%s tidak dapat bergerak\n", Nama(P));
                   }
             }
             else{
-                  if (!isPetakTerlarang(tempB, Map)){
+                  if (!isPetakTerlarang(backward)){
                         int inputMove;
                         printf("%s dapat maju dan mundur\n", Nama(P));
                         printf("Kemana %s mau bergerak?\n", Nama(P));
@@ -37,7 +37,7 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                         printf("2. %d\n", backward);
                         scanf("Masukkan pilihan %d\n", &inputMove);
                         if (inputMove == forward){
-                              if (isPetakTeleport(forward, countTel, LT)){
+                              if (isPetakTeleport(forward){
                                     printf("%s maju %d langkah\n", Nama(P), getdice);
                                     Petak(P) = forward;
                                     printf("%s menemukan teleporter\n");
@@ -54,10 +54,10 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                           }
                                           else{
                                                 printf("%s tidak teleport\n", Nama(P));
+                                                printf("Buff imunitas teleport hilang\n");
+                                                isImmune(P) = false;
 
                                           }
-                                          printf("Buff imunitas teleport hilang\n");
-                                          isImmune(P) = false;
                                     }
                                     updatePosition(PL, &PositionTOInteger);
                               }
@@ -68,9 +68,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     Petak(P) = forward;
                                     updatePosition(PL, &PositionTOInteger);
                               }
-                        }
                         else{
-                              if (isPetakTeleport(backward, countTel, LT)){
+                              if (isPetakTeleport(backward){
                                     printf("%s mundur %d langkah\n", Nama(P), getdice);
                                     Petak(P) = backward;
                                     printf("%s menemukan teleporter\n");
@@ -87,10 +86,9 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                           }
                                           else{
                                                 printf("%s tidak teleport\n", Nama(P));
-
+                                                printf("Buff imunitas teleport hilang\n");
+                                                isImmune(P) = false;
                                           }
-                                          printf("Buff imunitas teleport hilang\n");
-                                          isImmune(P) = false;
                                     }
                                     updatePosition(PL, &PositionTOInteger);
                               }
@@ -115,7 +113,6 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                   printf("%s dapat mundur\n", Nama(P));
                   printf("%s mundur %d langkah\n", Nama(P), getdice);
                   Petak(P) = backward;
-                  int tempB = LT.T[backward].src;
                   int tempBdest = LT.T[backward].dest;
                   if (!isPetakTeleport(backward, countTel, LT))
                   {
@@ -127,8 +124,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                         if (isImmune(P))
                               {
                                     char tempInput;
-                                    printf("%s memiliki imunitas teleport\n");
-                                    printf("Apakah %s ingin teleport? (Y/N)\n");
+                                    printf("%s memiliki imunitas teleport\n", Nama(P));
+                                    printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                     scanf("%c", &tempInput);
                                     if (tempInput == "Y")
                                     {
@@ -139,8 +136,9 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     else
                                     {
                                           printf("%s tidak teleport\n", Nama(P));
+                                          printf("Buff imunitas teleport hilang\n");
+                                          isImmune(P) = false;
                                     }
-                                    printf("Buff imunitas teleport hilang\n");
                                     updatePosition(PL, &PositionTOInteger);
                               }
                   }
@@ -156,7 +154,6 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                   printf("%s dapat maju\n", Nama(P));
                   printf("%s maju %d langkah\n", Nama(P), getdice);
                   Petak(P) = forward;
-                  int tempF = LT.T[forward].src;
                   int tempFdest = LT.T[forward].dest;
                   if (!isPetakTeleport(forward, countTel, LT))
                   {
@@ -168,8 +165,8 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                         if (isImmune(P))
                               {
                                     char tempInput;
-                                    printf("%s memiliki imunitas teleport\n");
-                                    printf("Apakah %s ingin telepor? (Y/N)\n");
+                                    printf("%s memiliki imunitas teleport\n", Nama(P));
+                                    printf("Apakah %s ingin telepor? (Y/N)\n", Nama(P));
                                     scanf("%c", &tempInput);
                                     if (tempInput == "Y")
                                     {
@@ -180,8 +177,9 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
                                     else
                                     {
                                           printf("%s tidak teleport\n", Nama(P));
+                                          printf("Buff imunitas teleport hilang\n");
+                                          isImmune(P) = false;
                                     }
-                                    printf("Buff imunitas teleport hilang\n");
                                     updatePosition(PL, &PositionTOInteger);
                               }
                   }
@@ -191,4 +189,4 @@ int STARTROLL(PlayerList PL, TabChar Map, TabInt PositionTOInteger, ListTeleport
             printf("%s tidak dapat bergerak\n", Nama(P));
       }
 
-}
+      }

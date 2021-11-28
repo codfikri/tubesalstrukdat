@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <time.h>
 #include "../map/map.h"
-#include "../teleporter & inspect/inspect.h"
+#include "../inspect/inspect.h"
 
 int randomroll(int maxRoll);
 //Memberikan nilai int secara random
