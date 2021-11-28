@@ -41,28 +41,28 @@ address SearchId (List L, infotype X)
 }
 
 
-void DelAddress(List *L, address nartoh)
+void DelAddress(List *L, address p)
 /* I.S. Sembarang */
 /* F.S. Jika ada elemen list beraddress P,  */
 /* Maka P dihapus dari list dan di-dealokasi */
 /* List mungkin menjadi kosong karena penghapusan */
 {
     // Kamus lokal
-    address hinata;
+    address q;
 
     // Algoritma
-    hinata = First(*L);
-    if(nartoh != Nil){
-        if(nartoh == hinata){
-            DelFirst(L,&nartoh);
+    q = First(*L);
+    if(p != Nil){
+        if(p == q){
+            DelFirst(L,&p);
         }
         else{
-            while(Next(hinata) != nartoh){
-                hinata = Next(hinata);
+            while(Next(q) != p){
+                q = Next(q);
             }
-            DelAfter(L,&nartoh, hinata);
+            DelAfter(L,&p, q);
         }
-        Dealokasi(&nartoh);
+        Dealokasi(&p);
     }
 }
 
