@@ -35,11 +35,11 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                               int idxB = getIdxTeleporter(backward);
                               int tempB = LT.T[idxB].dest;
                               if (isImmune(P)){
-                                    char tempInput;
+                                    char tempInput[1];
                                     printf("%s memiliki imunitas teleport\n");
                                     printf("Apakah %s ingin teleport? (Y/N)\n");
-                                    scanf("%c", &tempInput);
-                                    if (tempInput == 'Y'){ // Player tetap teleport
+                                    scanf("%s", tempInput);
+                                    if (strcmp(tempInput, "Y") == 0){ // Player tetap teleport
                                           printf("%s teleport\n", Nama(P));
                                           printf("%s teleport ke petak %d\n", Nama(P), tempB);
                                           Petak(P) = tempB;
@@ -82,11 +82,12 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                                     int tempF = LT.T[idxF].dest;
                                     if (isImmune(P)) // Player imun
                                     {
-                                          char tempInput;
+                                          char tempInput[1];
                                           printf("%s memiliki imunitas teleport\n");
                                           printf("Apakah %s ingin teleport? (Y/N)\n");
-                                          scanf("%c", &tempInput);
-                                          if (tempInput == 'Y'){ // Player tetap teleport
+                                          scanf("%s", tempInput);
+                                          if (strcmp(tempInput, "Y") == 0)
+                                          { // Player tetap teleport
                                                 printf("%s teleport\n", Nama(P));
                                                 printf("%s teleport ke petak %d\n", Nama(P), tempF);
                                                 Petak(P) = tempF;
@@ -119,11 +120,12 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                                     printf("%s menemukan teleporter\n", Nama(P));
                                     if (isImmune(P)) // Player imun
                                     {
-                                          char tempInput;
+                                          char tempInput[1];
                                           printf("%s memiliki imunitas teleport\n");
                                           printf("Apakah %s ingin teleport? (Y/N)\n");
-                                          scanf("%c", &tempInput);
-                                          if (tempInput == 'Y'){ // Player tetap memilih teleport
+                                          scanf("%s", tempInput);
+                                          if (strcmp(tempInput, "Y") == 0)
+                                         { // Player tetap memilih teleport
                                                 printf("%s teleport\n", Nama(P));
                                                 printf("%s teleport ke petak %d\n", Nama(P), tempB);
                                                 Petak(P) = tempB;
@@ -163,11 +165,11 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                               int tempF = LT.T[idxF].dest;
                               if (isImmune(P))
                                     {
-                                          char tempInput;
-                                          printf("%s memiliki imunitas teleport\n", Nama(P));
-                                          printf("Apakah %s ingin telepor? (Y/N)\n", Nama(P));
-                                          scanf("%c", &tempInput);
-                                          if (tempInput == 'Y')
+                                          char tempInput[1];
+                                          printf("%s memiliki imunitas teleport\n");
+                                          printf("Apakah %s ingin teleport? (Y/N)\n");
+                                          scanf("%s", tempInput);
+                                          if (strcmp(tempInput, "Y") == 0)
                                           {
                                                 printf("%s teleport\n", Nama(P));
                                                 printf("%s teleport ke petak %d\n", Nama(P), tempF);
@@ -214,11 +216,11 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                         printf("%s menemukan teleporter\n", Nama(P));
                         if (isImmune(P)) // Player imun
                               {
-                                    char tempInput;
-                                    printf("%s memiliki imunitas teleport\n", Nama(P));
-                                    printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
-                                    scanf("%c", &tempInput);
-                                    if (tempInput == 'Y')
+                                    char tempInput[1];
+                                    printf("%s memiliki imunitas teleport\n");
+                                    printf("Apakah %s ingin teleport? (Y/N)\n");
+                                    scanf("%s", tempInput);
+                                    if (strcmp(tempInput, "Y") == 0)
                                     {
                                           printf("%s teleport\n", Nama(P));
                                           printf("%s teleport ke petak %d\n", Nama(P), tempB);
@@ -262,11 +264,11 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                         printf("%s menemukan teleporter\n", Nama(P));
                         if (isImmune(P))
                               {
-                                    char tempInput;
-                                    printf("%s memiliki imunitas teleport\n", Nama(P));
-                                    printf("Apakah %s ingin telepor? (Y/N)\n", Nama(P));
-                                    scanf("%c", &tempInput);
-                                    if (tempInput == 'Y')
+                                    char tempInput[1];
+                                    printf("%s memiliki imunitas teleport\n");
+                                    printf("Apakah %s ingin teleport? (Y/N)\n");
+                                    scanf("%s", tempInput);
+                                    if (strcmp(tempInput, "Y") == 0)
                                     {
                                           printf("%s teleport\n", Nama(P));
                                           printf("%s teleport ke petak %d\n", Nama(P), tempF);
