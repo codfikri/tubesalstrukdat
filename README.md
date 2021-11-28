@@ -27,7 +27,7 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
  
 # Cara Menjalankan Program
 1. Pastikan Anda telah melakukan kompilasi pada program.
-2. Jalankan command ./main untuk run program.
+2. Jalankan command ```./main``` untuk run program.
 3. Jika berhasil run, maka Anda akan tiba pada Main Menu program.
 # Struktur Program
 ```
