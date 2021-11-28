@@ -102,6 +102,7 @@ void Turn(addressPlayer AP){
                         STARTROLL(PL,AP,NoUrut(AP));
                         isRolled = true;
                         if (isGameFinished(AP)){
+                                isEndTurn = true;
                                 isEndGame = true;
                                 isExitGame = true;
                         }
@@ -114,14 +115,20 @@ void Turn(addressPlayer AP){
                 } else if (command == 7){ // END TURN
                         endTurn(AP, isRolled);
                 } else if (command == 8){ 
-                        if (IsSEmpty || isRolled)
+                        if (IsSEmpty)
                         {
                                 printf("Yes\n");
                                 printf("Tidak dapat melakukan Undo\n");
                         }
                         else{
-                                printf("No\n");
-                                Undo(&S, &PL);
+                                if (!isRolled){
+                                        printf("Yes\n");
+                                        printf("Harap melakukan roll terlebih dahulu!\n");
+                                        printf("Tidak dapat melakukan Undo\n");
+                                } else{
+                                        printf("No\n");
+                                        Undo(&S, &PL);
+                                }
                         }
                 } else if (command == 9){
                         showCommands();

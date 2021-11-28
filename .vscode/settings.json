@@ -5,5 +5,9 @@
         "teleporter.h": "c",
         "mesinkata.h": "c",
         "menu.h": "c"
+    }, 
+    "code-runner.executorMap": {
+        "c": "cd $dir && gcc -o $fileNameWithoutExt main.c src/array/array.c src/inspect/inspect.c src/konfigurasi/mesinkar.c src/konfigurasi/mesinkata.c src/load/load.c src/map/arrayint.c src/map/map.c src/player/player.c src/roll/roll.c src/save/save.c src/skill/skill.c src/skill/listlinier.c src/stack/stack.c src/teleporter/teleporter.c engine/exit/exit.c engine/game/game.c engine/Mainmenu/menu.c && $dir$fileNameWithoutExt"
     }
+
 }
