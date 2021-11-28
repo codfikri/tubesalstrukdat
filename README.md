@@ -3,9 +3,30 @@ Disusun dalam rangka memenuhi Tugas Besar Algoritma dan Struktur Data STI
 # Daftar Isi
 - [Penjelasan Ringkas Program](https://github.com/codfikri/tubesalstrukdat#penjelasan-ringkas-program)
 - [Struktur Program](https://github.com/codfikri/tubesalstrukdat#struktur-program)
+- [Cara Kompilasi Program](https://github.com/codfikri/tubesalstrukdat#cara-kompilasi-program)
+- [Versi 1](
 - [Pembagian Tugas](https://github.com/codfikri/tubesalstrukdat#pembagian-tugas)
 # Penjelasan Ringkas Program
 Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ular tangga, namun terdapat beberapa modifikasi terhadap mekanisme permainan. Pada permainan Mobitangga terdapat mekanisme yang membuat seorang pemain dapat mengganggu pemain lainnya. Secara garis besar, permainan ini dimainkan mirip dengan ular tangga, pemain yang dapat mencapai akhir dari map merupakan pemenang dari permainan. Setiap pemain akan mendapatkan skill pada setiap turn, lalu pemain juga bisa menggunakan skill yang memiliki berbagai efek. Pada peta permainan terdapat teleporter yang dapat memindahkan posisi pemain dari petak ke-n menuju petak ke-n lainnya.
+# Cara Kompilasi Program
+## Versi 1
+1. Pastikan gcc compiler versi terbaru sudah terpasang pada mesin eksekusi (Anda dapat mengecek versi gcc compiler dengan menjalankan command ```gcc --version``` pada command prompt).
+2. Jalankan command ```make``` pada command prompt untuk melakukan kompilasi pada program.
+3. Jika berhasil dikompilasi, maka akan terdapat ```main.exe``` pada directory program.
+## Versi 2
+1. Download extension ```Code Runner``` pada Visual Studio Code.
+2. Masukkan potongan kode pada file ```settings.json``` seperti berikut</br> 
+```
+"code-runner.executorMap": {
+        "c": "cd $dir && gcc -o $fileNameWithoutExt main.c src/array/array.c src/inspect/inspect.c src/konfigurasi/mesinkar.c src/konfigurasi/mesinkata.c src/load/load.c src/map/arrayint.c src/map/map.c src/player/player.c src/roll/roll.c src/save/save.c src/skill/skill.c src/skill/listlinier.c src/stack/stack.c src/teleporter/teleporter.c engine/exit/exit.c engine/game/game.c engine/Mainmenu/menu.c && $dir$fileNameWithoutExt"
+    }
+```
+3. Jalankan ```main.c``` dan jika berhasil akan muncul file ```main.exe``` pada directory program.
+ 
+# Cara Menjalankan Program
+1. Pastikan Anda telah melakukan kompilasi pada program.
+2. Jalankan command ./main untuk run program.
+3. Jika berhasil run, maka Anda akan tiba pada Main Menu program.
 # Struktur Program
 ```
 .
