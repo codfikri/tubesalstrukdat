@@ -12,7 +12,14 @@ int randomroll(int maxRoll)
 
 int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
 {
-      int getdice = randomroll(maxRoll);
+      int getdice;
+      if (isHokiKecil(P) && !isHokiBesar(P)){
+            getdice = randomroll(floor(maxRoll/2));
+      } else if (isHokiBesar(P) && !isHokiKecil(P)){
+            getdice = randomroll(maxRoll*2);
+      } else if (!isHokiBesar(P) && !isHokiKecil(P)){
+            getdice = randomroll(maxRoll);
+      }
       int currPostition = CheckPlayerPosition(nPlayer, PositionToInteger);
       int forward = currPostition + getdice;
       int backward = currPostition - getdice;
@@ -36,8 +43,8 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                               int tempB = LT.T[idxB].dest;
                               if (isImmune(P)){
                                     char tempInput[1];
-                                    printf("%s memiliki imunitas teleport\n");
-                                    printf("Apakah %s ingin teleport? (Y/N)\n");
+                                    printf("%s memiliki imunitas teleport\n", Nama(P));
+                                    printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                     scanf("%s", tempInput);
                                     if (strcmp(tempInput, "Y") == 0){ // Player tetap teleport
                                           printf("%s teleport\n", Nama(P));
@@ -106,7 +113,7 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                                     updatePosition(PL, &PositionToInteger);
                               }
                               else{ // Petak maju bukan teleporter
-                                    printf("%s tidak menemukan teleport\n", Nama(P));
+                                    printf("%s tidak menemukan teleporter\n", Nama(P));
                                     updatePosition(PL, &PositionToInteger);
                               }
                         }
@@ -121,8 +128,8 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                                     if (isImmune(P)) // Player imun
                                     {
                                           char tempInput[1];
-                                          printf("%s memiliki imunitas teleport\n");
-                                          printf("Apakah %s ingin teleport? (Y/N)\n");
+                                          printf("%s memiliki imunitas teleport\n", Nama(P));
+                                          printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                           scanf("%s", tempInput);
                                           if (strcmp(tempInput, "Y") == 0)
                                          { // Player tetap memilih teleport
@@ -144,7 +151,7 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                                     updatePosition(PL, &PositionToInteger);
                               }
                               else{ // Petak mundur bukan teleporter
-                                    printf("%s tidak menemukan teleport\n", Nama(P));
+                                    printf("%s tidak menemukan teleporter\n", Nama(P));
                                     updatePosition(PL, &PositionToInteger);
                               }
                         }
@@ -166,8 +173,8 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                               if (isImmune(P))
                                     {
                                           char tempInput[1];
-                                          printf("%s memiliki imunitas teleport\n");
-                                          printf("Apakah %s ingin teleport? (Y/N)\n");
+                                          printf("%s memiliki imunitas teleport\n", Nama(P));
+                                          printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                           scanf("%s", tempInput);
                                           if (strcmp(tempInput, "Y") == 0)
                                           {
@@ -217,8 +224,8 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                         if (isImmune(P)) // Player imun
                               {
                                     char tempInput[1];
-                                    printf("%s memiliki imunitas teleport\n");
-                                    printf("Apakah %s ingin teleport? (Y/N)\n");
+                                    printf("%s memiliki imunitas teleport\n", Nama(P));
+                                    printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                     scanf("%s", tempInput);
                                     if (strcmp(tempInput, "Y") == 0)
                                     {
@@ -265,8 +272,8 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                         if (isImmune(P))
                               {
                                     char tempInput[1];
-                                    printf("%s memiliki imunitas teleport\n");
-                                    printf("Apakah %s ingin teleport? (Y/N)\n");
+                                    printf("%s memiliki imunitas teleport\n", Nama(P));
+                                    printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                     scanf("%s", tempInput);
                                     if (strcmp(tempInput, "Y") == 0)
                                     {

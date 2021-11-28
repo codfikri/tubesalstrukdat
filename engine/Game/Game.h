@@ -33,6 +33,8 @@ void endTurn(addressPlayer AP, boolean isRolled);
 
 void newGame();
 
+void setNewRoll (boolean *isRolled);
+
 void startNewGame();
 
 void startConfig();

@@ -102,8 +102,8 @@ void Turn(addressPlayer AP){
                         STARTROLL(PL,AP,NoUrut(AP));
                         isRolled = true;
                         if (isGameFinished(AP)){
+                                gameFinished(AP);
                                 isEndTurn = true;
-                                isEndGame = true;
                                 isExitGame = true;
                         }
                 } else if (command == 6){ // SAVE
@@ -114,6 +114,7 @@ void Turn(addressPlayer AP){
                         }
                 } else if (command == 7){ // END TURN
                         endTurn(AP, isRolled);
+                        setNewRoll(&isRolled);
                 } else if (command == 8){ 
                         if (IsSEmpty)
                         {
@@ -140,6 +141,10 @@ void Turn(addressPlayer AP){
                 }
         }
 
+}
+
+void setNewRoll (boolean *isRolled){
+        *isRolled = false;
 }
 
 void gameFinished(addressPlayer AP){
@@ -179,7 +184,6 @@ void endTurn(addressPlayer AP, boolean isRolled){
                 
                 isEndTurn = true;
                 setAfterTurn(AP);
-                isRolled = false;
  
         } else{
                 printf("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
@@ -232,9 +236,6 @@ void startNewGame(){
                         AP = NextPlayer(AP);
                         currentPlayer = NoUrut(AP);
                 }
-        }
-        if (isEndGame){
-                gameFinished(AP);
         }
 }
 
