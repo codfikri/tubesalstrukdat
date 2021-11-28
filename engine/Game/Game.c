@@ -107,7 +107,7 @@ void Turn(addressPlayer AP){
                 } else if (command == 7){ // END TURN
                         endTurn(AP, isRolled);
                         isEndTurn = true;
-                } else if (command == 8){ 
+                } else if (command == 8){
                         // UNDO;
                 } else if (command == 9){
                         showCommands();
@@ -195,7 +195,7 @@ void startNewGame(){
         STARTGAME("../../data/map.txt");
         delay(3);
         printf("Pembacaan Selesai");
-        pritnf("Selamat Bermain!\n");
+        printf("Selamat Bermain!\n");
         addressPlayer AP = FirstPlayer(PL);
         while (!isExitGame && !isEndGame){
                 Turn(AP);

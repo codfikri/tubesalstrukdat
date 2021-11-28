@@ -88,7 +88,7 @@ void printSkill(List skillPemain)
         "Mesin Penukar Posisi"
     };
     if(IsEmpty(skillPemain)){
-        printf(">> Ndda ada skill-nya~~\n");
+        printf(">> Tidak terdapat skill di sini...\n");
     }
     else{
         p = First(skillPemain);
@@ -173,7 +173,7 @@ void MenuSkill(addressPlayer AP) // main dari skill nya
         if(easteregg >= 20){
             printf(">> Baiklah %s-san, Sudah cukup main-mainnya.\n", Nama(AP));
             delay(2);
-            printf(">> BEGOOONEEEEE!!\n");
+            printf(">> BEGOOONEEEEE!!!!\n");
             n = -99;
         }
         else{
