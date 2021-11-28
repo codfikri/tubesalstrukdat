@@ -172,7 +172,6 @@ void endTurn(addressPlayer AP, boolean isRolled){
                 
                 isEndTurn = true;
                 setAfterTurn(AP);
-                printf("nourut %d\n", NoUrut(AP));
                 isRolled = false;
  
         } else{

@@ -83,8 +83,8 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
                                     if (isImmune(P)) // Player imun
                                     {
                                           char tempInput[1];
-                                          printf("%s memiliki imunitas teleport\n");
-                                          printf("Apakah %s ingin teleport? (Y/N)\n");
+                                          printf("%s memiliki imunitas teleport\n", Nama(P));
+                                          printf("Apakah %s ingin teleport? (Y/N)\n", Nama(P));
                                           scanf("%s", tempInput);
                                           if (strcmp(tempInput, "Y") == 0)
                                           { // Player tetap teleport
