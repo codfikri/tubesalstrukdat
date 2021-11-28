@@ -5,16 +5,16 @@
 #include "../konfigurasi/mesinkata.h"
 #include "../player/player.h"
 
-void LoadFile(PlayerList * LP)
+void LoadFile(PlayerList * LP, int *currentPlayer)
 {
     int n, jumlahskill, skill;
     char * nama;
-    char input[200] = "src/savefile/";
+    char input[200] = "data/";
     Player P;
     boolean isLastPlayer;
 
     printf("Masukkan nama file : ");
-    scanf("%s", input + 13);
+    scanf("%s", input + 5);
 
     STARTGAME(input);
     CreatePlayerList(LP);
@@ -52,4 +52,5 @@ void LoadFile(PlayerList * LP)
         }
     insertUpdatePlayerToList(LP,P,isLastPlayer);
     }
+    *currentPlayer = KataTOInteger(CKata);
 }

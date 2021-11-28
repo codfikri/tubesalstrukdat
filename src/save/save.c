@@ -2,14 +2,14 @@
 #include <unistd.h>
 #include "save.h"
 
-void saveData(PlayerList PL)
+void saveData(PlayerList PL, int currentPlayer)
 {
     int n, jumlahskill;
     
-    char input[100] = "src/savefile/";
+    char input[100] = "data/";
     addressPlayer AP;
     printf("Masukkan nama file yang akan disimpan: ");
-    scanf("%s", input + 13);
+    scanf("%s", input + 5);
     FILE *fp = fopen(input, "w");
     n = JumlahPlayer(PL);
     fprintf(fp, "%d\n", n);
@@ -33,7 +33,7 @@ void saveData(PlayerList PL)
         fprintf(fp, "%d\n", isPostCermin(AP));
         AP = NextPlayer(AP);
     }
-
+    fprintf(fp, "%d\n", currentPlayer);
     fprintf(fp, ";\n");
 
     fclose(fp);

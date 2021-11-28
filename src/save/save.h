@@ -5,6 +5,6 @@
 #include <unistd.h>
 #include "../player/player.h"
 
-void saveData(PlayerList PL);
+void saveData(PlayerList PL, int currentPlayer);
 
 #endif

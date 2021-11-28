@@ -29,7 +29,7 @@ void gameView(int option);
 
 int Exit();
 
-void endTurn(addressPlayer *AP, boolean isRolled);
+void endTurn(addressPlayer AP, boolean isRolled);
 
 void newGame();
 
@@ -40,5 +40,7 @@ void startConfig();
 boolean isGameFinished(addressPlayer AP);
 
 void Load();
+
+addressPlayer getIndexPlayer(int currentPlayer, PlayerList PL);
 
 #endif

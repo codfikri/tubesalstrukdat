@@ -5,6 +5,6 @@
 #include <unistd.h>
 #include "../player/player.h"
 
-void LoadFile(PlayerList * LP);
+void LoadFile(PlayerList * LP, int *currentPlayer);
 
 #endif
