@@ -16,7 +16,7 @@ int STARTROLL(PlayerList PL, addressPlayer P, int nPlayer)
       if (isHokiKecil(P) && !isHokiBesar(P)){
             getdice = randomroll(floor(maxRoll/2));
       } else if (isHokiBesar(P) && !isHokiKecil(P)){
-            getdice = randomroll(maxRoll*2);
+            getdice = maxRoll - randomroll(floor(maxRoll/2));
       } else if (!isHokiBesar(P) && !isHokiKecil(P)){
             getdice = randomroll(maxRoll);
       }

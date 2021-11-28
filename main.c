@@ -16,6 +16,5 @@ int main(){
     } else if (selection == 2){
         exitView();
     }
-
     return 0;
 }

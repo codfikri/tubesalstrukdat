@@ -39,4 +39,6 @@ void Undo(Stack * S, PlayerList *PL);
 
 void UndoPlayerList(Stack S, PlayerList *PL);
 
+boolean IsSOneElmt (Stack S);
+
 #endif

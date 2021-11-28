@@ -73,3 +73,7 @@ void UndoPlayerList(Stack S, PlayerList *PL)
 		insertUpdatePlayerToList(PL,P,isLastPlayer);
 	}
 }
+
+boolean IsSOneElmt (Stack S){
+	return (S).TOP-1 == SNil;
+}

@@ -7,6 +7,7 @@ boolean isEndGame = false;
 boolean isExitGame = false;
 boolean isRolled = false;
 boolean isEndTurn = false;
+boolean isUndo = false;
 int currentPlayer;
 
 void showCommands(){
@@ -62,6 +63,7 @@ int getNum(char *cmd){
 
 void Turn(addressPlayer AP){
         isEndTurn = false;
+        isUndo = false;
         int option, command;
         char cmd[50];
         MapPlayer(PL, PositionToInteger);
@@ -116,21 +118,22 @@ void Turn(addressPlayer AP){
                         endTurn(AP, isRolled);
                         setNewRoll(&isRolled);
                 } else if (command == 8){ 
-                        if (IsSEmpty)
-                        {
-                                printf("Yes\n");
-                                printf("Tidak dapat melakukan Undo\n");
-                        }
-                        else{
-                                if (!isRolled){
-                                        printf("Yes\n");
-                                        printf("Harap melakukan roll terlebih dahulu!\n");
-                                        printf("Tidak dapat melakukan Undo\n");
-                                } else{
-                                        printf("No\n");
-                                        Undo(&S, &PL);
-                                }
-                        }
+                        printf("Fitur Undo belum tersedia\n");
+                        // if (IsSEmpty)
+                        // {
+                        //         printf("Yes\n");
+                        //         printf("Tidak dapat melakukan Undo\n");
+                        // }
+                        // else{
+                        //         if (isRolled){
+                        //                 printf("Yes\n");
+                        //                 printf("Harap melakukan roll terlebih dahulu!\n");
+                        //                 printf("Tidak dapat melakukan Undo\n");
+                        //         } else{
+                        //                 printf("No\n");
+                        //                 Undo(&S, &PL);
+                        //         }
+                        // }
                 } else if (command == 9){
                         showCommands();
                 } else if (command == 10){
