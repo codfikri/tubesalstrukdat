@@ -134,7 +134,7 @@ void gameView(int option){
 
 void endTurn(addressPlayer AP, boolean isRolled){
         if (!isRolled){
-                print("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
+                printf("Lakukan Roll terlebih dahulu sebelum melakukan End Turn!\n");
         } else{
                 Player X;
                 GetPlayer(&X, AP);
