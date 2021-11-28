@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "mesinkata.h"
 #include "mesinkar.h"
 
@@ -126,6 +127,16 @@ int KataTOInteger(Kata CKata) {
         temp *= 10; 
     }
     return num;
+}
+
+char* KataToChar(Kata CKata){
+    char* CC = malloc (sizeof (100));
+    int i;
+    for (i = 1; i <= CKata.Length ; i++) {
+        CC[i-1] = CKata.TabKata[i];
+    } 
+    CC[i-1] = '\0';
+    return CC;
 }
 
 void setMap(Kata CKata, TabChar *Map, int lengthMap)

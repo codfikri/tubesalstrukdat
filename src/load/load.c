@@ -3,30 +3,28 @@
 #include "load.h"
 #include "../konfigurasi/mesinkar.h"
 #include "../konfigurasi/mesinkata.h"
-/*#include "../teleporter & inspect/ inspect.h"*/
 #include "../player/player.h"
-#include "../skill/skill.h"
-
 
 void LoadFile(PlayerList * LP)
 {
     int n, jumlahskill, skill;
-    char input[200] = "savefile/";
+    char * nama;
+    char input[200] = "src/savefile/";
     Player P;
     boolean isLastPlayer;
-    printf("Masukkan nama file : ");
-    scanf("%s", input + 9);
-    
-    STARTGAME(input);
 
+    printf("Masukkan nama file : ");
+    scanf("%s", input + 13);
+
+    STARTGAME(input);
     CreatePlayerList(LP);
     isLastPlayer = false;
     n = KataTOInteger(CKata);
     JumlahPlayer(*LP) = n;
     ADVKATA();
-    printf("%d\n", n);
     for (int i = 0; i < n; i++){
-        strcpy(P.nama, KataToChar(CKata));
+        nama = KataToChar(CKata);        
+        strcpy(P.nama , nama);
         ADVKATA();
         P.Petak = KataTOInteger(CKata);
         ADVKATA();
@@ -36,7 +34,6 @@ void LoadFile(PlayerList * LP)
         ADVKATA();
         CreateEmpty (&P.Skillpemain);
         for(int j = 0; j< jumlahskill ; j++){
-            printf("tes\n");
             skill = KataTOInteger(CKata);
             InsVLast (&P.Skillpemain, skill);
             ADVKATA();
@@ -53,7 +50,6 @@ void LoadFile(PlayerList * LP)
         if (i == n-1){
             isLastPlayer = true;    
         }
-        insertUpdatePlayerToList(LP,P,isLastPlayer);
+    insertUpdatePlayerToList(LP,P,isLastPlayer);
     }
 }
-

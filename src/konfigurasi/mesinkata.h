@@ -64,5 +64,7 @@ int convertNumber(char Charnumber);
 int KataTOInteger(Kata CKata);
     //mengembalikan angka dalam bentuk integer
 
+char* KataToChar(Kata CKata);
+   /*mengembalikan kata dalam bentuk char*/
 
 #endif
