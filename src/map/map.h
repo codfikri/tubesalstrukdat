@@ -9,6 +9,7 @@
 #define Nil NULL
 
 extern TabInt PositionToInteger;
+extern int maxRoll;
 
 void PrintTabChar(TabChar T);
 

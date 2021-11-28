@@ -1,5 +1,8 @@
 {
     "files.associations": {
-        "boolean.h": "c"
+        "html": "html",
+        "boolean.h": "c",
+        "teleporter.h": "c",
+        "mesinkata.h": "c"
     }
 }

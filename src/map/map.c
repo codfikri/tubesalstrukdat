@@ -1,6 +1,7 @@
 #include "map.h"
 
 TabInt PositionToInteger;
+int maxRoll;
 
 void PrintTabChar(TabChar T){
       for (int i = IdxMin; i<= T.Neff; i++){

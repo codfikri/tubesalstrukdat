@@ -8,7 +8,7 @@ int main(){
         /*Membaca panjang peta*/
       // TabChar Map;
       STARTGAME("map.txt");
-      int lengthMap = KataTOInteger(CKata);
+      lengthMap = KataTOInteger(CKata);
       ADVKATA();
 
       /*Membaca peta*/
@@ -22,7 +22,7 @@ int main(){
       SetTab(Map, &CopyMap);
 
       /*Membaca MaxRoll*/
-      int MaxRoll = KataTOInteger(CKata);
+      maxRoll = KataTOInteger(CKata);
       ADVKATA();
 
       /*Membaca banyaknya teleporter pada map*/
