@@ -152,7 +152,6 @@ void endTurn(addressPlayer AP, boolean isRolled){
 
 void newGame(){
         CreatePlayerList(&PL);
-        char* playerName;
         boolean isLastPlayer = false;
         int numberOfPlayer;
         printf("Masukan jumlah pemain: ");
@@ -162,6 +161,7 @@ void newGame(){
                 newGame();
         } else {
                 for (int i=1; i<=numberOfPlayer; i++){
+                        char playerName[50];
                         printf("PLAYER %d\n", i);
                         printf("Masukan nama pemain: ");
                         scanf("%s", playerName);
@@ -169,6 +169,7 @@ void newGame(){
                         if (i==numberOfPlayer){
                                 isLastPlayer = true;
                         }
+                        strcpy(Nama(AP), playerName);
                         insertPlayer(&PL, AP, isLastPlayer);
                         }
                 printPlayer(PL, numberOfPlayer);
