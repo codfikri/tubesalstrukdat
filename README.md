@@ -139,6 +139,7 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
      - Membuat kerangka laporan
      - Mengisi laporan
      - Membuat file readme
+     - Membuat fitur makefile
 4. 18220097 - Muhamad Fikri Nurohman
      - Membuat dan Merevisi ADT Player
      - Membuat rancangan awal ADT Teleporter dan List Teleporter
@@ -146,7 +147,8 @@ Mobitangga merupakan permainan yang pada dasarnya merupakan sebuah permainan ula
      - Membuat Main Program
      - Menambahkan menu exit dan game awal
      - Membuat file game yang menggabungkan seluruh ADT
-     - Merevisi fitur Roll, Map, Inspect
+     - Merevisi fitur Roll
+     - Membuat fitur makefile
 5. 18220105 - Made Adi Surya Pramana
      - Merevisi ADT Teleporter dan List Teleporter
      - Membuat ADT Array of Integer
